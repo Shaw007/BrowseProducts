@@ -25,4 +25,15 @@
     <string name="close">Close</string>
     <string name="ok">OK</string>
     <string name="logout">Logout</string>
+    <string name="these_permissions_are_required">These permissions are required to continue.</string>
+    <string name="unable_to_create_image_directory">Unable to create image directory</string>
+    <string name="product_name">Product name</string>
+    <string name="product_desc">Product description</string>
+    <string name="product_price">Product price</string>
+    <string name="please_capture_image">Please capture image</string>
+    <string name="please_enter_product_name">Please enter product name</string>
+    <string name="please_enter_product_desc">Please enter product description</string>
+    <string name="please_enter_product_price">Please enter product price</string>
+    <string name="add_product">Add Product</string>
+    <string name="product_added_successfully">Product added successfully</string>
 </resources>

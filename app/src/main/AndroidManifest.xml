@@ -2,10 +2,11 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.srmstudios.browseproducts">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.CAMERA"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
         android:icon="@mipmap/ic_launcher"
@@ -13,17 +14,24 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ui.vendor.VendorHomeActivity"
-            android:screenOrientation="portrait"></activity>
-        <activity android:name=".ui.customer.home.CustomerHomeActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".ui.account_selection.AccountSelectionActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".ui.sign_in.SignInActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".ui.sign_up.SignUpActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".ui.splash.SplashActivity"
+        <activity android:name=".ui.vendor.add_product.AddProductActivity"></activity>
+        <activity
+            android:name=".ui.vendor.home.VendorHomeActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.customer.home.CustomerHomeActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.account_selection.AccountSelectionActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.sign_in.SignInActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.sign_up.SignUpActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.splash.SplashActivity"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -31,6 +39,16 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="${applicationId}.provider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/provider_paths" />
+        </provider>
     </application>
 
 </manifest>

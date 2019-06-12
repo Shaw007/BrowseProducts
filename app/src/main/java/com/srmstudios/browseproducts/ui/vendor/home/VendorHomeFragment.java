@@ -1,4 +1,4 @@
-package com.srmstudios.browseproducts.ui.vendor;
+package com.srmstudios.browseproducts.ui.vendor.home;
 
 
 import android.os.Bundle;

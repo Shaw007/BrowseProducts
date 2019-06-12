@@ -17,5 +17,12 @@
         <item name="colorControlNormal">@color/grey_dark_sign_in_up_edt_hint</item>
         <item name="colorControlActivated">@color/grey_dark_sign_in_up_edt_hint</item>-->
     </style>
+    <style name="EditTextAddProduct" >
+        <!--<item name="android:editTextColor">@color/grey_dark_sign_in_up_edt</item>
+        <item name="android:textColorHint">@color/grey_dark_sign_in_up_edt_hint</item>
+        <item name="colorAccent">@color/grey_dark_sign_in_up_edt_hint</item>
+        <item name="colorControlNormal">@color/grey_dark_sign_in_up_edt_hint</item>
+        <item name="colorControlActivated">@color/grey_dark_sign_in_up_edt_hint</item>-->
+    </style>
 
 </resources>

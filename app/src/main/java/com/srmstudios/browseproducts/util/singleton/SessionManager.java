@@ -7,7 +7,6 @@ import android.content.SharedPreferences;
 import com.google.gson.Gson;
 import com.srmstudios.browseproducts.data.room.model.User;
 import com.srmstudios.browseproducts.ui.sign_in.SignInActivity;
-import com.srmstudios.browseproducts.ui.vendor.VendorHomeActivity;
 import com.srmstudios.browseproducts.util.AppConstants;
 
 public class SessionManager {
@@ -19,6 +18,7 @@ public class SessionManager {
 
     private static final String IS_LOGGED_IN = "isLoggedIn";
     private static final String KEY_USER = "user";
+    private static final String KEY_IMAGE_URL = "image_url";
 
     public SessionManager(Context context) {
         this.context = context;
@@ -61,5 +61,14 @@ public class SessionManager {
         Intent intent = new Intent(context, SignInActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         context.startActivity(intent);
+    }
+
+    public void setImageUrl(String imageUrl){
+        editor.putString(KEY_IMAGE_URL, imageUrl);
+        editor.commit();
+    }
+
+    public String getImageUrl(){
+        return pref.getString(KEY_IMAGE_URL, "");
     }
 }

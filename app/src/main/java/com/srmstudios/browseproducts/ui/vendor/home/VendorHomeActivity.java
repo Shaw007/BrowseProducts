@@ -1,7 +1,6 @@
-package com.srmstudios.browseproducts.ui.vendor;
+package com.srmstudios.browseproducts.ui.vendor.home;
 
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
 import android.os.Bundle;
