@@ -36,4 +36,5 @@
     <string name="please_enter_product_price">Please enter product price</string>
     <string name="add_product">Add Product</string>
     <string name="product_added_successfully">Product added successfully</string>
+    <string name="view_products">View Products</string>
 </resources>

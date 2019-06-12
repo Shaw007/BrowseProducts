@@ -35,7 +35,7 @@ public class AddProductPresenter implements AddProductMVP.Presenter {
 
                     @Override
                     public void onError(String message, Throwable throwable) {
-                        view.showDialogMessage(message);
+                        view.showDialogMessage(message + ": " + throwable.getMessage());
                     }
                 });
     }

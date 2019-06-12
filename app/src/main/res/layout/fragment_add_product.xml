@@ -20,6 +20,8 @@
                 android:layout_width="@dimen/img_add_product_width"
                 android:layout_height="@dimen/img_add_product_height"
                 android:src="@android:drawable/btn_plus"
+                android:scaleType="centerCrop"
+                android:adjustViewBounds="true"
                 />
             <EditText
                 android:id="@+id/edtProductName"

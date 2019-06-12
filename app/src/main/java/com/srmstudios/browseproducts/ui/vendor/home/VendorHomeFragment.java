@@ -13,6 +13,7 @@ import android.widget.Button;
 
 import com.srmstudios.browseproducts.R;
 import com.srmstudios.browseproducts.ui.vendor.add_product.AddProductActivity;
+import com.srmstudios.browseproducts.ui.vendor.view_products.ViewProductsActivity;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -24,6 +25,8 @@ import butterknife.Unbinder;
 public class VendorHomeFragment extends Fragment implements View.OnClickListener {
     @BindView(R.id.btnAddProduct)
     protected Button btnAddProduct;
+    @BindView(R.id.btnViewProducts)
+    protected Button btnViewProducts;
 
     private Unbinder unbinder;
 
@@ -47,6 +50,7 @@ public class VendorHomeFragment extends Fragment implements View.OnClickListener
         unbinder = ButterKnife.bind(this,v);
 
         btnAddProduct.setOnClickListener(this);
+        btnViewProducts.setOnClickListener(this);
     }
 
     @Override
@@ -54,6 +58,11 @@ public class VendorHomeFragment extends Fragment implements View.OnClickListener
         switch (v.getId()){
             case R.id.btnAddProduct:{
                 Intent intent = new Intent(getContext(), AddProductActivity.class);
+                startActivity(intent);
+                break;
+            }
+            case R.id.btnViewProducts:{
+                Intent intent = new Intent(getContext(), ViewProductsActivity.class);
                 startActivity(intent);
                 break;
             }
