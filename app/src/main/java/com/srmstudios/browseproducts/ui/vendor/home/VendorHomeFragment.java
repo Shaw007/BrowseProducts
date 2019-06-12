@@ -1,6 +1,7 @@
 package com.srmstudios.browseproducts.ui.vendor.home;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -8,16 +9,22 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import com.srmstudios.browseproducts.R;
+import com.srmstudios.browseproducts.ui.vendor.add_product.AddProductActivity;
 
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class VendorHomeFragment extends Fragment {
+public class VendorHomeFragment extends Fragment implements View.OnClickListener {
+    @BindView(R.id.btnAddProduct)
+    protected Button btnAddProduct;
+
     private Unbinder unbinder;
 
     public VendorHomeFragment() {
@@ -39,6 +46,18 @@ public class VendorHomeFragment extends Fragment {
     private void initializeViews(View v){
         unbinder = ButterKnife.bind(this,v);
 
+        btnAddProduct.setOnClickListener(this);
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.btnAddProduct:{
+                Intent intent = new Intent(getContext(), AddProductActivity.class);
+                startActivity(intent);
+                break;
+            }
+        }
     }
 
     @Override
@@ -46,5 +65,4 @@ public class VendorHomeFragment extends Fragment {
         super.onDestroy();
         unbinder.unbind();
     }
-
 }

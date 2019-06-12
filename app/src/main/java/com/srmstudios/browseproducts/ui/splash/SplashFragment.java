@@ -55,7 +55,7 @@ public class SplashFragment extends Fragment {
                         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                         startActivity(intent);
                     }else {
-                        Intent intent = new Intent(getContext(), AddProductActivity.class);
+                        Intent intent = new Intent(getContext(), VendorHomeActivity.class);
                         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                         startActivity(intent);
                     }
