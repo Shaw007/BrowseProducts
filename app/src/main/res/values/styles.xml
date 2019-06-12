@@ -1,0 +1,21 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:windowDisablePreview">true</item>
+        <item name="android:fontFamily">@font/futura_book</item>
+    </style>
+
+    <style name="EditTextSignInUp" >
+        <!--<item name="android:editTextColor">@color/grey_dark_sign_in_up_edt</item>
+        <item name="android:textColorHint">@color/grey_dark_sign_in_up_edt_hint</item>
+        <item name="colorAccent">@color/grey_dark_sign_in_up_edt_hint</item>
+        <item name="colorControlNormal">@color/grey_dark_sign_in_up_edt_hint</item>
+        <item name="colorControlActivated">@color/grey_dark_sign_in_up_edt_hint</item>-->
+    </style>
+
+</resources>

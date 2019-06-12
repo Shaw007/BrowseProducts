@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.vendor.sign_up.SignUpFragment">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:layout_gravity="center"
+            android:layout_marginLeft="@dimen/sign_in_up_parent_margin_left_right"
+            android:layout_marginRight="@dimen/sign_in_up_parent_margin_left_right"
+            >
+            <EditText
+                android:id="@+id/edtName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPersonName"
+                android:imeOptions="actionNext"
+                android:textSize="@dimen/edt_sign_in_up_text_size"
+                android:hint="@string/name"
+                android:maxLength="35"
+                style="@style/EditTextSignInUp"
+                android:layout_marginBottom="@dimen/edt_sign_in_up_bottom_margin"
+                />
+            <EditText
+                android:id="@+id/edtEmail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textEmailAddress"
+                android:imeOptions="actionNext"
+                android:textSize="@dimen/edt_sign_in_up_text_size"
+                android:hint="@string/email"
+                android:maxLength="35"
+                style="@style/EditTextSignInUp"
+                android:layout_marginBottom="@dimen/edt_sign_in_up_bottom_margin"
+                />
+            <EditText
+                android:id="@+id/edtPassword"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPassword"
+                android:imeOptions="actionNext"
+                android:textSize="@dimen/edt_sign_in_up_text_size"
+                android:hint="@string/password"
+                android:maxLength="25"
+                style="@style/EditTextSignInUp"
+                android:layout_marginBottom="@dimen/edt_sign_in_up_bottom_margin"
+                />
+            <EditText
+                android:id="@+id/edtConfirmPassword"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPassword"
+                android:imeOptions="actionDone"
+                android:textSize="@dimen/edt_sign_in_up_text_size"
+                android:hint="@string/confirm_password"
+                android:maxLength="25"
+                style="@style/EditTextSignInUp"
+                android:layout_marginBottom="@dimen/edt_sign_in_up_bottom_margin"
+                />
+            <Button
+                android:id="@+id/btnSignUp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/sign_up"
+                android:textAllCaps="false"
+                android:textSize="@dimen/btn_sign_in_up_text_size"
+                android:fontFamily="@font/futura_semi_bold_1"
+                />
+        </LinearLayout>
+    </ScrollView>
+
+</FrameLayout>
+
+
+
+
+
+
+
+
+
+
+
+
+
