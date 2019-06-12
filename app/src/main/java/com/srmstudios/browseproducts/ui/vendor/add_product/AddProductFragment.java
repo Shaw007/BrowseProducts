@@ -24,6 +24,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 
+import com.bumptech.glide.Glide;
 import com.srmstudios.browseproducts.R;
 import com.srmstudios.browseproducts.ui.BaseActivity;
 import com.srmstudios.browseproducts.util.DialogUtils;
@@ -233,15 +234,8 @@ public class AddProductFragment extends Fragment implements AddProductMVP.View,V
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
             try {
-                Uri photoUri;
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                    photoUri = FileProvider.getUriForFile(getActivity(),
-                            getActivity().getApplicationContext().getPackageName() + ".provider",
-                            new File(s));
-                } else {
-                    photoUri = Uri.fromFile(new File(s));
-                }
-                imgAddProductImage.setImageURI(photoUri);
+                imgAddProductImage.setImageURI(Utils.getUriFromFile(getContext(),s));
+                imageUrlMain = s;
                 //hideAvLoadingLayout();
             } catch (Exception ex) {
                 ex.printStackTrace();

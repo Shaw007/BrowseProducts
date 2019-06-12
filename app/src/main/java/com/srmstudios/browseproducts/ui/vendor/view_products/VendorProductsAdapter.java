@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.srmstudios.browseproducts.R;
 import com.srmstudios.browseproducts.data.room.model.Product;
+import com.srmstudios.browseproducts.util.Utils;
 
 import java.io.File;
 import java.util.List;
@@ -42,18 +43,9 @@ public class VendorProductsAdapter extends RecyclerView.Adapter<RecyclerView.Vie
         Product product = products.get(position);
         if(holder instanceof VendorProductsViewHolder){
             VendorProductsViewHolder vendorProductsViewHolder = (VendorProductsViewHolder) holder;
-            Uri photoUri;
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                photoUri = FileProvider.getUriForFile(vendorProductsViewHolder.imgProductImage.getContext(),
-                        vendorProductsViewHolder.imgProductImage.getContext().getApplicationContext().getPackageName() + ".provider",
-                        new File(product.getProductImageUrl()));
-            } else {
-                photoUri = Uri.fromFile(new File(product.getProductImageUrl()));
-            }
             Glide.with(vendorProductsViewHolder.imgProductImage.getContext())
-                    .load(Uri.fromFile(new File(product.getProductImageUrl())))
+                    .load(Utils.getUriFromFile(vendorProductsViewHolder.imgProductImage.getContext(),product.getProductImageUrl()))
                     .into(vendorProductsViewHolder.imgProductImage);
-            //vendorProductsViewHolder.imgProductImage.setImageURI(photoUri);
             vendorProductsViewHolder.txtProductName.setText(product.getProductName());
             vendorProductsViewHolder.txtProductPrice.setText("PKR " + product.getProductPrice());
         }

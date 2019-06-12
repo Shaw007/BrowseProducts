@@ -10,11 +10,14 @@ import android.graphics.Paint;
 import android.media.ExifInterface;
 import android.media.MediaScannerConnection;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Environment;
 import android.util.Log;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import androidx.core.content.FileProvider;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -241,6 +244,18 @@ public class Utils {
             e.printStackTrace();
             return "";
         }
+    }
+
+    public static Uri getUriFromFile(Context context,String imageFileUrl){
+        Uri photoUri;
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            photoUri = FileProvider.getUriForFile(context,
+                    context.getApplicationContext().getPackageName() + ".provider",
+                    new File(imageFileUrl));
+        } else {
+            photoUri = Uri.fromFile(new File(imageFileUrl));
+        }
+        return photoUri;
     }
 }
 
