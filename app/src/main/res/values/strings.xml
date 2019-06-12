@@ -17,4 +17,12 @@
     <string name="user_not_found">User not found</string>
     <string name="sign_in">Sign In</string>
     <string name="wrong_password">Wrong password</string>
+    <string name="vendor">Vendor</string>
+    <string name="customer">Customer</string>
+    <string name="dont_have_account">Don\'t have an account? Sign Up</string>
+    <string name="alert">Alert</string>
+    <string name="message">Message</string>
+    <string name="close">Close</string>
+    <string name="ok">OK</string>
+    <string name="logout">Logout</string>
 </resources>

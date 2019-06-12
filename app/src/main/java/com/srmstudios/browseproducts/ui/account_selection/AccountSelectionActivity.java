@@ -1,17 +1,18 @@
-package com.srmstudios.browseproducts.ui.vendor.sign_up;
+package com.srmstudios.browseproducts.ui.account_selection;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 
 import android.os.Bundle;
 import android.view.View;
 
-import androidx.fragment.app.Fragment;
-
 import com.srmstudios.browseproducts.ui.BaseActivity;
 
-public class SignUpActivity extends BaseActivity {
+public class AccountSelectionActivity extends BaseActivity {
 
     @Override
     public Fragment getFragment() {
-        return new SignUpFragment();
+        return new AccountSelectionFragment();
     }
 
     @Override
@@ -19,5 +20,4 @@ public class SignUpActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         getToolbar().setVisibility(View.GONE);
     }
-
 }

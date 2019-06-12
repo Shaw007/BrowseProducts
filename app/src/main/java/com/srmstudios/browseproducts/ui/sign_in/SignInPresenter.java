@@ -1,7 +1,8 @@
-package com.srmstudios.browseproducts.ui.vendor.sign_in;
+package com.srmstudios.browseproducts.ui.sign_in;
 
 import com.srmstudios.browseproducts.R;
 import com.srmstudios.browseproducts.data.room.model.User;
+import com.srmstudios.browseproducts.util.Crypto;
 import com.srmstudios.browseproducts.util.interfaces.IDatabaseOps;
 
 public class SignInPresenter implements SignInMVP.Presenter {
@@ -20,17 +21,17 @@ public class SignInPresenter implements SignInMVP.Presenter {
            public void onSuccess(Object response) {
                if(response instanceof User){
                    User user = (User) response;
-                   if(user.getPassword().equals(password)) {
-                       view.showToast(user.getName());
+                   if(Crypto.decrypt(user.getPassword()).equals(password)) {
+                       view.openHomeScreen(user);
                    }else {
-                       view.showToast(R.string.wrong_password);
+                       view.showDialogMessage(R.string.wrong_password);
                    }
                }
            }
 
            @Override
            public void onError(String message, Throwable throwable) {
-               view.showToast(message);
+               view.showDialogMessage(message);
            }
        });
     }

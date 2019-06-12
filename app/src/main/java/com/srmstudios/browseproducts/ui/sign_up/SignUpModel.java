@@ -1,7 +1,8 @@
-package com.srmstudios.browseproducts.ui.vendor.sign_up;
+package com.srmstudios.browseproducts.ui.sign_up;
 
 import com.srmstudios.browseproducts.data.room.AppDatabase;
 import com.srmstudios.browseproducts.data.room.model.User;
+import com.srmstudios.browseproducts.util.Crypto;
 import com.srmstudios.browseproducts.util.interfaces.IDatabaseOps;
 
 import io.reactivex.Observable;
@@ -19,7 +20,7 @@ public class SignUpModel implements SignUpMVP.Model {
     }
 
     @Override
-    public void insertUser(String name, String email, String password, IDatabaseOps iDatabaseOps) {
+    public void insertUser(String name, String email, String password, boolean isCustomer, IDatabaseOps iDatabaseOps) {
         Observable.just(appDatabase)
                 .map(new Function<AppDatabase, Object>() {
                     @Override
@@ -31,7 +32,8 @@ public class SignUpModel implements SignUpMVP.Model {
                             User newUser = new User();
                             newUser.setName(name);
                             newUser.setEmail(email);
-                            newUser.setPassword(password);
+                            newUser.setPassword(Crypto.encrypt(password));
+                            newUser.setIsCustomer(isCustomer);
                             appDatabase.getUserDao().insert(newUser);
                             return newUser;
                         }

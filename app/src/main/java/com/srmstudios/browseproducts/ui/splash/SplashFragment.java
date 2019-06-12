@@ -11,7 +11,12 @@ import android.view.ViewGroup;
 import androidx.fragment.app.Fragment;
 
 import com.srmstudios.browseproducts.R;
-import com.srmstudios.browseproducts.ui.vendor.sign_up.SignUpActivity;
+import com.srmstudios.browseproducts.data.room.model.User;
+import com.srmstudios.browseproducts.ui.account_selection.AccountSelectionActivity;
+import com.srmstudios.browseproducts.ui.customer.home.CustomerHomeActivity;
+import com.srmstudios.browseproducts.ui.sign_in.SignInActivity;
+import com.srmstudios.browseproducts.ui.vendor.VendorHomeActivity;
+import com.srmstudios.browseproducts.util.singleton.SessionManager;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -39,9 +44,22 @@ public class SplashFragment extends Fragment {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                Intent intent = new Intent(getActivity(), SignUpActivity.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                startActivity(intent);
+                User user = SessionManager.getInstance(getContext()).getUser();
+                if(user == null) {
+                    Intent intent = new Intent(getContext(), SignInActivity.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                    startActivity(intent);
+                }else {
+                    if(user.isCustomer()){
+                        Intent intent = new Intent(getContext(), CustomerHomeActivity.class);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                        startActivity(intent);
+                    }else {
+                        Intent intent = new Intent(getContext(), VendorHomeActivity.class);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                        startActivity(intent);
+                    }
+                }
             }
         },500);
     }

@@ -3,4 +3,11 @@
     <color name="colorPrimary">#008577</color>
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#D81B60</color>
+
+    <color name="white">@android:color/white</color>
+    <color name="dark_gradient_color_1">#413e4d</color>
+    <color name="dark_gradient_color_2">#545663</color>
+    <color name="line_color">#d7dbe4</color>
+    <color name="blue_gradient_color_1">#6cccfd</color>
+
 </resources>

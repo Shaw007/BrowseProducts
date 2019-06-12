@@ -1,12 +1,14 @@
-package com.srmstudios.browseproducts.ui.vendor.sign_in;
+package com.srmstudios.browseproducts.ui.sign_in;
 
+import com.srmstudios.browseproducts.data.room.model.User;
 import com.srmstudios.browseproducts.util.interfaces.IDatabaseOps;
 
 public interface SignInMVP {
 
     interface View{
-        void showToast(int resourceId);
-        void showToast(String message);
+        void showDialogMessage(int resourceId);
+        void showDialogMessage(String message);
+        void openHomeScreen(User user);
     }
 
     interface Presenter{

@@ -1,4 +1,4 @@
-package com.srmstudios.browseproducts.ui.vendor.sign_in;
+package com.srmstudios.browseproducts.ui.sign_in;
 
 import com.srmstudios.browseproducts.data.room.AppDatabase;
 import com.srmstudios.browseproducts.data.room.model.User;

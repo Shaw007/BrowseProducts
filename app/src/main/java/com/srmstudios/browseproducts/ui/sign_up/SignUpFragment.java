@@ -1,6 +1,7 @@
-package com.srmstudios.browseproducts.ui.vendor.sign_up;
+package com.srmstudios.browseproducts.ui.sign_up;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,8 +13,14 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.srmstudios.browseproducts.R;
+import com.srmstudios.browseproducts.data.room.model.User;
+import com.srmstudios.browseproducts.ui.customer.home.CustomerHomeActivity;
+import com.srmstudios.browseproducts.ui.sign_in.SignInActivity;
+import com.srmstudios.browseproducts.ui.vendor.VendorHomeActivity;
+import com.srmstudios.browseproducts.util.DialogUtils;
 import com.srmstudios.browseproducts.util.Utils;
 import com.srmstudios.browseproducts.util.singleton.BrowseProductsDatabase;
+import com.srmstudios.browseproducts.util.singleton.SessionManager;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -36,6 +43,7 @@ public class SignUpFragment extends Fragment implements SignUpMVP.View,View.OnCl
 
     private Unbinder unbinder;
     private SignUpPresenter presenter;
+    private boolean isCustomer;
 
     public SignUpFragment() {
         // Required empty public constructor
@@ -45,7 +53,8 @@ public class SignUpFragment extends Fragment implements SignUpMVP.View,View.OnCl
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         presenter = new SignUpPresenter(this,
-                new SignUpModel(BrowseProductsDatabase.getInstance(getActivity().getApplicationContext())));
+                new SignUpModel(BrowseProductsDatabase.getInstance(getContext()).getAppDatabase()));
+        isCustomer = getActivity().getIntent().getBooleanExtra(SignUpActivity.KEY_IS_CUSTOMER,true);
     }
 
     @Override
@@ -73,7 +82,7 @@ public class SignUpFragment extends Fragment implements SignUpMVP.View,View.OnCl
                     presenter.onClickBtnSignUp(edtName.getText().toString(),
                             edtEmail.getText().toString(),
                             edtPassword.getText().toString(),
-                            edtConfirmPassword.getText().toString());
+                            isCustomer);
                 }
                 break;
             }
@@ -82,27 +91,27 @@ public class SignUpFragment extends Fragment implements SignUpMVP.View,View.OnCl
 
     private boolean validateInputFields(){
         if(Utils.isEditTextNullOrEmpty(edtName)){
-            showToast(R.string.please_enter_name);
+            showDialogMessage(R.string.please_enter_name);
             return false;
         }
         if(Utils.isEditTextNullOrEmpty(edtEmail)){
-            showToast(R.string.please_enter_email);
+            showDialogMessage(R.string.please_enter_email);
             return false;
         }
         if(!Utils.isValidEmail(edtEmail.getText().toString())){
-            showToast(R.string.please_enter_valid_email);
+            showDialogMessage(R.string.please_enter_valid_email);
             return false;
         }
         if(Utils.isEditTextNullOrEmpty(edtPassword)){
-            showToast(R.string.please_enter_password);
+            showDialogMessage(R.string.please_enter_password);
             return false;
         }
         if(Utils.isEditTextNullOrEmpty(edtConfirmPassword)){
-            showToast(R.string.please_enter_confirm_password);
+            showDialogMessage(R.string.please_enter_confirm_password);
             return false;
         }
         if(!edtPassword.getText().toString().equals(edtConfirmPassword.getText().toString())){
-            showToast(R.string.passwords_donot_match);
+            showDialogMessage(R.string.passwords_donot_match);
             return false;
         }
         Utils.hideSoftKeyboard(getActivity());
@@ -116,13 +125,30 @@ public class SignUpFragment extends Fragment implements SignUpMVP.View,View.OnCl
     }
 
     @Override
-    public void showToast(int resourceId) {
-        Utils.showToastLongTime(getActivity(),resourceId);
+    public void showDialogMessage(int resourceId) {
+        DialogUtils.showSingleButtonDialog(getContext(),
+                Utils.getStringFromResourceId(getContext(),R.string.alert),
+                Utils.getStringFromResourceId(getContext(),resourceId));
     }
 
     @Override
-    public void showToast(String message) {
-        Utils.showToastLongTime(getActivity(),message);
+    public void showDialogMessage(String message) {
+        DialogUtils.showSingleButtonDialog(getContext(),
+                Utils.getStringFromResourceId(getContext(),R.string.alert),
+                message);
+    }
+
+    @Override
+    public void openHomeScreen(User user) {
+        Intent intent;
+        if(user.isCustomer()) {
+            intent = new Intent(getContext(), CustomerHomeActivity.class);
+        }else {
+            intent = new Intent(getContext(), VendorHomeActivity.class);
+        }
+        SessionManager.getInstance(getContext()).setUser(user);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);
     }
 }
 

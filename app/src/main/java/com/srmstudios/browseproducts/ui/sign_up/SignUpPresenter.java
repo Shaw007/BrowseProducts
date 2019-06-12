@@ -1,4 +1,4 @@
-package com.srmstudios.browseproducts.ui.vendor.sign_up;
+package com.srmstudios.browseproducts.ui.sign_up;
 
 import com.srmstudios.browseproducts.data.room.model.User;
 import com.srmstudios.browseproducts.util.interfaces.IDatabaseOps;
@@ -13,21 +13,21 @@ public class SignUpPresenter implements SignUpMVP.Presenter {
     }
 
     @Override
-    public void onClickBtnSignUp(String name, String email, String password, String confirmPassword) {
-        model.insertUser(name,email,password, new IDatabaseOps() {
+    public void onClickBtnSignUp(String name, String email, String password, boolean isCustomer) {
+        model.insertUser(name,email,password, isCustomer, new IDatabaseOps() {
             @Override
             public void onSuccess(Object response) {
                 if(response instanceof String){
-                    view.showToast(response.toString());
+                    view.showDialogMessage(response.toString());
                 }else if(response instanceof User){
                     User user = (User) response;
-                    view.showToast(user.getEmail());
+                    view.openHomeScreen(user);
                 }
             }
 
             @Override
             public void onError(String message,Throwable throwable) {
-                view.showToast(message);
+                view.showDialogMessage(message);
             }
         });
     }

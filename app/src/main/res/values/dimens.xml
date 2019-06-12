@@ -4,4 +4,12 @@
     <dimen name="sign_in_up_parent_margin_left_right">25dp</dimen>
     <dimen name="edt_sign_in_up_bottom_margin">12dp</dimen>
     <dimen name="btn_sign_in_up_text_size">18sp</dimen>
+    <dimen name="btn_account_selection_text_size">20sp</dimen>
+    <dimen name="btn_account_selection_width">300dp</dimen>
+    <dimen name="txt_dont_have_account_size">14sp</dimen>
+    <dimen name="dialog_box_desc_text">13sp</dimen>
+    <dimen name="dialog_box_title_text">16sp</dimen>
+    <dimen name="dialog_box_btn">15sp</dimen>
+    <dimen name="txt_logout_size">14sp</dimen>
+
 </resources>

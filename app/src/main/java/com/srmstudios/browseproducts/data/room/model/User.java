@@ -15,6 +15,8 @@ public class User {
     private String name;
     @ColumnInfo(name = "password")
     private String password;
+    @ColumnInfo(name = "is_customer")
+    private Boolean isCustomer;
 
     public String getName() {
         return name;
@@ -38,6 +40,14 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public Boolean isCustomer() {
+        return isCustomer;
+    }
+
+    public void setIsCustomer(Boolean customer) {
+        isCustomer = customer;
     }
 }
 

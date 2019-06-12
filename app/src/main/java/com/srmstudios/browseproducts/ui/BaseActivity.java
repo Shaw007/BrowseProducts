@@ -1,6 +1,9 @@
 package com.srmstudios.browseproducts.ui;
 
 import android.os.Bundle;
+import android.util.Base64;
+import android.view.View;
+import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -8,6 +11,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 
 import com.srmstudios.browseproducts.R;
+import com.srmstudios.browseproducts.util.singleton.SessionManager;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -16,6 +20,8 @@ import butterknife.Unbinder;
 public abstract class BaseActivity extends AppCompatActivity {
     @BindView(R.id.toolbar)
     protected Toolbar toolbar;
+    @BindView(R.id.txtLogout)
+    protected TextView txtLogout;
 
     private Unbinder unbinder;
 
@@ -28,6 +34,13 @@ public abstract class BaseActivity extends AppCompatActivity {
         unbinder = ButterKnife.bind(this);
         setSupportActionBar(toolbar);
         initializeFragment();
+
+        txtLogout.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                SessionManager.getInstance(getApplicationContext()).logoutUser();
+            }
+        });
     }
 
     @Override
