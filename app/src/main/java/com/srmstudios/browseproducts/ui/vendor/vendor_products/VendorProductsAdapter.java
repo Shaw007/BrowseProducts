@@ -1,7 +1,5 @@
-package com.srmstudios.browseproducts.ui.vendor.view_products;
+package com.srmstudios.browseproducts.ui.vendor.vendor_products;
 
-import android.net.Uri;
-import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,15 +7,12 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.core.content.FileProvider;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.bumptech.glide.Glide;
 import com.srmstudios.browseproducts.R;
 import com.srmstudios.browseproducts.data.room.model.Product;
-import com.srmstudios.browseproducts.util.Utils;
+import com.srmstudios.browseproducts.util.GlideUtils;
 
-import java.io.File;
 import java.util.List;
 
 import butterknife.BindView;
@@ -43,9 +38,9 @@ public class VendorProductsAdapter extends RecyclerView.Adapter<RecyclerView.Vie
         Product product = products.get(position);
         if(holder instanceof VendorProductsViewHolder){
             VendorProductsViewHolder vendorProductsViewHolder = (VendorProductsViewHolder) holder;
-            Glide.with(vendorProductsViewHolder.imgProductImage.getContext())
-                    .load(Utils.getUriFromFile(vendorProductsViewHolder.imgProductImage.getContext(),product.getProductImageUrl()))
-                    .into(vendorProductsViewHolder.imgProductImage);
+            GlideUtils.loadImage(vendorProductsViewHolder.imgProductImage.getContext(),
+                    vendorProductsViewHolder.imgProductImage,
+                    product.getProductImageUrl());
             vendorProductsViewHolder.txtProductName.setText(product.getProductName());
             vendorProductsViewHolder.txtProductPrice.setText("PKR " + product.getProductPrice());
         }

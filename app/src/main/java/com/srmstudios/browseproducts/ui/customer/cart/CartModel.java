@@ -1,10 +1,8 @@
-package com.srmstudios.browseproducts.ui.vendor.view_products;
+package com.srmstudios.browseproducts.ui.customer.cart;
 
 import com.srmstudios.browseproducts.data.room.AppDatabase;
-import com.srmstudios.browseproducts.data.room.model.Product;
-import com.srmstudios.browseproducts.data.room.model.User;
+import com.srmstudios.browseproducts.data.room.model.CartJoinProduct;
 import com.srmstudios.browseproducts.util.interfaces.IDatabaseListOps;
-import com.srmstudios.browseproducts.util.interfaces.IDatabaseOps;
 
 import java.util.List;
 
@@ -15,33 +13,33 @@ import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Function;
 import io.reactivex.schedulers.Schedulers;
 
-public class ViewProductsModel implements ViewProductsMVP.Model {
+public class CartModel implements CartMVP.Model {
     private AppDatabase appDatabase;
 
-    public ViewProductsModel(AppDatabase appDatabase) {
+    public CartModel(AppDatabase appDatabase) {
         this.appDatabase = appDatabase;
     }
 
     @Override
-    public void getVendorProducts(String vendorName, IDatabaseListOps iDatabaseListOps) {
+    public void getUserCart(String userEmail, IDatabaseListOps iDatabaseListOps) {
         Observable.just(appDatabase)
-                .map(new Function<AppDatabase, List<Product>>() {
+                .map(new Function<AppDatabase, List<CartJoinProduct>>() {
                     @Override
-                    public List<Product> apply(AppDatabase appDatabase) throws Exception {
-                        return appDatabase.getProductDao().getVendorProducts(vendorName);
+                    public List<CartJoinProduct> apply(AppDatabase appDatabase) throws Exception {
+                        return appDatabase.getCartDao().getUserCart(userEmail);
                     }
                 })
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Observer<List<Product>>() {
+                .subscribe(new Observer<List<CartJoinProduct>>() {
                     @Override
                     public void onSubscribe(Disposable d) {
 
                     }
 
                     @Override
-                    public void onNext(List<Product> products) {
-                        iDatabaseListOps.onSuccess(products);
+                    public void onNext(List<CartJoinProduct> cartJoinProducts) {
+                        iDatabaseListOps.onSuccess(cartJoinProducts);
                     }
 
                     @Override

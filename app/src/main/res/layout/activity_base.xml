@@ -33,6 +33,7 @@
                     android:layout_alignParentRight="true"
                     android:layout_margin="4dp"
                     android:paddingRight="15dp"
+                    android:visibility="gone"
                     />
             </RelativeLayout>
         </androidx.appcompat.widget.Toolbar>

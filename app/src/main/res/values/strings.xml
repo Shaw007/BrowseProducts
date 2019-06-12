@@ -37,4 +37,11 @@
     <string name="add_product">Add Product</string>
     <string name="product_added_successfully">Product added successfully</string>
     <string name="view_products">View Products</string>
+    <string name="browse_products">Browse Products</string>
+    <string name="my_cart">My Cart</string>
+    <string name="minus">-</string>
+    <string name="plus">+</string>
+    <string name="max_20_allowed">Maximum 20 items are allowed at a time.</string>
+    <string name="add_to_cart">Add to Cart</string>
+    <string name="product_added_in_cart_successfully">Product added to cart successfully.</string>
 </resources>

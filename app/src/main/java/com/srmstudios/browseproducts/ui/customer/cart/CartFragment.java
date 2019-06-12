@@ -1,16 +1,15 @@
-package com.srmstudios.browseproducts.ui.vendor.view_products;
+package com.srmstudios.browseproducts.ui.customer.cart;
 
 
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 
 import com.srmstudios.browseproducts.R;
 import com.srmstudios.browseproducts.util.DialogUtils;
@@ -25,41 +24,47 @@ import butterknife.Unbinder;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class ViewProductsFragment extends Fragment implements ViewProductsMVP.View {
-    @BindView(R.id.recyclerViewProducts)
-    protected RecyclerView recyclerViewProducts;
+public class CartFragment extends Fragment implements CartMVP.View{
+    @BindView(R.id.recyclerViewCart)
+    protected RecyclerView recyclerViewCart;
 
     private Unbinder unbinder;
-    private ViewProductsPresenter presenter;
+    private CartPresenter presenter;
 
-    public ViewProductsFragment() {
+    public CartFragment() {
         // Required empty public constructor
     }
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        presenter = new ViewProductsPresenter(this,
-                new ViewProductsModel(BrowseProductsDatabase.getInstance(getContext()).getAppDatabase()));
+        presenter = new CartPresenter(this,
+                new CartModel(BrowseProductsDatabase.getInstance(getContext()).getAppDatabase()));
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View v = inflater.inflate(R.layout.fragment_view_products, container, false);
+        View v = inflater.inflate(R.layout.fragment_cart, container, false);
 
         initializeViews(v);
 
         return v;
     }
 
-    private void initializeViews(View v) {
-        unbinder = ButterKnife.bind(this, v);
+    private void initializeViews(View v){
+        unbinder = ButterKnife.bind(this,v);
 
-        recyclerViewProducts.setLayoutManager(new LinearLayoutManager(getContext()));
+        recyclerViewCart.setLayoutManager(new LinearLayoutManager(getContext()));
 
-        presenter.getVendorProducts(SessionManager.getInstance(getContext()).getUser().getName());
+        presenter.getUserCart(SessionManager.getInstance(getContext()).getUser().getEmail());
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        unbinder.unbind();
     }
 
     @Override
@@ -77,24 +82,8 @@ public class ViewProductsFragment extends Fragment implements ViewProductsMVP.Vi
     }
 
     @Override
-    public void setRecyclerViewProductsAdapter(VendorProductsAdapter adapter) {
-        recyclerViewProducts.setAdapter(adapter);
+    public void setRecyclerViewCartAdapter(CartAdapter adapter) {
+        recyclerViewCart.setAdapter(adapter);
     }
 
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        unbinder.unbind();
-    }
 }
-
-
-
-
-
-
-
-
-
-
-

@@ -13,7 +13,7 @@ import android.widget.Button;
 
 import com.srmstudios.browseproducts.R;
 import com.srmstudios.browseproducts.ui.vendor.add_product.AddProductActivity;
-import com.srmstudios.browseproducts.ui.vendor.view_products.ViewProductsActivity;
+import com.srmstudios.browseproducts.ui.vendor.vendor_products.VendorProductsActivity;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -62,7 +62,7 @@ public class VendorHomeFragment extends Fragment implements View.OnClickListener
                 break;
             }
             case R.id.btnViewProducts:{
-                Intent intent = new Intent(getContext(), ViewProductsActivity.class);
+                Intent intent = new Intent(getContext(), VendorProductsActivity.class);
                 startActivity(intent);
                 break;
             }

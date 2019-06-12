@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.product_detail.ProductDetailFragment">
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            >
+            <ImageView
+                android:id="@+id/imgProductImage"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/img_prodduct_detail_banner_height"
+                android:scaleType="centerCrop"
+                android:adjustViewBounds="true"
+                />
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_centerVertical="true"
+                android:layout_marginTop="18dp"
+                >
+                <TextView
+                    android:id="@+id/txtProductName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/txt_list_item_vendor_product_name_size"
+                    android:layout_marginBottom="10dp"
+                    />
+                <TextView
+                    android:id="@+id/txtProductDesc"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/txt_list_item_vendor_product_name_size"
+                    android:layout_marginBottom="10dp"
+                    />
+                <TextView
+                    android:id="@+id/txtProductPrice"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/txt_list_item_vendor_product_price_size"
+                    />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                >
+                <Button
+                    android:id="@+id/btnMinus"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/minus"
+                    android:textSize="@dimen/btn_sign_in_up_text_size"
+                    android:fontFamily="@font/futura_semi_bold_1"
+                    />
+                <TextView
+                    android:id="@+id/txtQuantity"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="1"
+                    android:textSize="@dimen/txt_quantity_product_detail_size"
+                    android:layout_marginLeft="6dp"
+                    android:layout_marginRight="6dp"
+                    />
+                <Button
+                    android:id="@+id/btnPlus"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/plus"
+                    android:textSize="@dimen/btn_sign_in_up_text_size"
+                    android:fontFamily="@font/futura_semi_bold_1"
+                    />
+            </LinearLayout>
+            <Button
+                android:id="@+id/btnAddToCart"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/add_to_cart"
+                android:textAllCaps="false"
+                android:textSize="@dimen/btn_sign_in_up_text_size"
+                android:fontFamily="@font/futura_semi_bold_1"
+                />
+    </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
+</FrameLayout>
+
+
+
+
+
+
+

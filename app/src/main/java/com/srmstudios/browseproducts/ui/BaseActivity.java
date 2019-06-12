@@ -1,7 +1,6 @@
 package com.srmstudios.browseproducts.ui;
 
 import android.os.Bundle;
-import android.util.Base64;
 import android.view.View;
 import android.widget.TextView;
 
@@ -65,6 +64,10 @@ public abstract class BaseActivity extends AppCompatActivity {
 
     public Toolbar getToolbar() {
         return toolbar;
+    }
+
+    public TextView getTxtLogout() {
+        return txtLogout;
     }
 
     @Override

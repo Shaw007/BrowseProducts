@@ -1,10 +1,10 @@
 package com.srmstudios.browseproducts.ui.customer.home;
 
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
-
 import android.os.Bundle;
+import android.view.View;
+
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
 
 import com.srmstudios.browseproducts.R;
 import com.srmstudios.browseproducts.ui.BaseActivity;
@@ -19,6 +19,7 @@ public class CustomerHomeActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getTxtLogout().setVisibility(View.VISIBLE);
     }
 
     @Override

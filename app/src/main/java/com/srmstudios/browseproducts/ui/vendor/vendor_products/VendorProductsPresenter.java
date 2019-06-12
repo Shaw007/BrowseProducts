@@ -1,16 +1,16 @@
-package com.srmstudios.browseproducts.ui.vendor.view_products;
+package com.srmstudios.browseproducts.ui.vendor.vendor_products;
 
 import com.srmstudios.browseproducts.data.room.model.Product;
 import com.srmstudios.browseproducts.util.interfaces.IDatabaseListOps;
 
 import java.util.List;
 
-public class ViewProductsPresenter implements ViewProductsMVP.Presenter {
-    private ViewProductsMVP.View view;
-    private ViewProductsMVP.Model model;
+public class VendorProductsPresenter implements VendorProductsMVP.Presenter {
+    private VendorProductsMVP.View view;
+    private VendorProductsMVP.Model model;
     private VendorProductsAdapter adapter;
 
-    public ViewProductsPresenter(ViewProductsMVP.View view, ViewProductsMVP.Model model) {
+    public VendorProductsPresenter(VendorProductsMVP.View view, VendorProductsMVP.Model model) {
         this.view = view;
         this.model = model;
     }
@@ -34,7 +34,7 @@ public class ViewProductsPresenter implements ViewProductsMVP.Presenter {
 
     private void setupVendorProductsAdapter(List<Product> products){
         adapter = new VendorProductsAdapter(products);
-        view.setRecyclerViewProductsAdapter(adapter);
+        view.setRecyclerViewVendorProductsAdapter(adapter);
     }
 }
 

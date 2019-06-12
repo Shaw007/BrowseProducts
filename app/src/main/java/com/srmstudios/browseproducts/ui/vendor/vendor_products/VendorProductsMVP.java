@@ -1,14 +1,13 @@
-package com.srmstudios.browseproducts.ui.vendor.view_products;
+package com.srmstudios.browseproducts.ui.vendor.vendor_products;
 
 import com.srmstudios.browseproducts.util.interfaces.IDatabaseListOps;
-import com.srmstudios.browseproducts.util.interfaces.IDatabaseOps;
 
-public interface ViewProductsMVP {
+public interface VendorProductsMVP {
 
     interface View{
         void showDialogMessage(int resourceId);
         void showDialogMessage(String message);
-        void setRecyclerViewProductsAdapter(VendorProductsAdapter adapter);
+        void setRecyclerViewVendorProductsAdapter(VendorProductsAdapter adapter);
     }
 
     interface Presenter{

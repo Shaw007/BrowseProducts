@@ -29,6 +29,12 @@
             android:layout_marginBottom="10dp"
             />
         <TextView
+            android:id="@+id/txtProductQuantity"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/txt_list_item_vendor_product_price_size"
+            />
+        <TextView
             android:id="@+id/txtProductPrice"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
