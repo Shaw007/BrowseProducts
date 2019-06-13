@@ -33,6 +33,15 @@
                 android:textSize="@dimen/btn_sign_in_up_text_size"
                 android:fontFamily="@font/futura_semi_bold_1"
                 />
+            <Button
+                android:id="@+id/btnOrderHistory"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/order_history"
+                android:textAllCaps="false"
+                android:textSize="@dimen/btn_sign_in_up_text_size"
+                android:fontFamily="@font/futura_semi_bold_1"
+                />
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
 

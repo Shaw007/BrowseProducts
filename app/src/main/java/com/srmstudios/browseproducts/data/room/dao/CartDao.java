@@ -6,6 +6,7 @@ import androidx.room.Query;
 
 import com.srmstudios.browseproducts.data.room.model.Cart;
 import com.srmstudios.browseproducts.data.room.model.CartJoinProduct;
+import com.srmstudios.browseproducts.data.room.model.CustomerOrderHistory;
 
 import java.util.List;
 
@@ -15,12 +16,30 @@ public interface CartDao {
     @Insert
     void insert(Cart cart);
 
-    @Query("select * from cart where user_email=:userEmail and product_id=:productId")
+    @Query("select * from cart where user_email=:userEmail and product_id=:productId and order_id is null")
     Cart getCartByUserAndProductId(String userEmail,int productId);
 
-    @Query("select c.cart_id,c.user_email,c.product_quantity,c.product_id,p.product_name,p.product_image_url,p.product_details,p.product_price,p.product_vendor " +
+    @Query("select c.cart_id,c.user_email,c.order_id,c.product_quantity,c.product_id,p.product_name,p.product_image_url,p.product_details,p.product_price,p.product_vendor,c.is_booked,c.is_dispatched " +
             "from cart c,product p " +
-            "where c.product_id=p.product_id and user_email=:userEmail")
+            "where c.product_id=p.product_id and user_email=:userEmail and is_booked=0")
     List<CartJoinProduct> getUserCart(String userEmail);
 
+    @Query("update cart set order_id=:orderId,is_booked=1 " +
+            "where cart_id in (:cartIdList) " +
+            "and user_email=:userEmail and is_booked=0")
+    void bookUserCart(List<Integer> cartIdList,String orderId,String userEmail);
+
+    @Query("select c.order_id,sum(p.product_price*c.product_quantity) as total_amount,c.is_dispatched " +
+            "from cart c,product p " +
+            "where c.product_id = p.product_id and is_booked = 1  and c.user_email=:userEmail " +
+            "group by c.order_id")
+    List<CustomerOrderHistory> getCustomerOrderHistory(String userEmail);
 }
+
+
+
+
+
+
+
+

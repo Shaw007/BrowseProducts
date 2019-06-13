@@ -12,6 +12,7 @@ import androidx.fragment.app.Fragment;
 
 import com.srmstudios.browseproducts.R;
 import com.srmstudios.browseproducts.ui.customer.cart.CartActivity;
+import com.srmstudios.browseproducts.ui.customer.order_history.OrderHistoryActivity;
 import com.srmstudios.browseproducts.ui.customer.view_products.ViewProductsActivity;
 
 import butterknife.BindView;
@@ -26,6 +27,8 @@ public class CustomerHomeFragment extends Fragment implements View.OnClickListen
     protected Button btnBrowseProducts;
     @BindView(R.id.btnMyCart)
     protected Button btnMyCart;
+    @BindView(R.id.btnOrderHistory)
+    protected Button btnOrderHistory;
 
     private Unbinder unbinder;
 
@@ -50,6 +53,7 @@ public class CustomerHomeFragment extends Fragment implements View.OnClickListen
 
         btnBrowseProducts.setOnClickListener(this);
         btnMyCart.setOnClickListener(this);
+        btnOrderHistory.setOnClickListener(this);
     }
 
     @Override
@@ -65,7 +69,11 @@ public class CustomerHomeFragment extends Fragment implements View.OnClickListen
                 startActivity(intent);
                 break;
             }
-
+            case R.id.btnOrderHistory:{
+                Intent intent = new Intent(getContext(), OrderHistoryActivity.class);
+                startActivity(intent);
+                break;
+            }
         }
     }
 

@@ -52,6 +52,15 @@ public class CartAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         return cartJoinProducts.size();
     }
 
+    public List<CartJoinProduct> getCartJoinProducts(){
+        return cartJoinProducts;
+    }
+
+    public void clear(){
+        cartJoinProducts.clear();
+        notifyDataSetChanged();
+    }
+
     class CartViewHolder extends RecyclerView.ViewHolder{
         @BindView(R.id.imgProductImage)
         protected ImageView imgProductImage;

@@ -13,10 +13,16 @@ public class Cart {
     private int cart_id;
     @ColumnInfo(name = "user_email")
     private String userEmail;
+    @ColumnInfo(name = "order_id")
+    private String orderId;
     @ColumnInfo(name = "product_id")
     private int productId;
     @ColumnInfo(name = "product_quantity")
     private int productQuantity;
+    @ColumnInfo(name = "is_booked")
+    private boolean isBooked = false;
+    @ColumnInfo(name = "is_dispatched")
+    private boolean isDispatched = false;
 
     public int getCart_id() {
         return cart_id;
@@ -35,6 +41,14 @@ public class Cart {
         this.userEmail = userEmail;
     }
 
+    public String getOrderId() {
+        return orderId;
+    }
+
+    public void setOrderId(String orderId) {
+        this.orderId = orderId;
+    }
+
     public int getProductId() {
         return productId;
     }
@@ -49,5 +63,21 @@ public class Cart {
 
     public void setProductQuantity(int productQuantity) {
         this.productQuantity = productQuantity;
+    }
+
+    public boolean isBooked() {
+        return isBooked;
+    }
+
+    public void setIsBooked(boolean booked) {
+        isBooked = booked;
+    }
+
+    public boolean isDispatched() {
+        return isDispatched;
+    }
+
+    public void setIsDispatched(boolean dispatched) {
+        isDispatched = dispatched;
     }
 }

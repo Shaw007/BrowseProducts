@@ -44,4 +44,10 @@
     <string name="max_20_allowed">Maximum 20 items are allowed at a time.</string>
     <string name="add_to_cart">Add to Cart</string>
     <string name="product_added_in_cart_successfully">Product added to cart successfully.</string>
+    <string name="checkout">Checkout</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="proceed_to_checkout">Proceed to Checkout</string>
+    <string name="are_you_sure_checkout">Are you sure you want to checkout?</string>
+    <string name="order_history">Order History</string>
 </resources>

@@ -21,5 +21,7 @@
     <dimen name="img_product_list_item_customer_height">185dp</dimen>
     <dimen name="img_prodduct_detail_banner_height">260dp</dimen>
     <dimen name="txt_quantity_product_detail_size">18sp</dimen>
+    <dimen name="txt_cart_total_size">16sp</dimen>
+    <dimen name="btn_cart_checkout_txt_siz">15sp</dimen>
 
 </resources>

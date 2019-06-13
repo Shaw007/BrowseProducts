@@ -27,7 +27,7 @@ public class VendorProductsPresenter implements VendorProductsMVP.Presenter {
 
             @Override
             public void onError(String message, Throwable throwable) {
-                view.showDialogMessage(message + ": " + throwable.getMessage());
+                view.showDialogMessage(message);
             }
         });
     }

@@ -27,7 +27,7 @@ public class ProductDetailPresenter implements ProductDetailMVP.Presenter {
 
             @Override
             public void onError(String message, Throwable throwable) {
-                view.showDialogMessage(message + ": " + throwable.getMessage());
+                view.showDialogMessage(message );
             }
         });
     }
@@ -47,7 +47,7 @@ public class ProductDetailPresenter implements ProductDetailMVP.Presenter {
 
             @Override
             public void onError(String message, Throwable throwable) {
-                view.showDialogMessage(message + ": " + throwable.getMessage());
+                view.showDialogMessage(message);
             }
         });
     }

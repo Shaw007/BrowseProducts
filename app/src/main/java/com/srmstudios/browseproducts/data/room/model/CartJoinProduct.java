@@ -9,6 +9,8 @@ public class CartJoinProduct {
     private String userEmail;
     @ColumnInfo(name = "product_quantity")
     private int productQuantity;
+    @ColumnInfo(name = "order_id")
+    private String orderId;
     @ColumnInfo(name = "product_id")
     private int productId;
     @ColumnInfo(name = "product_name")
@@ -21,6 +23,10 @@ public class CartJoinProduct {
     private String productPrice;
     @ColumnInfo(name = "product_vendor")
     private String productVendor;
+    @ColumnInfo(name = "is_booked")
+    private boolean isBooked;
+    @ColumnInfo(name = "is_dispatched")
+    private boolean isDispatched = false;
 
     public int getCartId() {
         return cartId;
@@ -44,6 +50,14 @@ public class CartJoinProduct {
 
     public void setProductQuantity(int productQuantity) {
         this.productQuantity = productQuantity;
+    }
+
+    public String getOrderId() {
+        return orderId;
+    }
+
+    public void setOrderId(String orderId) {
+        this.orderId = orderId;
     }
 
     public int getProductId() {
@@ -92,5 +106,21 @@ public class CartJoinProduct {
 
     public void setProductVendor(String productVendor) {
         this.productVendor = productVendor;
+    }
+
+    public boolean isBooked() {
+        return isBooked;
+    }
+
+    public void setBooked(boolean booked) {
+        isBooked = booked;
+    }
+
+    public boolean isDispatched() {
+        return isDispatched;
+    }
+
+    public void setDispatched(boolean dispatched) {
+        isDispatched = dispatched;
     }
 }

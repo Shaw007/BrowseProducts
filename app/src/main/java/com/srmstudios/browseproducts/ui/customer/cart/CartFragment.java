@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -14,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.srmstudios.browseproducts.R;
 import com.srmstudios.browseproducts.util.DialogUtils;
 import com.srmstudios.browseproducts.util.Utils;
+import com.srmstudios.browseproducts.util.interfaces.DialogBoxTwoButtonCallback;
 import com.srmstudios.browseproducts.util.singleton.BrowseProductsDatabase;
 import com.srmstudios.browseproducts.util.singleton.SessionManager;
 
@@ -24,9 +27,13 @@ import butterknife.Unbinder;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class CartFragment extends Fragment implements CartMVP.View{
+public class CartFragment extends Fragment implements CartMVP.View,View.OnClickListener{
     @BindView(R.id.recyclerViewCart)
     protected RecyclerView recyclerViewCart;
+    @BindView(R.id.txtCartTotalAmount)
+    protected TextView txtCartTotalAmount;
+    @BindView(R.id.btnCheckout)
+    protected Button btnCheckout;
 
     private Unbinder unbinder;
     private CartPresenter presenter;
@@ -57,8 +64,32 @@ public class CartFragment extends Fragment implements CartMVP.View{
         unbinder = ButterKnife.bind(this,v);
 
         recyclerViewCart.setLayoutManager(new LinearLayoutManager(getContext()));
+        btnCheckout.setOnClickListener(this);
 
         presenter.getUserCart(SessionManager.getInstance(getContext()).getUser().getEmail());
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.btnCheckout:{
+                DialogUtils.showTwoButonDialogBox(getContext(),
+                        Utils.getStringFromResourceId(getContext(),R.string.proceed_to_checkout),
+                        Utils.getStringFromResourceId(getContext(),R.string.are_you_sure_checkout),
+                        new DialogBoxTwoButtonCallback() {
+                            @Override
+                            public void onSuccess() {
+                                presenter.proceedToCheckout();
+                            }
+
+                            @Override
+                            public void onFailure() {
+
+                            }
+                        });
+                break;
+            }
+        }
     }
 
     @Override
@@ -86,4 +117,13 @@ public class CartFragment extends Fragment implements CartMVP.View{
         recyclerViewCart.setAdapter(adapter);
     }
 
+    @Override
+    public void setTxtTotalCartAmount(String totalAmount) {
+        txtCartTotalAmount.setText("PKR " + totalAmount);
+    }
+
+    @Override
+    public String getLoggedInUserEmail() {
+        return SessionManager.getInstance(getContext()).getUser().getEmail();
+    }
 }

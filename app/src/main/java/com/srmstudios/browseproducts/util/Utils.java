@@ -257,6 +257,11 @@ public class Utils {
         }
         return photoUri;
     }
+
+    public static String generateUniqueOrderId(){
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyyMMddHHmm");
+        return simpleDateFormat.format(new Date());
+    }
 }
 
 

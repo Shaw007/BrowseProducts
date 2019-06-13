@@ -31,7 +31,7 @@ public class SignInPresenter implements SignInMVP.Presenter {
 
            @Override
            public void onError(String message, Throwable throwable) {
-               view.showDialogMessage(message + ": " + throwable.getMessage());
+               view.showDialogMessage(message);
            }
        });
     }
