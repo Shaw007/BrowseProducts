@@ -35,7 +35,7 @@ public class CartPresenter implements CartMVP.Presenter {
     }
 
     @Override
-    public void proceedToCheckout() {
+    public void proceedToCheckout(String deliveryDate) {
         List<Integer> cartIdsList = new ArrayList<>();
         for(CartJoinProduct cartJoinProduct : adapter.getCartJoinProducts()){
             cartIdsList.add(cartJoinProduct.getCartId());
@@ -43,6 +43,7 @@ public class CartPresenter implements CartMVP.Presenter {
         model.bookUserCartItems(cartIdsList,
                 Utils.generateUniqueOrderId(),
                 view.getLoggedInUserEmail(),
+                deliveryDate,
                 new IDatabaseOps() {
                     @Override
                     public void onSuccess(Object response) {
@@ -66,8 +67,30 @@ public class CartPresenter implements CartMVP.Presenter {
 
         double totalCartAmount = 0;
         for(CartJoinProduct cartJoinProduct : cartJoinProducts){
-            totalCartAmount += Double.parseDouble(cartJoinProduct.getProductPrice())*cartJoinProduct.getProductQuantity();
+            if(cartJoinProduct.getProductDiscount() == 0) {
+                totalCartAmount += Double.parseDouble(cartJoinProduct.getProductPrice()) * cartJoinProduct.getProductQuantity();
+            }else {
+                double discountedPrice = Double.parseDouble(cartJoinProduct.getProductPrice()) -
+                        Double.parseDouble(cartJoinProduct.getProductPrice())*(cartJoinProduct.getProductDiscount()/100f);
+                totalCartAmount += Math.round(discountedPrice) * cartJoinProduct.getProductQuantity();
+            }
         }
         view.setTxtTotalCartAmount(String.valueOf(totalCartAmount));
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

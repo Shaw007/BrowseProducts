@@ -3,6 +3,7 @@ package com.srmstudios.browseproducts.ui.vendor.vendor_products;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -20,9 +21,11 @@ import butterknife.ButterKnife;
 
 public class VendorProductsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private List<Product> products;
+    private IVendorProductsAdapter iVendorProductsAdapter;
 
-    public VendorProductsAdapter(List<Product> products) {
+    public VendorProductsAdapter(List<Product> products,IVendorProductsAdapter iVendorProductsAdapter) {
         this.products = products;
+        this.iVendorProductsAdapter = iVendorProductsAdapter;
     }
 
     @NonNull
@@ -42,13 +45,32 @@ public class VendorProductsAdapter extends RecyclerView.Adapter<RecyclerView.Vie
                     vendorProductsViewHolder.imgProductImage,
                     product.getProductImageUrl());
             vendorProductsViewHolder.txtProductName.setText(product.getProductName());
-            vendorProductsViewHolder.txtProductPrice.setText("PKR " + product.getProductPrice());
+            if(product.getProductDiscount() == 0){
+                vendorProductsViewHolder.txtProductPrice.setText("PKR " + product.getProductPrice());
+                vendorProductsViewHolder.txtProductDiscountedPrice.setVisibility(View.GONE);
+            }else {
+                double actualPrice = Double.parseDouble(product.getProductPrice());
+                double discountedPrice = actualPrice - (actualPrice*(product.getProductDiscount()/100f));
+                vendorProductsViewHolder.txtProductPrice.setText("Actual Price: PKR " + product.getProductPrice());
+                vendorProductsViewHolder.txtProductDiscountedPrice.setText("Discounted Price: PKR " + Math.round(discountedPrice));
+                vendorProductsViewHolder.txtProductDiscountedPrice.setVisibility(View.VISIBLE);
+            }
         }
     }
 
     @Override
     public int getItemCount() {
         return products.size();
+    }
+
+    public void updateProductDiscount(int productId,int newDiscount){
+        for(int i=0;i<products.size();i++){
+            if(products.get(i).getProductId() == productId){
+                products.get(i).setProductDiscount(newDiscount);
+                notifyItemChanged(i);
+                break;
+            }
+        }
     }
 
     class VendorProductsViewHolder extends RecyclerView.ViewHolder{
@@ -58,10 +80,40 @@ public class VendorProductsAdapter extends RecyclerView.Adapter<RecyclerView.Vie
         protected TextView txtProductName;
         @BindView(R.id.txtProductPrice)
         protected TextView txtProductPrice;
+        @BindView(R.id.txtProductDiscountedPrice)
+        protected TextView txtProductDiscountedPrice;
+        @BindView(R.id.btnEditDiscount)
+        protected Button btnEditDiscount;
 
         public VendorProductsViewHolder(@NonNull View itemView) {
             super(itemView);
             ButterKnife.bind(this,itemView);
+            btnEditDiscount.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    iVendorProductsAdapter.onItemClick(products.get(getLayoutPosition()).getProductId(),
+                            products.get(getLayoutPosition()).getProductDiscount());
+                }
+            });
         }
     }
+
+    public interface IVendorProductsAdapter{
+        void onItemClick(int productId,int currentDiscount);
+    }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

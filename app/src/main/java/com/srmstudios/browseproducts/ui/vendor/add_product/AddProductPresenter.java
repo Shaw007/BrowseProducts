@@ -2,7 +2,6 @@ package com.srmstudios.browseproducts.ui.vendor.add_product;
 
 import com.srmstudios.browseproducts.R;
 import com.srmstudios.browseproducts.data.room.model.Product;
-import com.srmstudios.browseproducts.data.room.model.User;
 import com.srmstudios.browseproducts.util.interfaces.IDatabaseOps;
 
 public class AddProductPresenter implements AddProductMVP.Presenter {
@@ -15,13 +14,14 @@ public class AddProductPresenter implements AddProductMVP.Presenter {
     }
 
     @Override
-    public void onClickBtnAddProduct(String productImage, String productName, String productDesc, String productPrice, String productVendor,String productVendorEmail) {
+    public void onClickBtnAddProduct(String productImage, String productName, String productDesc, String productPrice, String productVendor,String productVendorEmail,int productDiscount) {
         model.addProduct(productImage,
                 productName,
                 productDesc,
                 productPrice,
                 productVendor,
                 productVendorEmail,
+                productDiscount,
                 new IDatabaseOps() {
                     @Override
                     public void onSuccess(Object response) {

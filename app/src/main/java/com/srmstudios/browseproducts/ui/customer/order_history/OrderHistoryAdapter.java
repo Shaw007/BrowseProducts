@@ -38,6 +38,7 @@ public class OrderHistoryAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             OrderHistoryViewHolder orderHistoryViewHolder = (OrderHistoryViewHolder) holder;
             orderHistoryViewHolder.txtOrderId.setText(order.getOrderId());
             orderHistoryViewHolder.txtTotalAmount.setText("PKR " + order.getTotalAmount());
+            orderHistoryViewHolder.txtDeliveryDate.setText("Delivery Date: " + order.getDeliveryDate());
             if(order.isDispatched()) {
                 orderHistoryViewHolder.txtIsDispatched.setText("Dispatched: Yes");
             }else {
@@ -56,6 +57,8 @@ public class OrderHistoryAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         protected TextView txtOrderId;
         @BindView(R.id.txtTotalAmount)
         protected TextView txtTotalAmount;
+        @BindView(R.id.txtDeliveryDate)
+        protected TextView txtDeliveryDate;
         @BindView(R.id.txtIsDispatched)
         protected TextView txtIsDispatched;
 

@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.srmstudios.browseproducts.R;
 import com.srmstudios.browseproducts.util.DialogUtils;
 import com.srmstudios.browseproducts.util.Utils;
+import com.srmstudios.browseproducts.util.interfaces.DialogBoxTwoButtonInputCallback;
 import com.srmstudios.browseproducts.util.singleton.BrowseProductsDatabase;
 import com.srmstudios.browseproducts.util.singleton.SessionManager;
 
@@ -78,6 +79,24 @@ public class VendorProductsFragment extends Fragment implements VendorProductsMV
     @Override
     public void setRecyclerViewVendorProductsAdapter(VendorProductsAdapter adapter) {
         recyclerVendorProducts.setAdapter(adapter);
+    }
+
+    @Override
+    public void showEditDiscountDialog(int productId, int currentDiscount) {
+        DialogUtils.showTwoButonDiscountInputDialogBox(getContext(),
+                Utils.getStringFromResourceId(getContext(),R.string.edit_discount),
+                String.valueOf(currentDiscount),
+                new DialogBoxTwoButtonInputCallback() {
+                    @Override
+                    public void onSuccess(String input) {
+                        presenter.updateProductDiscount(productId,Integer.parseInt(input));
+                    }
+
+                    @Override
+                    public void onFailure() {
+
+                    }
+                });
     }
 
     @Override

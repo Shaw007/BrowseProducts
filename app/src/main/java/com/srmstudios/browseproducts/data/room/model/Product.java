@@ -23,6 +23,8 @@ public class Product {
     private String productVendor;
     @ColumnInfo(name = "product_vendor_email")
     private String productVendorEmail;
+    @ColumnInfo(name = "product_discount")
+    private int productDiscount;
 
     public int getProductId() {
         return productId;
@@ -78,6 +80,14 @@ public class Product {
 
     public void setProductVendorEmail(String productVendorEmail) {
         this.productVendorEmail = productVendorEmail;
+    }
+
+    public int getProductDiscount() {
+        return productDiscount;
+    }
+
+    public void setProductDiscount(int productDiscount) {
+        this.productDiscount = productDiscount;
     }
 }
 

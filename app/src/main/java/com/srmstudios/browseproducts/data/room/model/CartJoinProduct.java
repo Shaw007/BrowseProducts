@@ -23,6 +23,8 @@ public class CartJoinProduct {
     private String productPrice;
     @ColumnInfo(name = "product_vendor")
     private String productVendor;
+    @ColumnInfo(name = "product_discount")
+    private int productDiscount;
     @ColumnInfo(name = "is_booked")
     private boolean isBooked;
     @ColumnInfo(name = "is_dispatched")
@@ -106,6 +108,14 @@ public class CartJoinProduct {
 
     public void setProductVendor(String productVendor) {
         this.productVendor = productVendor;
+    }
+
+    public int getProductDiscount() {
+        return productDiscount;
+    }
+
+    public void setProductDiscount(int productDiscount) {
+        this.productDiscount = productDiscount;
     }
 
     public boolean isBooked() {

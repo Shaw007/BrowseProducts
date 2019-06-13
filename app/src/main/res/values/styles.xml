@@ -24,5 +24,9 @@
         <item name="colorControlNormal">@color/grey_dark_sign_in_up_edt_hint</item>
         <item name="colorControlActivated">@color/grey_dark_sign_in_up_edt_hint</item>-->
     </style>
+    <style name="DatePickerDialogTheme" parent="Theme.AppCompat.Light.Dialog">
+        <item name="colorAccent">@color/colorPrimary</item>
+        <item name="colorControlNormal">@color/colorPrimary</item>
+    </style>
 
 </resources>

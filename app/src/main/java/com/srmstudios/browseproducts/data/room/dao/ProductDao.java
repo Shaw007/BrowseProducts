@@ -5,7 +5,6 @@ import androidx.room.Insert;
 import androidx.room.Query;
 
 import com.srmstudios.browseproducts.data.room.model.Product;
-import com.srmstudios.browseproducts.data.room.model.User;
 
 import java.util.List;
 
@@ -26,4 +25,7 @@ public interface ProductDao {
 
     @Query("select * from product")
     List<Product> getAllProducts();
+
+    @Query("update product set product_discount=:productDiscount where product_id=:productId")
+    void updateProductDiscount(int productId,int productDiscount);
 }

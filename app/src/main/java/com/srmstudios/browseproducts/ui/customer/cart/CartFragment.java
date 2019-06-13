@@ -6,9 +6,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
+import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -20,6 +22,9 @@ import com.srmstudios.browseproducts.util.interfaces.DialogBoxTwoButtonCallback;
 import com.srmstudios.browseproducts.util.singleton.BrowseProductsDatabase;
 import com.srmstudios.browseproducts.util.singleton.SessionManager;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
@@ -27,7 +32,7 @@ import butterknife.Unbinder;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class CartFragment extends Fragment implements CartMVP.View,View.OnClickListener{
+public class CartFragment extends Fragment implements CartMVP.View,View.OnClickListener,DatePickerFragment.DateSelectedListener{
     @BindView(R.id.recyclerViewCart)
     protected RecyclerView recyclerViewCart;
     @BindView(R.id.txtCartTotalAmount)
@@ -67,6 +72,7 @@ public class CartFragment extends Fragment implements CartMVP.View,View.OnClickL
         btnCheckout.setOnClickListener(this);
 
         presenter.getUserCart(SessionManager.getInstance(getContext()).getUser().getEmail());
+
     }
 
     @Override
@@ -79,7 +85,9 @@ public class CartFragment extends Fragment implements CartMVP.View,View.OnClickL
                         new DialogBoxTwoButtonCallback() {
                             @Override
                             public void onSuccess() {
-                                presenter.proceedToCheckout();
+                                DialogFragment datePickerFragment = new DatePickerFragment(CartFragment.this,
+                                        Utils.getMillisecondsByAddingMonthsToCurrentTimestamp(1));
+                                datePickerFragment.show(getActivity().getSupportFragmentManager(), "DatePickerDialog");
                             }
 
                             @Override
@@ -126,4 +134,43 @@ public class CartFragment extends Fragment implements CartMVP.View,View.OnClickL
     public String getLoggedInUserEmail() {
         return SessionManager.getInstance(getContext()).getUser().getEmail();
     }
+
+    @Override
+    public void onDateSelected(DatePicker datePicker, int year, int monthOfYear, int dayOfMonth) {
+        try {
+            Calendar calendarDeliveryDate = Calendar.getInstance();
+            calendarDeliveryDate.set(Calendar.YEAR,year);
+            calendarDeliveryDate.set(Calendar.MONTH,monthOfYear);
+            calendarDeliveryDate.set(Calendar.DAY_OF_MONTH,dayOfMonth);
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("d MMM, yyyy");
+            String deliveryDateFormatted = simpleDateFormat.format(calendarDeliveryDate.getTime());
+            presenter.proceedToCheckout(deliveryDateFormatted);
+        }catch (Exception ex){
+            ex.printStackTrace();
+            showDialogMessage(ex.getMessage());
+        }
+    }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

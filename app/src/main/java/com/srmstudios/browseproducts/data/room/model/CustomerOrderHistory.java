@@ -9,6 +9,8 @@ public class CustomerOrderHistory {
     private double totalAmount;
     @ColumnInfo(name = "is_dispatched")
     private boolean isDispatched;
+    @ColumnInfo(name = "delivery_date")
+    private String deliveryDate;
 
     public String getOrderId() {
         return orderId;
@@ -32,5 +34,13 @@ public class CustomerOrderHistory {
 
     public void setDispatched(boolean dispatched) {
         isDispatched = dispatched;
+    }
+
+    public String getDeliveryDate() {
+        return deliveryDate;
+    }
+
+    public void setDeliveryDate(String deliveryDate) {
+        this.deliveryDate = deliveryDate;
     }
 }

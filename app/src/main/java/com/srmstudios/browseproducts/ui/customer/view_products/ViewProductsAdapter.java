@@ -44,7 +44,16 @@ public class ViewProductsAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                     viewProductsViewHolder.imgProductImage,
                     product.getProductImageUrl());
             viewProductsViewHolder.txtProductName.setText(product.getProductName());
-            viewProductsViewHolder.txtProductPrice.setText("PKR " + product.getProductPrice());
+            if(product.getProductDiscount() == 0){
+                viewProductsViewHolder.txtProductPrice.setText("PKR " + product.getProductPrice());
+                viewProductsViewHolder.txtProductDiscountedPrice.setVisibility(View.GONE);
+            }else {
+                double actualPrice = Double.parseDouble(product.getProductPrice());
+                double discountedPrice = actualPrice - (actualPrice*(product.getProductDiscount()/100f));
+                viewProductsViewHolder.txtProductPrice.setText("Actual Price: PKR " + product.getProductPrice());
+                viewProductsViewHolder.txtProductDiscountedPrice.setText("Discounted Price: PKR " + Math.round(discountedPrice));
+                viewProductsViewHolder.txtProductDiscountedPrice.setVisibility(View.VISIBLE);
+            }
         }
     }
 
@@ -60,6 +69,8 @@ public class ViewProductsAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         protected TextView txtProductName;
         @BindView(R.id.txtProductPrice)
         protected TextView txtProductPrice;
+        @BindView(R.id.txtProductDiscountedPrice)
+        protected TextView txtProductDiscountedPrice;
 
         public ViewProductsViewHolder(@NonNull View itemView) {
             super(itemView);

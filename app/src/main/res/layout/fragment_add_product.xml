@@ -58,6 +58,18 @@
                 style="@style/EditTextAddProduct"
                 android:layout_marginBottom="@dimen/edt_sign_in_up_bottom_margin"
                 />
+            <EditText
+                android:id="@+id/edtProductDiscount"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="number"
+                android:imeOptions="actionDone"
+                android:textSize="@dimen/edt_add_product_text_size"
+                android:hint="@string/product_discount_optional"
+                android:maxLength="2"
+                style="@style/EditTextAddProduct"
+                android:layout_marginBottom="@dimen/edt_sign_in_up_bottom_margin"
+                />
             <Button
                 android:id="@+id/btnAddProduct"
                 android:layout_width="wrap_content"

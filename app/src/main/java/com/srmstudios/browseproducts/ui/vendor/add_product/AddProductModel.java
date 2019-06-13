@@ -2,10 +2,7 @@ package com.srmstudios.browseproducts.ui.vendor.add_product;
 
 import com.srmstudios.browseproducts.data.room.AppDatabase;
 import com.srmstudios.browseproducts.data.room.model.Product;
-import com.srmstudios.browseproducts.data.room.model.User;
-import com.srmstudios.browseproducts.util.Crypto;
 import com.srmstudios.browseproducts.util.interfaces.IDatabaseOps;
-import com.srmstudios.browseproducts.util.singleton.BrowseProductsDatabase;
 
 import io.reactivex.Observable;
 import io.reactivex.Observer;
@@ -22,7 +19,7 @@ public class AddProductModel implements AddProductMVP.Model {
     }
 
     @Override
-    public void addProduct(String productImage, String productName, String productDesc, String productPrice, String productVendor, String productVendorEmail, IDatabaseOps iDatabaseOps) {
+    public void addProduct(String productImage, String productName, String productDesc, String productPrice, String productVendor, String productVendorEmail, int productDiscount, IDatabaseOps iDatabaseOps) {
         Observable.just(appDatabase)
                 .map(new Function<AppDatabase, Object>() {
                     @Override
@@ -38,6 +35,7 @@ public class AddProductModel implements AddProductMVP.Model {
                             newProduct.setProductPrice(productPrice);
                             newProduct.setProductVendor(productVendor);
                             newProduct.setProductVendorEmail(productVendorEmail);
+                            newProduct.setProductDiscount(productDiscount);
                             appDatabase.getProductDao().insert(newProduct);
                             return newProduct;
                         }

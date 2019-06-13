@@ -105,6 +105,10 @@ public class SignUpFragment extends Fragment implements SignUpMVP.View,View.OnCl
             showDialogMessage(R.string.please_enter_password);
             return false;
         }
+        if(edtPassword.getText().toString().length() < 4){
+            showDialogMessage(R.string.password_must_be_four_chars_long);
+            return false;
+        }
         if(Utils.isEditTextNullOrEmpty(edtConfirmPassword)){
             showDialogMessage(R.string.please_enter_confirm_password);
             return false;

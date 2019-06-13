@@ -10,12 +10,6 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
-
-import androidx.annotation.Nullable;
-import androidx.core.content.ContextCompat;
-import androidx.core.content.FileProvider;
-import androidx.fragment.app.Fragment;
-
 import android.provider.MediaStore;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -24,9 +18,12 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 
-import com.bumptech.glide.Glide;
+import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
+import androidx.core.content.FileProvider;
+import androidx.fragment.app.Fragment;
+
 import com.srmstudios.browseproducts.R;
-import com.srmstudios.browseproducts.ui.BaseActivity;
 import com.srmstudios.browseproducts.util.DialogUtils;
 import com.srmstudios.browseproducts.util.Utils;
 import com.srmstudios.browseproducts.util.singleton.BrowseProductsDatabase;
@@ -50,6 +47,8 @@ public class AddProductFragment extends Fragment implements AddProductMVP.View,V
     protected EditText edtProductDesc;
     @BindView(R.id.edtProductPrice)
     protected EditText edtProductPrice;
+    @BindView(R.id.edtProductDiscount)
+    protected EditText edtProductDiscount;
     @BindView(R.id.btnAddProduct)
     protected Button btnAddProduct;
 
@@ -101,12 +100,19 @@ public class AddProductFragment extends Fragment implements AddProductMVP.View,V
             }
             case R.id.btnAddProduct:{
                 if(validateInputFields()){
+                    int discount = 0;
+                    if(Utils.isEditTextNullOrEmpty(edtProductDiscount)){
+                        discount = 0;
+                    }else {
+                        discount = Integer.parseInt(edtProductDiscount.getText().toString());
+                    }
                     presenter.onClickBtnAddProduct(imageUrlMain,
                             edtProductName.getText().toString(),
                             edtProductDesc.getText().toString(),
                             edtProductPrice.getText().toString(),
                             SessionManager.getInstance(getContext()).getUser().getName(),
-                            SessionManager.getInstance(getContext()).getUser().getEmail());
+                            SessionManager.getInstance(getContext()).getUser().getEmail(),
+                            discount);
                 }
                 break;
             }
@@ -155,6 +161,8 @@ public class AddProductFragment extends Fragment implements AddProductMVP.View,V
         edtProductName.setText("");
         edtProductDesc.setText("");
         edtProductPrice.setText("");
+        edtProductDiscount.setText("");
+        edtProductName.requestFocus();
     }
 
     @Override

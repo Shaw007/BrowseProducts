@@ -19,6 +19,8 @@ public class Cart {
     private int productId;
     @ColumnInfo(name = "product_quantity")
     private int productQuantity;
+    @ColumnInfo(name = "delivery_date")
+    private String deliveryDate;
     @ColumnInfo(name = "is_booked")
     private boolean isBooked = false;
     @ColumnInfo(name = "is_dispatched")
@@ -63,6 +65,14 @@ public class Cart {
 
     public void setProductQuantity(int productQuantity) {
         this.productQuantity = productQuantity;
+    }
+
+    public String getDeliveryDate() {
+        return deliveryDate;
+    }
+
+    public void setDeliveryDate(String deliveryDate) {
+        this.deliveryDate = deliveryDate;
     }
 
     public boolean isBooked() {

@@ -43,7 +43,16 @@ public class CartAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                     cartJoinProduct.getProductImageUrl());
             cartViewHolder.txtProductName.setText(cartJoinProduct.getProductName());
             cartViewHolder.txtProductQuantity.setText("Quantity " + cartJoinProduct.getProductQuantity());
-            cartViewHolder.txtProductPrice.setText("PKR " + Double.parseDouble(cartJoinProduct.getProductPrice())*cartJoinProduct.getProductQuantity());
+            if(cartJoinProduct.getProductDiscount() == 0){
+                cartViewHolder.txtProductPrice.setText("PKR " + cartJoinProduct.getProductPrice());
+                cartViewHolder.txtProductDiscountedPrice.setVisibility(View.GONE);
+            }else {
+                double actualPrice = Double.parseDouble(cartJoinProduct.getProductPrice());
+                double discountedPrice = actualPrice - (actualPrice*(cartJoinProduct.getProductDiscount()/100f));
+                cartViewHolder.txtProductPrice.setText("Actual Price: PKR " + cartJoinProduct.getProductPrice());
+                cartViewHolder.txtProductDiscountedPrice.setText("Discounted Price: PKR " + Math.round(discountedPrice));
+                cartViewHolder.txtProductDiscountedPrice.setVisibility(View.VISIBLE);
+            }
         }
     }
 
@@ -70,6 +79,8 @@ public class CartAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         protected TextView txtProductQuantity;
         @BindView(R.id.txtProductPrice)
         protected TextView txtProductPrice;
+        @BindView(R.id.txtProductDiscountedPrice)
+        protected TextView txtProductDiscountedPrice;
 
         public CartViewHolder(@NonNull View itemView) {
             super(itemView);

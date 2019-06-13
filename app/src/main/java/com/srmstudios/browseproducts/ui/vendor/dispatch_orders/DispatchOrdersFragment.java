@@ -2,20 +2,19 @@ package com.srmstudios.browseproducts.ui.vendor.dispatch_orders;
 
 
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-
 import com.srmstudios.browseproducts.R;
-import com.srmstudios.browseproducts.ui.vendor.vendor_products.VendorProductsAdapter;
 import com.srmstudios.browseproducts.util.DialogUtils;
 import com.srmstudios.browseproducts.util.Utils;
+import com.srmstudios.browseproducts.util.interfaces.DialogBoxTwoButtonCallback;
 import com.srmstudios.browseproducts.util.singleton.BrowseProductsDatabase;
 import com.srmstudios.browseproducts.util.singleton.SessionManager;
 
@@ -59,6 +58,8 @@ public class DispatchOrdersFragment extends Fragment implements DispatchOrdersMV
         unbinder = ButterKnife.bind(this, v);
 
         recyclerViewVendorOrders.setLayoutManager(new LinearLayoutManager(getContext()));
+
+        presenter.getVendorOrders(SessionManager.getInstance(getContext()).getUser().getEmail());
     }
 
     @Override
@@ -78,6 +79,24 @@ public class DispatchOrdersFragment extends Fragment implements DispatchOrdersMV
     @Override
     public void setRecyclerViewVendorOrdersAdapter(DispatchOrdersAdapter adapter) {
         recyclerViewVendorOrders.setAdapter(adapter);
+    }
+
+    @Override
+    public void showDispatchingCofirmationDialog(String orderId) {
+        DialogUtils.showTwoButonDialogBox(getContext(),
+                Utils.getStringFromResourceId(getContext(),R.string.alert),
+                Utils.getStringFromResourceId(getContext(),R.string.are_you_sure_dispatch) + orderId + "?",
+                new DialogBoxTwoButtonCallback() {
+                    @Override
+                    public void onSuccess() {
+                        presenter.dispatchOrder(orderId);
+                    }
+
+                    @Override
+                    public void onFailure() {
+
+                    }
+                });
     }
 
     @Override

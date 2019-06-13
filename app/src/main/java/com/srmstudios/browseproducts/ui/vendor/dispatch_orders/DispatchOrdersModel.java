@@ -1,9 +1,9 @@
 package com.srmstudios.browseproducts.ui.vendor.dispatch_orders;
 
 import com.srmstudios.browseproducts.data.room.AppDatabase;
-import com.srmstudios.browseproducts.data.room.model.CartJoinProduct;
 import com.srmstudios.browseproducts.data.room.model.VendorOrder;
 import com.srmstudios.browseproducts.util.interfaces.IDatabaseListOps;
+import com.srmstudios.browseproducts.util.interfaces.IDatabaseOps;
 
 import java.util.List;
 
@@ -47,6 +47,42 @@ public class DispatchOrdersModel implements DispatchOrdersMVP.Model{
                     public void onError(Throwable e) {
                         e.printStackTrace();
                         iDatabaseListOps.onError("Something went wrong", e);
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
+    }
+
+    @Override
+    public void dispatchOrder(String orderId, IDatabaseOps iDatabaseOps) {
+        Observable.just(appDatabase)
+                .map(new Function<AppDatabase, Object>() {
+                    @Override
+                    public Object apply(AppDatabase appDatabase) throws Exception {
+                        appDatabase.getCartDao().dispatchOrder(orderId);
+                        return "Order#" + orderId + " dispatched successfully.";
+                    }
+                })
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<Object>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onNext(Object object) {
+                        iDatabaseOps.onSuccess(object);
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        e.printStackTrace();
+                        iDatabaseOps.onError("Something went wrong", e);
                     }
 
                     @Override

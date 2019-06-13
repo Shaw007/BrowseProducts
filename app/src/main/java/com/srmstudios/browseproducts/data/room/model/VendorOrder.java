@@ -11,6 +11,8 @@ public class VendorOrder {
     private boolean isDispatched;
     @ColumnInfo(name = "customer_name")
     private String customerName;
+    @ColumnInfo(name = "delivery_date")
+    private String deliveryDate;
 
     public String getOrderId() {
         return orderId;
@@ -42,5 +44,13 @@ public class VendorOrder {
 
     public void setCustomerName(String customerName) {
         this.customerName = customerName;
+    }
+
+    public String getDeliveryDate() {
+        return deliveryDate;
+    }
+
+    public void setDeliveryDate(String deliveryDate) {
+        this.deliveryDate = deliveryDate;
     }
 }

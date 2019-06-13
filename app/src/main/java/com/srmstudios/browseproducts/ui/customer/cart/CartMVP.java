@@ -17,12 +17,12 @@ public class CartMVP {
 
     interface Presenter{
         void getUserCart(String userEmail);
-        void proceedToCheckout();
+        void proceedToCheckout(String deliveryDate);
     }
 
     interface Model{
         void getUserCart(String userEmail, IDatabaseListOps iDatabaseListOps);
-        void bookUserCartItems(List<Integer> cartIdList, String orderId, String userEmail, IDatabaseOps iDatabaseOps);
+        void bookUserCartItems(List<Integer> cartIdList, String orderId, String userEmail, String deliveryDate,IDatabaseOps iDatabaseOps);
     }
 
 }

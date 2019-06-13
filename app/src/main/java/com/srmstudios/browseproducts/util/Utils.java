@@ -23,6 +23,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
@@ -261,6 +262,12 @@ public class Utils {
     public static String generateUniqueOrderId(){
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyyMMddHHmm");
         return simpleDateFormat.format(new Date());
+    }
+
+    public static long getMillisecondsByAddingMonthsToCurrentTimestamp(int months){
+        Calendar calendar = Calendar.getInstance();
+        calendar.add(Calendar.MONTH, months);
+        return calendar.getTime().getTime();
     }
 }
 

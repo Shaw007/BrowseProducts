@@ -57,13 +57,15 @@ public class CartModel implements CartMVP.Model {
     }
 
     @Override
-    public void bookUserCartItems(List<Integer> cartIdList, String orderId, String userEmail, IDatabaseOps iDatabaseOps) {
+    public void bookUserCartItems(List<Integer> cartIdList, String orderId, String userEmail, String deliveryDate,IDatabaseOps iDatabaseOps) {
         Observable.just(appDatabase)
                 .map(new Function<AppDatabase, String>() {
                     @Override
                     public String apply(AppDatabase appDatabase) throws Exception {
                         appDatabase.getCartDao().bookUserCart(cartIdList,
-                                orderId,userEmail);
+                                orderId,
+                                userEmail,
+                                deliveryDate);
                         return "Order booked successfully. Waiting for vendor's approval to dispatch.";
                     }
                 })

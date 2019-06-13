@@ -51,4 +51,12 @@
     <string name="are_you_sure_checkout">Are you sure you want to checkout?</string>
     <string name="order_history">Order History</string>
     <string name="dispatch_orders">Dispatch Orders</string>
+    <string name="dispatch_order">Dispatch Order</string>
+    <string name="are_you_sure_dispatch">Are you sure you want to dispatch items in Order #</string>
+    <string name="product_discount_optional">Product Discount (Optional)</string>
+    <string name="edit_discount">Edit Discount</string>
+    <string name="product_discount">Product Discount</string>
+    <string name="cancel">Cancel</string>
+    <string name="please_enter_discount">Please enter discount</string>
+    <string name="password_must_be_four_chars_long">Password must be 4 characters long</string>
 </resources>
