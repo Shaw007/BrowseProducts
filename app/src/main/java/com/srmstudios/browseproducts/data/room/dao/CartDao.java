@@ -7,6 +7,7 @@ import androidx.room.Query;
 import com.srmstudios.browseproducts.data.room.model.Cart;
 import com.srmstudios.browseproducts.data.room.model.CartJoinProduct;
 import com.srmstudios.browseproducts.data.room.model.CustomerOrderHistory;
+import com.srmstudios.browseproducts.data.room.model.VendorOrder;
 
 import java.util.List;
 
@@ -34,6 +35,12 @@ public interface CartDao {
             "where c.product_id = p.product_id and is_booked = 1  and c.user_email=:userEmail " +
             "group by c.order_id")
     List<CustomerOrderHistory> getCustomerOrderHistory(String userEmail);
+
+    @Query("select c.order_id,sum(p.product_price*c.product_quantity) as total_amount,c.is_dispatched,u.name as customer_name " +
+            "from cart c,product p,user u where c.product_id = p.product_id and c.user_email = u.email " +
+            "and is_booked = 1 and p.product_vendor_email=:vendorUserEmail " +
+            "group by c.order_id")
+    List<VendorOrder> getVendorOrders(String vendorUserEmail);
 }
 
 

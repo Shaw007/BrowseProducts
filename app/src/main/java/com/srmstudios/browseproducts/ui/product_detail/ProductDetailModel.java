@@ -2,8 +2,11 @@ package com.srmstudios.browseproducts.ui.product_detail;
 
 import com.srmstudios.browseproducts.data.room.AppDatabase;
 import com.srmstudios.browseproducts.data.room.model.Cart;
+import com.srmstudios.browseproducts.data.room.model.CartJoinProduct;
 import com.srmstudios.browseproducts.data.room.model.Product;
 import com.srmstudios.browseproducts.util.interfaces.IDatabaseOps;
+
+import java.util.List;
 
 import io.reactivex.Observable;
 import io.reactivex.Observer;
@@ -68,6 +71,15 @@ public class ProductDetailModel implements ProductDetailMVP.Model {
                         if(cart != null) {
                             return "Product already added in cart.";
                         }else {
+                            List<CartJoinProduct> presentCartList = appDatabase.getCartDao().getUserCart(userEmail);
+                            if(presentCartList != null){
+                                if(presentCartList.size() > 0){
+                                    Product productToBeAdded = appDatabase.getProductDao().getProductById(productId);
+                                    if(!presentCartList.get(0).getProductVendor().equals(productToBeAdded.getProductVendor())){
+                                        return "Products of same vendor are allowed in one order.";
+                                    }
+                                }
+                            }
                             Cart newCart = new Cart();
                             newCart.setUserEmail(userEmail);
                             newCart.setProductId(productId);

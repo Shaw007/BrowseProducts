@@ -105,7 +105,8 @@ public class AddProductFragment extends Fragment implements AddProductMVP.View,V
                             edtProductName.getText().toString(),
                             edtProductDesc.getText().toString(),
                             edtProductPrice.getText().toString(),
-                            SessionManager.getInstance(getContext()).getUser().getName());
+                            SessionManager.getInstance(getContext()).getUser().getName(),
+                            SessionManager.getInstance(getContext()).getUser().getEmail());
                 }
                 break;
             }

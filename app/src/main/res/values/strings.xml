@@ -50,4 +50,5 @@
     <string name="proceed_to_checkout">Proceed to Checkout</string>
     <string name="are_you_sure_checkout">Are you sure you want to checkout?</string>
     <string name="order_history">Order History</string>
+    <string name="dispatch_orders">Dispatch Orders</string>
 </resources>

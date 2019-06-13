@@ -15,7 +15,8 @@ public interface AddProductMVP {
                         String productName,
                         String productDesc,
                         String productPrice,
-                        String productVendor);
+                        String productVendor,
+                        String productVendorEmail);
     }
 
     interface Model{
@@ -24,6 +25,7 @@ public interface AddProductMVP {
                         String productDesc,
                         String productPrice,
                         String productVendor,
+                        String productVendorEmail,
                         IDatabaseOps iDatabaseOps);
     }
 }

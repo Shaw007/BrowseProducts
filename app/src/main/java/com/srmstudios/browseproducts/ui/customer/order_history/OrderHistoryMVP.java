@@ -7,10 +7,11 @@ public interface OrderHistoryMVP {
     interface View{
         void showDialogMessage(int resourceId);
         void showDialogMessage(String message);
+        void setRecyclerViewOrderHistoryAdapter(OrderHistoryAdapter adapter);
     }
 
     interface Presenter{
-
+        void getCustomerOrderHistory(String email);
     }
 
     interface Model{

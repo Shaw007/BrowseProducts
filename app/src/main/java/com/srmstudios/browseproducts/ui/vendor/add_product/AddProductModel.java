@@ -22,7 +22,7 @@ public class AddProductModel implements AddProductMVP.Model {
     }
 
     @Override
-    public void addProduct(String productImage, String productName, String productDesc, String productPrice, String productVendor, IDatabaseOps iDatabaseOps) {
+    public void addProduct(String productImage, String productName, String productDesc, String productPrice, String productVendor, String productVendorEmail, IDatabaseOps iDatabaseOps) {
         Observable.just(appDatabase)
                 .map(new Function<AppDatabase, Object>() {
                     @Override
@@ -37,6 +37,7 @@ public class AddProductModel implements AddProductMVP.Model {
                             newProduct.setProductDetails(productDesc);
                             newProduct.setProductPrice(productPrice);
                             newProduct.setProductVendor(productVendor);
+                            newProduct.setProductVendorEmail(productVendorEmail);
                             appDatabase.getProductDao().insert(newProduct);
                             return newProduct;
                         }

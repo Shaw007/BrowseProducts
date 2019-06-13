@@ -15,12 +15,13 @@ public class AddProductPresenter implements AddProductMVP.Presenter {
     }
 
     @Override
-    public void onClickBtnAddProduct(String productImage, String productName, String productDesc, String productPrice, String productVendor) {
+    public void onClickBtnAddProduct(String productImage, String productName, String productDesc, String productPrice, String productVendor,String productVendorEmail) {
         model.addProduct(productImage,
                 productName,
                 productDesc,
                 productPrice,
                 productVendor,
+                productVendorEmail,
                 new IDatabaseOps() {
                     @Override
                     public void onSuccess(Object response) {

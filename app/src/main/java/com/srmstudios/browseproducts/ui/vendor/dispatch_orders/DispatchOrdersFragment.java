@@ -1,4 +1,4 @@
-package com.srmstudios.browseproducts.ui.customer.order_history;
+package com.srmstudios.browseproducts.ui.vendor.dispatch_orders;
 
 
 import android.os.Bundle;
@@ -13,9 +13,9 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.srmstudios.browseproducts.R;
+import com.srmstudios.browseproducts.ui.vendor.vendor_products.VendorProductsAdapter;
 import com.srmstudios.browseproducts.util.DialogUtils;
 import com.srmstudios.browseproducts.util.Utils;
-import com.srmstudios.browseproducts.util.interfaces.DialogBoxTwoButtonCallback;
 import com.srmstudios.browseproducts.util.singleton.BrowseProductsDatabase;
 import com.srmstudios.browseproducts.util.singleton.SessionManager;
 
@@ -26,47 +26,39 @@ import butterknife.Unbinder;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class OrderHistoryFragment extends Fragment implements OrderHistoryMVP.View {
-    @BindView(R.id.recyclerViewOrderHistory)
-    protected RecyclerView recyclerViewOrderHistory;
+public class DispatchOrdersFragment extends Fragment implements DispatchOrdersMVP.View {
+    @BindView(R.id.recyclerViewVendorOrders)
+    protected RecyclerView recyclerViewVendorOrders;
 
     private Unbinder unbinder;
-    private OrderHistoryPresenter presenter;
+    private DispatchOrdersPresenter presenter;
 
-    public OrderHistoryFragment() {
+    public DispatchOrdersFragment() {
         // Required empty public constructor
     }
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        presenter = new OrderHistoryPresenter(this,
-                new OrderHistoryModel(BrowseProductsDatabase.getInstance(getContext()).getAppDatabase()));
+        presenter = new DispatchOrdersPresenter(this,
+                new DispatchOrdersModel(BrowseProductsDatabase.getInstance(getContext()).getAppDatabase()));
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View v = inflater.inflate(R.layout.fragment_order_history, container, false);
+        View v = inflater.inflate(R.layout.fragment_dispatch_orders, container, false);
 
         initializeViews(v);
 
         return v;
     }
 
-    private void initializeViews(View v){
-        unbinder = ButterKnife.bind(this,v);
+    private void initializeViews(View v) {
+        unbinder = ButterKnife.bind(this, v);
 
-        recyclerViewOrderHistory.setLayoutManager(new LinearLayoutManager(getContext()));
-
-        presenter.getCustomerOrderHistory(SessionManager.getInstance(getContext()).getUser().getEmail());
-    }
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        unbinder.unbind();
+        recyclerViewVendorOrders.setLayoutManager(new LinearLayoutManager(getContext()));
     }
 
     @Override
@@ -84,8 +76,14 @@ public class OrderHistoryFragment extends Fragment implements OrderHistoryMVP.Vi
     }
 
     @Override
-    public void setRecyclerViewOrderHistoryAdapter(OrderHistoryAdapter adapter) {
-        recyclerViewOrderHistory.setAdapter(adapter);
+    public void setRecyclerViewVendorOrdersAdapter(DispatchOrdersAdapter adapter) {
+        recyclerViewVendorOrders.setAdapter(adapter);
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        unbinder.unbind();
     }
 
 }
