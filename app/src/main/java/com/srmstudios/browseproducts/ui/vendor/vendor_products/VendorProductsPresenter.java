@@ -57,7 +57,7 @@ public class VendorProductsPresenter implements VendorProductsMVP.Presenter, Ven
     }
 
     @Override
-    public void onItemClick(int productId,int currentDiscount) {
+    public void onBtnEditDiscountClick(int productId,int currentDiscount) {
         view.showEditDiscountDialog(productId,currentDiscount);
     }
 }

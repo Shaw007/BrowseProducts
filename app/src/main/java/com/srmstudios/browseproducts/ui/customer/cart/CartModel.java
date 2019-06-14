@@ -57,7 +57,7 @@ public class CartModel implements CartMVP.Model {
     }
 
     @Override
-    public void bookUserCartItems(List<Integer> cartIdList, String orderId, String userEmail, String deliveryDate,IDatabaseOps iDatabaseOps) {
+    public void bookUserCartItems(List<Integer> cartIdList, String orderId, String userEmail, String deliveryDate,double latitude,double longitude,IDatabaseOps iDatabaseOps) {
         Observable.just(appDatabase)
                 .map(new Function<AppDatabase, String>() {
                     @Override
@@ -65,7 +65,9 @@ public class CartModel implements CartMVP.Model {
                         appDatabase.getCartDao().bookUserCart(cartIdList,
                                 orderId,
                                 userEmail,
-                                deliveryDate);
+                                deliveryDate,
+                                latitude,
+                                longitude);
                         return "Order booked successfully. Waiting for vendor's approval to dispatch.";
                     }
                 })
@@ -80,6 +82,42 @@ public class CartModel implements CartMVP.Model {
                     @Override
                     public void onNext(String response) {
                         iDatabaseOps.onSuccess(response);
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        e.printStackTrace();
+                        iDatabaseOps.onError("Something went wrong", e);
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
+    }
+
+    @Override
+    public void deleteCartItem(int cartId, IDatabaseOps iDatabaseOps) {
+        Observable.just(appDatabase)
+                .map(new Function<AppDatabase, Object>() {
+                    @Override
+                    public Object apply(AppDatabase appDatabase) throws Exception {
+                        appDatabase.getCartDao().deleteCartItem(cartId);
+                        return "Cart item deleted successfully.";
+                    }
+                })
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<Object>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onNext(Object object) {
+                        iDatabaseOps.onSuccess(object);
                     }
 
                     @Override

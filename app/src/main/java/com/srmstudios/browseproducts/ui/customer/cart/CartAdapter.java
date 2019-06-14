@@ -3,6 +3,7 @@ package com.srmstudios.browseproducts.ui.customer.cart;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -20,9 +21,11 @@ import butterknife.ButterKnife;
 
 public class CartAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private List<CartJoinProduct> cartJoinProducts;
+    private ICartAdapter iCartAdapter;
 
-    public CartAdapter(List<CartJoinProduct> cartJoinProducts) {
+    public CartAdapter(List<CartJoinProduct> cartJoinProducts,ICartAdapter iCartAdapter) {
         this.cartJoinProducts = cartJoinProducts;
+        this.iCartAdapter = iCartAdapter;
     }
 
     @NonNull
@@ -47,8 +50,7 @@ public class CartAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                 cartViewHolder.txtProductPrice.setText("PKR " + cartJoinProduct.getProductPrice());
                 cartViewHolder.txtProductDiscountedPrice.setVisibility(View.GONE);
             }else {
-                double actualPrice = Double.parseDouble(cartJoinProduct.getProductPrice());
-                double discountedPrice = actualPrice - (actualPrice*(cartJoinProduct.getProductDiscount()/100f));
+                double discountedPrice = cartJoinProduct.getProductPrice() - (cartJoinProduct.getProductPrice()*(cartJoinProduct.getProductDiscount()/100f));
                 cartViewHolder.txtProductPrice.setText("Actual Price: PKR " + cartJoinProduct.getProductPrice());
                 cartViewHolder.txtProductDiscountedPrice.setText("Discounted Price: PKR " + Math.round(discountedPrice));
                 cartViewHolder.txtProductDiscountedPrice.setVisibility(View.VISIBLE);
@@ -59,6 +61,16 @@ public class CartAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     @Override
     public int getItemCount() {
         return cartJoinProducts.size();
+    }
+
+    public void deleteItem(int cardId){
+        for(int i=0;i<cartJoinProducts.size();i++){
+            if(cartJoinProducts.get(i).getCartId() == cardId){
+                cartJoinProducts.remove(i);
+                notifyItemRemoved(i);
+                break;
+            }
+        }
     }
 
     public List<CartJoinProduct> getCartJoinProducts(){
@@ -81,11 +93,23 @@ public class CartAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         protected TextView txtProductPrice;
         @BindView(R.id.txtProductDiscountedPrice)
         protected TextView txtProductDiscountedPrice;
+        @BindView(R.id.btnDeleteItem)
+        protected Button btnDeleteItem;
 
         public CartViewHolder(@NonNull View itemView) {
             super(itemView);
             ButterKnife.bind(this,itemView);
+            btnDeleteItem.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    iCartAdapter.onBtnDeleteItem(cartJoinProducts.get(getLayoutPosition()).getCartId());
+                }
+            });
         }
+    }
+
+    public interface ICartAdapter{
+        void onBtnDeleteItem(int cartId);
     }
 }
 

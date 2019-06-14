@@ -56,8 +56,13 @@ public class DispatchOrdersPresenter implements DispatchOrdersMVP.Presenter, Dis
     }
 
     @Override
-    public void onItemClick(String orderId) {
+    public void onClickBtnDispatchOrder(String orderId) {
         view.showDispatchingCofirmationDialog(orderId);
+    }
+
+    @Override
+    public void onClickBtnShowLocation(double latitude, double longitude) {
+        view.showDeliveryLocationOnMap(latitude,longitude);
     }
 }
 

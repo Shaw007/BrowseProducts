@@ -100,6 +100,11 @@ public class DispatchOrdersFragment extends Fragment implements DispatchOrdersMV
     }
 
     @Override
+    public void showDeliveryLocationOnMap(double latitude, double longitude) {
+        Utils.showLocationOnMap(getContext(),latitude,longitude);
+    }
+
+    @Override
     public void onDestroy() {
         super.onDestroy();
         unbinder.unbind();

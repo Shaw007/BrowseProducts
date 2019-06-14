@@ -25,10 +25,10 @@ public interface CartDao {
             "where c.product_id=p.product_id and user_email=:userEmail and is_booked=0")
     List<CartJoinProduct> getUserCart(String userEmail);
 
-    @Query("update cart set order_id=:orderId,is_booked=1,delivery_date=:deliveryDate " +
+    @Query("update cart set order_id=:orderId,is_booked=1,delivery_date=:deliveryDate,latitude=:latitude,longitude=:longitude " +
             "where cart_id in (:cartIdList) " +
             "and user_email=:userEmail and is_booked=0")
-    void bookUserCart(List<Integer> cartIdList,String orderId,String userEmail,String deliveryDate);
+    void bookUserCart(List<Integer> cartIdList,String orderId,String userEmail,String deliveryDate,double latitude,double longitude);
 
     @Query("select c.order_id,sum(p.product_price-(p.product_price*(p.product_discount/100.0))) as total_amount,c.is_dispatched,c.delivery_date " +
             "from cart c,product p where c.product_id = p.product_id " +
@@ -36,7 +36,7 @@ public interface CartDao {
             "group by c.order_id")
     List<CustomerOrderHistory> getCustomerOrderHistory(String userEmail);
 
-    @Query("select c.order_id,sum(p.product_price-(p.product_price*(p.product_discount/100.0))) as total_amount,c.is_dispatched,u.name as customer_name,c.delivery_date " +
+    @Query("select c.order_id,sum(p.product_price-(p.product_price*(p.product_discount/100.0))) as total_amount,c.is_dispatched,u.name as customer_name,c.delivery_date,c.latitude,c.longitude " +
             "from cart c,product p,user u where c.product_id = p.product_id and c.user_email = u.email " +
             "and is_booked = 1 and p.product_vendor_email=:vendorUserEmail " +
             "group by c.order_id")
@@ -45,6 +45,9 @@ public interface CartDao {
     @Query("update cart set is_dispatched=1 " +
             "where order_id=:orderId")
     void dispatchOrder(String orderId);
+
+    @Query("delete from cart where cart_id=:cartId")
+    void deleteCartItem(int cartId);
 }
 
 

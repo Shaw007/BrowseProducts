@@ -14,7 +14,7 @@ public class AddProductPresenter implements AddProductMVP.Presenter {
     }
 
     @Override
-    public void onClickBtnAddProduct(String productImage, String productName, String productDesc, String productPrice, String productVendor,String productVendorEmail,int productDiscount) {
+    public void onClickBtnAddProduct(String productImage, String productName, String productDesc, double productPrice, String productVendor,String productVendorEmail,int productDiscount) {
         model.addProduct(productImage,
                 productName,
                 productDesc,

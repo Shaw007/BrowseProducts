@@ -10,6 +10,7 @@ public interface DispatchOrdersMVP {
         void showDialogMessage(String message);
         void setRecyclerViewVendorOrdersAdapter(DispatchOrdersAdapter adapter);
         void showDispatchingCofirmationDialog(String orderId);
+        void showDeliveryLocationOnMap(double latitude,double longitude);
     }
 
     interface Presenter{

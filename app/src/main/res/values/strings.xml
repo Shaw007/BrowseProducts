@@ -59,4 +59,10 @@
     <string name="cancel">Cancel</string>
     <string name="please_enter_discount">Please enter discount</string>
     <string name="password_must_be_four_chars_long">Password must be 4 characters long</string>
+    <string name="delete_item">Delete Item</string>
+    <string name="are_you_sure_remove_cart_item">Are you sure you want to remove this item?</string>
+    <string name="please_wait">Please wait...</string>
+    <string name="location_setting_is_required">App needs to turn on your location settings for better delivery of the products. Kindly Tap \'OK\' to continue.</string>
+    <string name="location_permission_required">App needs to access your current location for better delivery of the products. Kindly Tap \'Allow\' to grant permission.</string>
+    <string name="show_location">Show Location</string>
 </resources>

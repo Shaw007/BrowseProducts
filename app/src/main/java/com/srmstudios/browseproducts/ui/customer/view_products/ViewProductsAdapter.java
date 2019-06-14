@@ -48,8 +48,7 @@ public class ViewProductsAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                 viewProductsViewHolder.txtProductPrice.setText("PKR " + product.getProductPrice());
                 viewProductsViewHolder.txtProductDiscountedPrice.setVisibility(View.GONE);
             }else {
-                double actualPrice = Double.parseDouble(product.getProductPrice());
-                double discountedPrice = actualPrice - (actualPrice*(product.getProductDiscount()/100f));
+                double discountedPrice = product.getProductPrice() - (product.getProductPrice()*(product.getProductDiscount()/100f));
                 viewProductsViewHolder.txtProductPrice.setText("Actual Price: PKR " + product.getProductPrice());
                 viewProductsViewHolder.txtProductDiscountedPrice.setText("Discounted Price: PKR " + Math.round(discountedPrice));
                 viewProductsViewHolder.txtProductDiscountedPrice.setVisibility(View.VISIBLE);

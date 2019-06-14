@@ -14,7 +14,7 @@ public interface AddProductMVP {
         void onClickBtnAddProduct(String productImage,
                         String productName,
                         String productDesc,
-                        String productPrice,
+                        double productPrice,
                         String productVendor,
                         String productVendorEmail,
                         int productDiscount);
@@ -24,7 +24,7 @@ public interface AddProductMVP {
         void addProduct(String productImage,
                         String productName,
                         String productDesc,
-                        String productPrice,
+                        double productPrice,
                         String productVendor,
                         String productVendorEmail,
                         int productDiscount,

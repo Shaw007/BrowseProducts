@@ -24,6 +24,7 @@ import androidx.core.content.FileProvider;
 import androidx.fragment.app.Fragment;
 
 import com.srmstudios.browseproducts.R;
+import com.srmstudios.browseproducts.util.CustomProgressDialog;
 import com.srmstudios.browseproducts.util.DialogUtils;
 import com.srmstudios.browseproducts.util.Utils;
 import com.srmstudios.browseproducts.util.singleton.BrowseProductsDatabase;
@@ -55,6 +56,7 @@ public class AddProductFragment extends Fragment implements AddProductMVP.View,V
     private Unbinder unbinder;
     private AddProductPresenter presenter;
     private String imageUrlMain = "";
+    private CustomProgressDialog customProgressDialogPleaseWait;
 
     public AddProductFragment() {
         // Required empty public constructor
@@ -83,6 +85,7 @@ public class AddProductFragment extends Fragment implements AddProductMVP.View,V
 
         imgAddProductImage.setOnClickListener(this);
         btnAddProduct.setOnClickListener(this);
+        customProgressDialogPleaseWait = new CustomProgressDialog(getContext(),R.string.please_wait);
     }
 
     @Override
@@ -106,10 +109,18 @@ public class AddProductFragment extends Fragment implements AddProductMVP.View,V
                     }else {
                         discount = Integer.parseInt(edtProductDiscount.getText().toString());
                     }
+                    String price = "";
+                    if(edtProductPrice.getText().toString().startsWith(".")){
+                        price = "0" + edtProductPrice.getText().toString();
+                    }else if(price.endsWith(".")){
+                        price = edtProductPrice.getText().toString() + "0";
+                    }else {
+                        price = edtProductPrice.getText().toString();
+                    }
                     presenter.onClickBtnAddProduct(imageUrlMain,
                             edtProductName.getText().toString(),
                             edtProductDesc.getText().toString(),
-                            edtProductPrice.getText().toString(),
+                            Double.parseDouble(price),
                             SessionManager.getInstance(getContext()).getUser().getName(),
                             SessionManager.getInstance(getContext()).getUser().getEmail(),
                             discount);
@@ -222,7 +233,7 @@ public class AddProductFragment extends Fragment implements AddProductMVP.View,V
         protected void onPreExecute() {
             super.onPreExecute();
             if(!(getActivity().isFinishing())) {
-                //showAvLoadingLayout();
+                customProgressDialogPleaseWait.showDialog();
             }
         }
 
@@ -245,7 +256,7 @@ public class AddProductFragment extends Fragment implements AddProductMVP.View,V
             try {
                 imgAddProductImage.setImageURI(Utils.getUriFromFile(getContext(),s));
                 imageUrlMain = s;
-                //hideAvLoadingLayout();
+                customProgressDialogPleaseWait.hideDialog();
             } catch (Exception ex) {
                 ex.printStackTrace();
                 DialogUtils.showSingleButtonDialog(getContext(),

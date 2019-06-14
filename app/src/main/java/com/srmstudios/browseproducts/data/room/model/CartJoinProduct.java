@@ -20,7 +20,7 @@ public class CartJoinProduct {
     @ColumnInfo(name = "product_details")
     private String productDetails;
     @ColumnInfo(name = "product_price")
-    private String productPrice;
+    private double productPrice;
     @ColumnInfo(name = "product_vendor")
     private String productVendor;
     @ColumnInfo(name = "product_discount")
@@ -94,11 +94,11 @@ public class CartJoinProduct {
         this.productDetails = productDetails;
     }
 
-    public String getProductPrice() {
+    public double getProductPrice() {
         return productPrice;
     }
 
-    public void setProductPrice(String productPrice) {
+    public void setProductPrice(double productPrice) {
         this.productPrice = productPrice;
     }
 

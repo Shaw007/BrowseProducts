@@ -2,6 +2,7 @@ package com.srmstudios.browseproducts.util;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
@@ -268,6 +269,17 @@ public class Utils {
         Calendar calendar = Calendar.getInstance();
         calendar.add(Calendar.MONTH, months);
         return calendar.getTime().getTime();
+    }
+
+    public static void showLocationOnMap(Context context,double latitude,double longitude){
+        //Uri gmmIntentUri = Uri.parse("geo:37.7749,-122.4194?z=20");
+        Uri gmmIntentUri = Uri.parse("geo:"+latitude+","+
+                longitude+"?z=18");
+        Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
+        mapIntent.setPackage("com.google.android.apps.maps");
+        if (mapIntent.resolveActivity(context.getPackageManager()) != null) {
+            context.startActivity(mapIntent);
+        }
     }
 }
 

@@ -19,7 +19,7 @@ public class AddProductModel implements AddProductMVP.Model {
     }
 
     @Override
-    public void addProduct(String productImage, String productName, String productDesc, String productPrice, String productVendor, String productVendorEmail, int productDiscount, IDatabaseOps iDatabaseOps) {
+    public void addProduct(String productImage, String productName, String productDesc, double productPrice, String productVendor, String productVendorEmail, int productDiscount, IDatabaseOps iDatabaseOps) {
         Observable.just(appDatabase)
                 .map(new Function<AppDatabase, Object>() {
                     @Override

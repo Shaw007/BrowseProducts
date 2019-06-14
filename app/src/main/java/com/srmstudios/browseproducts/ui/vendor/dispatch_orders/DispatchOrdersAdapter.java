@@ -77,6 +77,8 @@ public class DispatchOrdersAdapter extends RecyclerView.Adapter<RecyclerView.Vie
         protected TextView txtDeliveryDate;
         @BindView(R.id.btnDispatchOrder)
         protected Button btnDispatchOrder;
+        @BindView(R.id.btnShowLocation)
+        protected Button btnShowLocation;
 
         public DispatchOrdersViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -84,14 +86,22 @@ public class DispatchOrdersAdapter extends RecyclerView.Adapter<RecyclerView.Vie
             btnDispatchOrder.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    iDispatchOrdersAdapter.onItemClick(vendorOrders.get(getLayoutPosition()).getOrderId());
+                    iDispatchOrdersAdapter.onClickBtnDispatchOrder(vendorOrders.get(getLayoutPosition()).getOrderId());
+                }
+            });
+            btnShowLocation.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    iDispatchOrdersAdapter.onClickBtnShowLocation(vendorOrders.get(getLayoutPosition()).getLatitude(),
+                            vendorOrders.get(getLayoutPosition()).getLongitude());
                 }
             });
         }
     }
 
     public interface IDispatchOrdersAdapter{
-        void onItemClick(String orderId);
+        void onClickBtnDispatchOrder(String orderId);
+        void onClickBtnShowLocation(double latitude,double longitude);
     }
 }
 

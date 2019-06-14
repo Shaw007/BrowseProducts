@@ -43,10 +43,11 @@
             />
     </LinearLayout>
 
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
+        android:orientation="vertical"
         >
         <Button
             android:id="@+id/btnDispatchOrder"
@@ -56,9 +57,18 @@
             android:text="@string/dispatch_order"
             android:textAllCaps="false"
             android:textSize="@dimen/btn_sign_in_up_text_size"
-            android:layout_centerInParent="true"
+            android:layout_marginBottom="10dp"
             />
-    </RelativeLayout>
+        <Button
+            android:id="@+id/btnShowLocation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/futura_semi_bold_1"
+            android:text="@string/show_location"
+            android:textAllCaps="false"
+            android:textSize="@dimen/btn_sign_in_up_text_size"
+            />
+    </LinearLayout>
 </LinearLayout>
 
 

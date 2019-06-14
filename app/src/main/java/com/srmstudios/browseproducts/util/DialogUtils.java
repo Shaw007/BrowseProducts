@@ -11,6 +11,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.srmstudios.browseproducts.R;
+import com.srmstudios.browseproducts.util.interfaces.DialogBoxOneButtonCallback;
 import com.srmstudios.browseproducts.util.interfaces.DialogBoxTwoButtonCallback;
 import com.srmstudios.browseproducts.util.interfaces.DialogBoxTwoButtonInputCallback;
 
@@ -36,6 +37,33 @@ public class DialogUtils {
             @Override
             public void onClick(View v) {
                 dialog.dismiss();
+            }
+        });
+
+        dialog.show();
+    }
+
+    public static void showSingleButtonDialog(Context context, String title, String message, DialogBoxOneButtonCallback dialogBoxOneButtonCallback){
+        final Dialog dialog = new Dialog(context);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setCancelable(false);
+        dialog.setContentView(R.layout.custom_dialog_box_single_button);
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+
+        TextView txtTitle = dialog.findViewById(R.id.txtTitle);
+        TextView txtMessage = dialog.findViewById(R.id.txtMessage);
+
+        txtTitle.setText(title);
+        txtMessage.setText(message);
+
+        dialog.setCanceledOnTouchOutside(false);
+
+        final LinearLayout linearBox = dialog.findViewById(R.id.linearBox);
+        linearBox.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+                dialogBoxOneButtonCallback.onDismiss();
             }
         });
 

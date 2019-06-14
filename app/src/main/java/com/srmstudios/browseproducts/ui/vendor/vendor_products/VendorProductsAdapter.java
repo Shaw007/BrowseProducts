@@ -49,8 +49,7 @@ public class VendorProductsAdapter extends RecyclerView.Adapter<RecyclerView.Vie
                 vendorProductsViewHolder.txtProductPrice.setText("PKR " + product.getProductPrice());
                 vendorProductsViewHolder.txtProductDiscountedPrice.setVisibility(View.GONE);
             }else {
-                double actualPrice = Double.parseDouble(product.getProductPrice());
-                double discountedPrice = actualPrice - (actualPrice*(product.getProductDiscount()/100f));
+                double discountedPrice = product.getProductPrice() - (product.getProductPrice()*(product.getProductDiscount()/100f));
                 vendorProductsViewHolder.txtProductPrice.setText("Actual Price: PKR " + product.getProductPrice());
                 vendorProductsViewHolder.txtProductDiscountedPrice.setText("Discounted Price: PKR " + Math.round(discountedPrice));
                 vendorProductsViewHolder.txtProductDiscountedPrice.setVisibility(View.VISIBLE);
@@ -91,7 +90,7 @@ public class VendorProductsAdapter extends RecyclerView.Adapter<RecyclerView.Vie
             btnEditDiscount.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    iVendorProductsAdapter.onItemClick(products.get(getLayoutPosition()).getProductId(),
+                    iVendorProductsAdapter.onBtnEditDiscountClick(products.get(getLayoutPosition()).getProductId(),
                             products.get(getLayoutPosition()).getProductDiscount());
                 }
             });
@@ -99,7 +98,7 @@ public class VendorProductsAdapter extends RecyclerView.Adapter<RecyclerView.Vie
     }
 
     public interface IVendorProductsAdapter{
-        void onItemClick(int productId,int currentDiscount);
+        void onBtnEditDiscountClick(int productId,int currentDiscount);
     }
 }
 
