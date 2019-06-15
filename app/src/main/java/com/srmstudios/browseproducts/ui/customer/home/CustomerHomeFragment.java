@@ -64,14 +64,15 @@ public class CustomerHomeFragment extends Fragment {
         recyclerViewHome.setAdapter(new HomeAdapter(homeItems, new HomeAdapter.IHomeAdapter() {
             @Override
             public void onItemClick(HomeItem homeItem) {
+                Intent intent = null;
                 if(homeItem.getName().equals(Utils.getStringFromResourceId(getContext(),R.string.browse_products))){
-                    Intent intent = new Intent(getContext(), ViewProductsActivity.class);
-                    startActivity(intent);
+                    intent = new Intent(getContext(), ViewProductsActivity.class);
                 }else if(homeItem.getName().equals(Utils.getStringFromResourceId(getContext(),R.string.my_cart))){
-                    Intent intent = new Intent(getContext(), CartActivity.class);
-                    startActivity(intent);
+                    intent = new Intent(getContext(), CartActivity.class);
                 }else if(homeItem.getName().equals(Utils.getStringFromResourceId(getContext(),R.string.order_history))){
-                    Intent intent = new Intent(getContext(), OrderHistoryActivity.class);
+                    intent = new Intent(getContext(), OrderHistoryActivity.class);
+                }
+                if(intent != null) {
                     startActivity(intent);
                 }
             }

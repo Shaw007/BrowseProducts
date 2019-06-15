@@ -38,12 +38,12 @@ public class OrderHistoryAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             OrderHistoryViewHolder orderHistoryViewHolder = (OrderHistoryViewHolder) holder;
             orderHistoryViewHolder.txtOrderId.setText(order.getOrderNumber());
             orderHistoryViewHolder.txtVendorName.setText(order.getVendorName());
-            orderHistoryViewHolder.txtTotalAmount.setText("PKR " + order.getTotalAmount());
-            orderHistoryViewHolder.txtDeliveryDate.setText("Delivery Date: " + order.getDeliveryDate());
+            orderHistoryViewHolder.txtTotalAmount.setText("Rs. " + order.getTotalAmount());
+            orderHistoryViewHolder.txtDeliveryDate.setText(order.getDeliveryDate());
             if(order.isDispatched()) {
-                orderHistoryViewHolder.txtIsDispatched.setText("Dispatched: Yes");
+                orderHistoryViewHolder.txtIsDispatched.setText("Yes");
             }else {
-                orderHistoryViewHolder.txtIsDispatched.setText("Dispatched: No");
+                orderHistoryViewHolder.txtIsDispatched.setText("No");
             }
         }
     }
