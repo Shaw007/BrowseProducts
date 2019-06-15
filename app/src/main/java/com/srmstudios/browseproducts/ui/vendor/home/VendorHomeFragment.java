@@ -61,7 +61,7 @@ public class VendorHomeFragment extends Fragment {
 
         List<HomeItem> homeItems = new ArrayList<>();
         homeItems.add(new HomeItem(R.drawable.add_products, Utils.getStringFromResourceId(getContext(),R.string.add_products)));
-        homeItems.add(new HomeItem(R.drawable.products, Utils.getStringFromResourceId(getContext(),R.string.view_products)));
+        homeItems.add(new HomeItem(R.drawable.products, Utils.getStringFromResourceId(getContext(),R.string.my_products)));
         homeItems.add(new HomeItem(R.drawable.dispatch_orders, Utils.getStringFromResourceId(getContext(),R.string.dispatch_orders)));
         homeItems.add(new HomeItem(R.drawable.sales, Utils.getStringFromResourceId(getContext(),R.string.sales)));
         recyclerViewHome.setAdapter(new HomeAdapter(homeItems, new HomeAdapter.IHomeAdapter() {
@@ -70,7 +70,7 @@ public class VendorHomeFragment extends Fragment {
                 Intent intent = null;
                 if(homeItem.getName().equals(Utils.getStringFromResourceId(getContext(),R.string.add_products))){
                     intent = new Intent(getContext(), AddProductActivity.class);
-                }else if(homeItem.getName().equals(Utils.getStringFromResourceId(getContext(),R.string.view_products))){
+                }else if(homeItem.getName().equals(Utils.getStringFromResourceId(getContext(),R.string.my_products))){
                     intent = new Intent(getContext(), VendorProductsActivity.class);
                 }else if(homeItem.getName().equals(Utils.getStringFromResourceId(getContext(),R.string.dispatch_orders))){
                     intent = new Intent(getContext(), DispatchOrdersActivity.class);

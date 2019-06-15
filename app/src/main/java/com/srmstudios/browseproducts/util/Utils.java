@@ -299,13 +299,15 @@ public class Utils {
 
     public static void showLocationOnMap(Context context,double latitude,double longitude){
         //Uri gmmIntentUri = Uri.parse("geo:37.7749,-122.4194?z=20");
-        Uri gmmIntentUri = Uri.parse("geo:"+latitude+","+
+        /*Uri gmmIntentUri = Uri.parse("geo:"+latitude+","+
                 longitude+"?z=18");
         Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
         mapIntent.setPackage("com.google.android.apps.maps");
         if (mapIntent.resolveActivity(context.getPackageManager()) != null) {
             context.startActivity(mapIntent);
-        }
+        }*/
+        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("geo:<"+latitude+">,<"+longitude+">?q=<"+latitude+">,<"+longitude+">(Delivery_Location)"));
+        context.startActivity(intent);
     }
 }
 

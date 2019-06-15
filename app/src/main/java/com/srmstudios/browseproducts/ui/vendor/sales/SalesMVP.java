@@ -9,6 +9,7 @@ public interface SalesMVP {
         void showDialogMessage(String message);
         void setRecyclerViewSalesAdapter(SalesAdapter adapter);
         void setTxtTotalDayEndSales(double totalDayEndSales);
+        void setTxtTotalOrdersReceived(int ordersReceived);
     }
 
     interface Presenter{

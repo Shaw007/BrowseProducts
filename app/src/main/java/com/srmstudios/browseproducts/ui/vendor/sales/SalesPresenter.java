@@ -41,6 +41,7 @@ public class SalesPresenter implements SalesMVP.Presenter {
             totalDayEndSales += vendorSale.getTotalOrderAmount();
         }
         view.setTxtTotalDayEndSales(totalDayEndSales);
+        view.setTxtTotalOrdersReceived(vendorSales.size());
     }
 }
 

@@ -1,9 +1,9 @@
 package com.srmstudios.browseproducts.ui.vendor.vendor_products;
 
+import android.graphics.Paint;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -46,13 +46,17 @@ public class VendorProductsAdapter extends RecyclerView.Adapter<RecyclerView.Vie
                     product.getProductImageUrl());
             vendorProductsViewHolder.txtProductName.setText(product.getProductName());
             if(product.getProductDiscount() == 0){
-                vendorProductsViewHolder.txtProductPrice.setText("PKR " + product.getProductPrice());
-                vendorProductsViewHolder.txtProductDiscountedPrice.setVisibility(View.GONE);
+                vendorProductsViewHolder.txtProductPriceNew.setText("Rs. " + product.getProductPrice());
+                vendorProductsViewHolder.txtProductPriceOld.setVisibility(View.GONE);
+                vendorProductsViewHolder.txtDiscountPercent.setVisibility(View.GONE);
             }else {
                 double discountedPrice = product.getProductPrice() - (product.getProductPrice()*(product.getProductDiscount()/100f));
-                vendorProductsViewHolder.txtProductPrice.setText("Actual Price: PKR " + product.getProductPrice());
-                vendorProductsViewHolder.txtProductDiscountedPrice.setText("Discounted Price: PKR " + Math.round(discountedPrice));
-                vendorProductsViewHolder.txtProductDiscountedPrice.setVisibility(View.VISIBLE);
+                vendorProductsViewHolder.txtProductPriceNew.setText("Rs. " + Math.round(discountedPrice));
+                vendorProductsViewHolder.txtProductPriceOld.setText("Rs. " + product.getProductPrice());
+                vendorProductsViewHolder.txtProductPriceOld.setPaintFlags(vendorProductsViewHolder.txtProductPriceOld.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
+                vendorProductsViewHolder.txtProductPriceOld.setVisibility(View.VISIBLE);
+                vendorProductsViewHolder.txtDiscountPercent.setText("-"+product.getProductDiscount()+"%");
+                vendorProductsViewHolder.txtDiscountPercent.setVisibility(View.VISIBLE);
             }
         }
     }
@@ -77,17 +81,19 @@ public class VendorProductsAdapter extends RecyclerView.Adapter<RecyclerView.Vie
         protected ImageView imgProductImage;
         @BindView(R.id.txtProductName)
         protected TextView txtProductName;
-        @BindView(R.id.txtProductPrice)
-        protected TextView txtProductPrice;
-        @BindView(R.id.txtProductDiscountedPrice)
-        protected TextView txtProductDiscountedPrice;
-        @BindView(R.id.btnEditDiscount)
-        protected Button btnEditDiscount;
+        @BindView(R.id.txtProductPriceNew)
+        protected TextView txtProductPriceNew;
+        @BindView(R.id.txtProductPriceOld)
+        protected TextView txtProductPriceOld;
+        @BindView(R.id.txtDiscountPercent)
+        protected TextView txtDiscountPercent;
+        @BindView(R.id.txtEditDiscount)
+        protected TextView txtEditDiscount;
 
         public VendorProductsViewHolder(@NonNull View itemView) {
             super(itemView);
             ButterKnife.bind(this,itemView);
-            btnEditDiscount.setOnClickListener(new View.OnClickListener() {
+            txtEditDiscount.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     iVendorProductsAdapter.onBtnEditDiscountClick(products.get(getLayoutPosition()).getProductId(),

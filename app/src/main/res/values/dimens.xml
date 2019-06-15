@@ -42,5 +42,6 @@
     <dimen name="txt_list_item_vendor_product_detail_vendor_name_size">17sp</dimen>
     <dimen name="txt_add_to_cart_height">52dp</dimen>
     <dimen name="txt_list_item_order_history_value_size">16sp</dimen>
+    <dimen name="txt_edit_discount_size">11sp</dimen>
 
 </resources>

@@ -40,6 +40,8 @@ public class SalesFragment extends Fragment implements SalesMVP.View,View.OnClic
     protected Button btnSelectDate;
     @BindView(R.id.txtTotalDayEndSales)
     protected TextView txtTotalDayEndSales;
+    @BindView(R.id.txtTotalOrdersReceived)
+    protected TextView txtTotalOrdersReceived;
     @BindView(R.id.recyclerViewSales)
     protected RecyclerView recyclerViewSales;
 
@@ -130,6 +132,11 @@ public class SalesFragment extends Fragment implements SalesMVP.View,View.OnClic
     @Override
     public void setTxtTotalDayEndSales(double totalDayEndSales) {
         txtTotalDayEndSales.setText("Day End Sale: PKR " + totalDayEndSales);
+    }
+
+    @Override
+    public void setTxtTotalOrdersReceived(int ordersReceived) {
+        txtTotalOrdersReceived.setText("Total Orders Received: " + ordersReceived);
     }
 
     @Override

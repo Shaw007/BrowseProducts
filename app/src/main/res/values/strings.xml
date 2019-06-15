@@ -34,7 +34,7 @@
     <string name="please_enter_product_name">Please enter product name</string>
     <string name="please_enter_product_desc">Please enter product description</string>
     <string name="please_enter_product_price">Please enter product price</string>
-    <string name="add_products">Add Product</string>
+    <string name="add_products">Add Products</string>
     <string name="product_added_successfully">Product added successfully</string>
     <string name="view_products">View Products</string>
     <string name="browse_products">Browse Products</string>
@@ -78,4 +78,5 @@
     <string name="dispatched">Dispatched:</string>
     <string name="vendor_with_colon">Vendor:</string>
     <string name="add_product">Add Product</string>
+    <string name="my_products">My Products</string>
 </resources>

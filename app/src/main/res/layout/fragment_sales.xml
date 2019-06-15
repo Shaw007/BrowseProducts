@@ -34,6 +34,13 @@
             android:textSize="@dimen/txt_list_item_vendor_product_name_size"
             android:layout_marginBottom="10dp"
             />
+        <TextView
+            android:id="@+id/txtTotalOrdersReceived"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/txt_list_item_vendor_product_name_size"
+            android:layout_marginBottom="10dp"
+            />
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerViewSales"
             android:layout_width="match_parent"
