@@ -3,8 +3,8 @@ package com.srmstudios.browseproducts.data.room.model;
 import androidx.room.ColumnInfo;
 
 public class VendorOrder {
-    @ColumnInfo(name = "order_id")
-    private String orderId;
+    @ColumnInfo(name = "order_number")
+    private String orderNumber;
     @ColumnInfo(name = "total_amount")
     private double totalAmount;
     @ColumnInfo(name = "is_dispatched")
@@ -18,20 +18,20 @@ public class VendorOrder {
     @ColumnInfo(name = "longitude")
     private double longitude;
 
-    public String getOrderId() {
-        return orderId;
+    public String getOrderNumber() {
+        return orderNumber;
     }
 
-    public void setOrderId(String orderId) {
-        this.orderId = orderId;
+    public void setOrderNumber(String orderNumber) {
+        this.orderNumber = orderNumber;
     }
 
     public double getTotalAmount() {
-        return totalAmount;
+        return Math.round(totalAmount);
     }
 
     public void setTotalAmount(double totalAmount) {
-        this.totalAmount = totalAmount;
+        this.totalAmount = Math.round(totalAmount);
     }
 
     public boolean isDispatched() {

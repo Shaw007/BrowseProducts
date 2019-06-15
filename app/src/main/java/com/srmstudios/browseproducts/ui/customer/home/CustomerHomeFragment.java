@@ -6,14 +6,21 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.srmstudios.browseproducts.R;
 import com.srmstudios.browseproducts.ui.customer.cart.CartActivity;
 import com.srmstudios.browseproducts.ui.customer.order_history.OrderHistoryActivity;
 import com.srmstudios.browseproducts.ui.customer.view_products.ViewProductsActivity;
+import com.srmstudios.browseproducts.util.GridSpacingItemDecoration;
+import com.srmstudios.browseproducts.util.HomeItem;
+import com.srmstudios.browseproducts.util.Utils;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -22,13 +29,9 @@ import butterknife.Unbinder;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class CustomerHomeFragment extends Fragment implements View.OnClickListener {
-    @BindView(R.id.btnBrowseProducts)
-    protected Button btnBrowseProducts;
-    @BindView(R.id.btnMyCart)
-    protected Button btnMyCart;
-    @BindView(R.id.btnOrderHistory)
-    protected Button btnOrderHistory;
+public class CustomerHomeFragment extends Fragment {
+    @BindView(R.id.recyclerViewHome)
+    protected RecyclerView recyclerViewHome;
 
     private Unbinder unbinder;
 
@@ -51,30 +54,28 @@ public class CustomerHomeFragment extends Fragment implements View.OnClickListen
     private void initializeViews(View v){
         unbinder = ButterKnife.bind(this,v);
 
-        btnBrowseProducts.setOnClickListener(this);
-        btnMyCart.setOnClickListener(this);
-        btnOrderHistory.setOnClickListener(this);
-    }
+        recyclerViewHome.setLayoutManager(new GridLayoutManager(getContext(),2));
+        recyclerViewHome.addItemDecoration(new GridSpacingItemDecoration(2, 16, true));
 
-    @Override
-    public void onClick(View view) {
-        switch (view.getId()){
-            case R.id.btnBrowseProducts:{
-                Intent intent = new Intent(getContext(), ViewProductsActivity.class);
-                startActivity(intent);
-                break;
+        List<HomeItem> homeItems = new ArrayList<>();
+        homeItems.add(new HomeItem(R.drawable.products, Utils.getStringFromResourceId(getContext(),R.string.browse_products)));
+        homeItems.add(new HomeItem(R.drawable.cart, Utils.getStringFromResourceId(getContext(),R.string.my_cart)));
+        homeItems.add(new HomeItem(R.drawable.customer_orders, Utils.getStringFromResourceId(getContext(),R.string.order_history)));
+        recyclerViewHome.setAdapter(new HomeAdapter(homeItems, new HomeAdapter.IHomeAdapter() {
+            @Override
+            public void onItemClick(HomeItem homeItem) {
+                if(homeItem.getName().equals(Utils.getStringFromResourceId(getContext(),R.string.browse_products))){
+                    Intent intent = new Intent(getContext(), ViewProductsActivity.class);
+                    startActivity(intent);
+                }else if(homeItem.getName().equals(Utils.getStringFromResourceId(getContext(),R.string.my_cart))){
+                    Intent intent = new Intent(getContext(), CartActivity.class);
+                    startActivity(intent);
+                }else if(homeItem.getName().equals(Utils.getStringFromResourceId(getContext(),R.string.order_history))){
+                    Intent intent = new Intent(getContext(), OrderHistoryActivity.class);
+                    startActivity(intent);
+                }
             }
-            case R.id.btnMyCart:{
-                Intent intent = new Intent(getContext(), CartActivity.class);
-                startActivity(intent);
-                break;
-            }
-            case R.id.btnOrderHistory:{
-                Intent intent = new Intent(getContext(), OrderHistoryActivity.class);
-                startActivity(intent);
-                break;
-            }
-        }
+        }));
     }
 
     @Override

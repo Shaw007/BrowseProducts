@@ -1,5 +1,6 @@
 package com.srmstudios.browseproducts.ui.customer.cart;
 
+import com.srmstudios.browseproducts.data.room.model.OrderItem;
 import com.srmstudios.browseproducts.util.interfaces.IDatabaseListOps;
 import com.srmstudios.browseproducts.util.interfaces.IDatabaseOps;
 
@@ -12,7 +13,6 @@ public class CartMVP {
         void showDialogMessage(String message);
         void setRecyclerViewCartAdapter(CartAdapter adapter);
         void setTxtTotalCartAmount(String totalAmount);
-        String getLoggedInUserEmail();
         void showDeleteItemConfirmationDialog(int cartId);
     }
 
@@ -24,7 +24,7 @@ public class CartMVP {
 
     interface Model{
         void getUserCart(String userEmail, IDatabaseListOps iDatabaseListOps);
-        void bookUserCartItems(List<Integer> cartIdList, String orderId, String userEmail, String deliveryDate,double latitude,double longitude,IDatabaseOps iDatabaseOps);
+        void placeOrder(List<OrderItem> orderItems,String userEmail,IDatabaseOps iDatabaseOps);
         void deleteCartItem(int cartId,IDatabaseOps iDatabaseOps);
     }
 

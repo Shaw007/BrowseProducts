@@ -7,10 +7,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.IntentSender;
 import android.content.pm.PackageManager;
-import android.location.Address;
-import android.location.Geocoder;
 import android.location.Location;
-import android.net.Uri;
 import android.os.Bundle;
 import android.os.Looper;
 import android.util.Log;
@@ -21,9 +18,7 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.annotation.RequiresPermission;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
@@ -40,12 +35,10 @@ import com.google.android.gms.location.LocationSettingsRequest;
 import com.google.android.gms.location.LocationSettingsResponse;
 import com.google.android.gms.location.LocationSettingsStates;
 import com.google.android.gms.location.LocationSettingsStatusCodes;
-import com.google.android.gms.location.SettingsClient;
 import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.srmstudios.browseproducts.R;
+import com.srmstudios.browseproducts.util.AppConstants;
 import com.srmstudios.browseproducts.util.CustomProgressDialog;
 import com.srmstudios.browseproducts.util.DialogUtils;
 import com.srmstudios.browseproducts.util.Utils;
@@ -56,8 +49,6 @@ import com.srmstudios.browseproducts.util.singleton.SessionManager;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.List;
-import java.util.Locale;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -111,8 +102,6 @@ public class CartFragment extends Fragment implements CartMVP.View,View.OnClickL
 
         presenter.getUserCart(SessionManager.getInstance(getContext()).getUser().getEmail());
         customProgressDialogPleaseWait = new CustomProgressDialog(getContext(),R.string.please_wait);
-
-        showTurnOnOffLocationDialog();
     }
 
     @Override
@@ -125,8 +114,17 @@ public class CartFragment extends Fragment implements CartMVP.View,View.OnClickL
                         new DialogBoxTwoButtonCallback() {
                             @Override
                             public void onSuccess() {
+                                Calendar calendarTwoDaysAfter = Calendar.getInstance();
+                                calendarTwoDaysAfter.add(Calendar.DAY_OF_MONTH, 2);
+                                long minDateMilliseconds = calendarTwoDaysAfter.getTime().getTime();
+                                long maxDateMilliseconds = Utils.getMillisecondsByAddingMonthsToCurrentTimestamp(1);
+
                                 DialogFragment datePickerFragment = new DatePickerFragment(CartFragment.this,
-                                        Utils.getMillisecondsByAddingMonthsToCurrentTimestamp(1));
+                                        minDateMilliseconds,
+                                        maxDateMilliseconds,
+                                        0,
+                                        0,
+                                        0);
                                 datePickerFragment.show(getActivity().getSupportFragmentManager(), "DatePickerDialog");
                             }
 
@@ -168,12 +166,7 @@ public class CartFragment extends Fragment implements CartMVP.View,View.OnClickL
 
     @Override
     public void setTxtTotalCartAmount(String totalAmount) {
-        txtCartTotalAmount.setText("PKR " + totalAmount);
-    }
-
-    @Override
-    public String getLoggedInUserEmail() {
-        return SessionManager.getInstance(getContext()).getUser().getEmail();
+        txtCartTotalAmount.setText(totalAmount+"rs");
     }
 
     @Override
@@ -201,7 +194,7 @@ public class CartFragment extends Fragment implements CartMVP.View,View.OnClickL
             calendarDeliveryDate.set(Calendar.YEAR,year);
             calendarDeliveryDate.set(Calendar.MONTH,monthOfYear);
             calendarDeliveryDate.set(Calendar.DAY_OF_MONTH,dayOfMonth);
-            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("d MMM, yyyy");
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat(AppConstants.DATE_FORMAT_ONE);
             deliveryDateFormatted = simpleDateFormat.format(calendarDeliveryDate.getTime());
             if(currentLocation == null){
                 customProgressDialogPleaseWait.showDialog();
@@ -414,6 +407,8 @@ public class CartFragment extends Fragment implements CartMVP.View,View.OnClickL
             // Permission was not granted, displaying error dialog.
             showMissingPermissionError();
             mPermissionDenied = false;
+        }else {
+            showTurnOnOffLocationDialog();
         }
     }
 }

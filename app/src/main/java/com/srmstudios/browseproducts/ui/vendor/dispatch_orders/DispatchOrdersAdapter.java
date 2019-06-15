@@ -39,7 +39,7 @@ public class DispatchOrdersAdapter extends RecyclerView.Adapter<RecyclerView.Vie
         VendorOrder vendorOrder = vendorOrders.get(position);
         if (holder instanceof DispatchOrdersViewHolder) {
             DispatchOrdersViewHolder dispatchOrdersViewHolder = (DispatchOrdersViewHolder) holder;
-            dispatchOrdersViewHolder.txtOrderId.setText(vendorOrder.getOrderId());
+            dispatchOrdersViewHolder.txtOrderId.setText(vendorOrder.getOrderNumber());
             dispatchOrdersViewHolder.txtCustomerName.setText(vendorOrder.getCustomerName());
             dispatchOrdersViewHolder.txtTotalAmount.setText("PKR " + vendorOrder.getTotalAmount());
             dispatchOrdersViewHolder.txtDeliveryDate.setText("DeliveryDate: " + vendorOrder.getDeliveryDate());
@@ -56,9 +56,9 @@ public class DispatchOrdersAdapter extends RecyclerView.Adapter<RecyclerView.Vie
         return vendorOrders.size();
     }
 
-    public void dispatchOrder(String orderId){
+    public void dispatchOrder(String orderNumber){
         for(int i=0;i<vendorOrders.size();i++){
-            if(vendorOrders.get(i).getOrderId().equals(orderId)){
+            if(vendorOrders.get(i).getOrderNumber().equals(orderNumber)){
                 vendorOrders.get(i).setDispatched(true);
                 notifyItemChanged(i);
                 break;
@@ -86,7 +86,7 @@ public class DispatchOrdersAdapter extends RecyclerView.Adapter<RecyclerView.Vie
             btnDispatchOrder.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    iDispatchOrdersAdapter.onClickBtnDispatchOrder(vendorOrders.get(getLayoutPosition()).getOrderId());
+                    iDispatchOrdersAdapter.onClickBtnDispatchOrder(vendorOrders.get(getLayoutPosition()).getOrderNumber());
                 }
             });
             btnShowLocation.setOnClickListener(new View.OnClickListener() {

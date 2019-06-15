@@ -1,11 +1,14 @@
 package com.srmstudios.browseproducts.ui.customer.cart;
 
 import com.srmstudios.browseproducts.data.room.model.CartJoinProduct;
+import com.srmstudios.browseproducts.data.room.model.OrderItem;
+import com.srmstudios.browseproducts.util.AppConstants;
 import com.srmstudios.browseproducts.util.Utils;
 import com.srmstudios.browseproducts.util.interfaces.IDatabaseListOps;
 import com.srmstudios.browseproducts.util.interfaces.IDatabaseOps;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class CartPresenter implements CartMVP.Presenter, CartAdapter.ICartAdapter {
@@ -36,31 +39,48 @@ public class CartPresenter implements CartMVP.Presenter, CartAdapter.ICartAdapte
 
     @Override
     public void proceedToCheckout(String deliveryDate,double latitude,double longitude) {
-        List<Integer> cartIdsList = new ArrayList<>();
-        for(CartJoinProduct cartJoinProduct : adapter.getCartJoinProducts()){
-            cartIdsList.add(cartJoinProduct.getCartId());
+        if(adapter == null){
+            return;
         }
-        model.bookUserCartItems(cartIdsList,
-                Utils.generateUniqueOrderId(),
-                view.getLoggedInUserEmail(),
-                deliveryDate,
-                latitude,
-                longitude,
-                new IDatabaseOps() {
-                    @Override
-                    public void onSuccess(Object response) {
-                        view.showDialogMessage(response.toString());
-                        if(response.toString().contains("successfully")){
-                            adapter.clear();
-                            view.setTxtTotalCartAmount("0");
-                        }
-                    }
+        if(adapter.getCartJoinProducts() == null){
+            return;
+        }
+        if(adapter.getCartJoinProducts().size() == 0){
+            return;
+        }
+        List<OrderItem> orderItems = new ArrayList<>();
+        for(CartJoinProduct cartJoinProduct : adapter.getCartJoinProducts()){
+            OrderItem orderItem = new OrderItem();
+            orderItem.setOrderNumber(Utils.generateUniqueOrderId());
+            orderItem.setVendorEmail(cartJoinProduct.getProductVendorEmail());
+            orderItem.setUserEmail(cartJoinProduct.getUserEmail());
+            orderItem.setProductId(cartJoinProduct.getProductId());
+            // discounted price multiply by product quantity
+            double totalPrice = cartJoinProduct.getProductQuantity() * (cartJoinProduct.getProductPrice() - (cartJoinProduct.getProductPrice()*(cartJoinProduct.getProductDiscount()/100f)));
+            orderItem.setTotalPrice(totalPrice);
+            orderItem.setProductQuantity(cartJoinProduct.getProductQuantity());
+            orderItem.setBookingDate(Utils.getFormattedDateString(AppConstants.DATE_FORMAT_TWO,new Date()));
+            orderItem.setDeliveryDate(deliveryDate);
+            orderItem.setLatitude(latitude);
+            orderItem.setLongitude(longitude);
+            orderItem.setDispatched(false);
+            orderItems.add(orderItem);
+        }
+        model.placeOrder(orderItems, adapter.getCartJoinProducts().get(0).getUserEmail(),new IDatabaseOps() {
+            @Override
+            public void onSuccess(Object response) {
+                view.showDialogMessage(response.toString());
+                if(response.toString().contains("successfully")){
+                    adapter.clear();
+                    view.setTxtTotalCartAmount("0");
+                }
+            }
 
-                    @Override
-                    public void onError(String message, Throwable throwable) {
-                        view.showDialogMessage(message);
-                    }
-                });
+            @Override
+            public void onError(String message, Throwable throwable) {
+                view.showDialogMessage(message);
+            }
+        });
     }
 
     @Override

@@ -37,7 +37,7 @@ public class ViewProductsPresenter implements ViewProductsMVP.Presenter, ViewPro
     }
 
     @Override
-    public void onItemClick(int productId) {
-        view.openProductDetail(productId);
+    public void onItemClick(int productId,String vendorEmail) {
+        view.openProductDetail(productId,vendorEmail);
     }
 }

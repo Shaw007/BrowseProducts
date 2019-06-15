@@ -8,6 +8,7 @@
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:paddingBottom="@dimen/txt_add_to_cart_height"
         >
         <LinearLayout
             android:layout_width="match_parent"
@@ -22,75 +23,162 @@
                 android:adjustViewBounds="true"
                 />
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:layout_centerVertical="true"
-                android:layout_marginTop="18dp"
+                android:layout_margin="10dp"
                 >
-                <TextView
-                    android:id="@+id/txtProductName"
-                    android:layout_width="wrap_content"
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textSize="@dimen/txt_list_item_vendor_product_name_size"
-                    android:layout_marginBottom="10dp"
-                    />
+                    android:orientation="horizontal"
+                    >
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_weight="2"
+                        >
+                        <TextView
+                            android:id="@+id/txtProductPriceNew"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="@dimen/txt_list_item_vendor_product_detail_new_price_size"
+                            android:textColor="@color/orange_dark"
+                            android:fontFamily="@font/titilliu_web_bold"
+                            />
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:layout_marginBottom="6dp"
+                            >
+                            <TextView
+                                android:id="@+id/txtProductPriceOld"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textSize="@dimen/txt_list_item_vendor_product_detail_old_price_size"
+                                android:textColor="@color/grey_dark_sign_in_up_edt_hint"
+                                android:layout_marginRight="3dp"
+                                />
+                            <TextView
+                                android:id="@+id/txtDiscountPercent"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textSize="@dimen/txt_list_item_vendor_product_detail_old_price_size"
+                                android:textColor="@color/grey_dark_sign_in_up_edt_hint"
+                                />
+                        </LinearLayout>
+                        <TextView
+                            android:id="@+id/txtVendorOrdersBookedCount"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="@dimen/txt_vendor_orders_count_size"
+                            android:textColor="@color/grey_dark_sign_in_up_edt"
+                            android:fontFamily="@font/titilliu_web_semi_bold"
+                            />
+                        <TextView
+                            android:id="@+id/txtProductBookedCount"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="@dimen/txt_vendor_orders_count_size"
+                            android:textColor="@color/grey_dark_sign_in_up_edt"
+                            android:fontFamily="@font/titilliu_web_semi_bold"
+                            />
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_weight="1"
+                        >
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/quantity"
+                            android:textSize="@dimen/txt_quantity_lbl_product_detail_size"
+                            android:layout_gravity="center_horizontal"
+                            android:fontFamily="@font/titilliu_web_bold"
+                            />
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:gravity="center_vertical"
+                            android:layout_gravity="center_horizontal"
+                            android:layout_marginTop="4dp"
+                            >
+                            <ImageView
+                                android:id="@+id/imgMinus"
+                                android:layout_width="@dimen/img_plus_minus_width_height"
+                                android:layout_height="@dimen/img_plus_minus_width_height"
+                                android:src="@drawable/minus"
+                                />
+                            <TextView
+                                android:id="@+id/txtQuantity"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="1"
+                                android:textSize="@dimen/txt_quantity_product_detail_size"
+                                android:fontFamily="@font/titilliu_web_bold"
+                                android:layout_marginLeft="8dp"
+                                android:layout_marginRight="8dp"
+                                />
+                            <ImageView
+                                android:id="@+id/imgPlus"
+                                android:layout_width="@dimen/img_plus_minus_width_height"
+                                android:layout_height="@dimen/img_plus_minus_width_height"
+                                android:src="@drawable/plus"
+                                />
+                        </LinearLayout>
+                    </LinearLayout>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="10dp"
+                    >
+                    <TextView
+                        android:id="@+id/txtProductName"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/txt_list_item_vendor_product_detail_name_size"
+                        android:textColor="@color/grey_dark_sign_in_up_edt"
+                        android:fontFamily="@font/titilliu_web_semi_bold"
+                        android:layout_marginRight="5dp"
+                        />
+                    <TextView
+                        android:id="@+id/txtVendorName"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/txt_list_item_vendor_product_detail_vendor_name_size"
+                        android:textColor="@color/grey_dark_sign_in_up_edt"
+                        />
+                </LinearLayout>
                 <TextView
                     android:id="@+id/txtProductDesc"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="@dimen/txt_list_item_vendor_product_name_size"
+                    android:textSize="@dimen/txt_list_item_vendor_product_detail_detail_name_size"
                     android:layout_marginBottom="10dp"
                     />
-                <TextView
-                    android:id="@+id/txtProductPrice"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="@dimen/txt_list_item_vendor_product_price_size"
-                    />
             </LinearLayout>
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                >
-                <Button
-                    android:id="@+id/btnMinus"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/minus"
-                    android:textSize="@dimen/btn_sign_in_up_text_size"
-                    android:fontFamily="@font/futura_semi_bold_1"
-                    />
-                <TextView
-                    android:id="@+id/txtQuantity"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="1"
-                    android:textSize="@dimen/txt_quantity_product_detail_size"
-                    android:layout_marginLeft="6dp"
-                    android:layout_marginRight="6dp"
-                    />
-                <Button
-                    android:id="@+id/btnPlus"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/plus"
-                    android:textSize="@dimen/btn_sign_in_up_text_size"
-                    android:fontFamily="@font/futura_semi_bold_1"
-                    />
-            </LinearLayout>
-            <Button
-                android:id="@+id/btnAddToCart"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/add_to_cart"
-                android:textAllCaps="false"
-                android:textSize="@dimen/btn_sign_in_up_text_size"
-                android:fontFamily="@font/futura_semi_bold_1"
-                />
-    </LinearLayout>
+        </LinearLayout>
     </androidx.core.widget.NestedScrollView>
+    <TextView
+        android:id="@+id/txtAddToCart"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/txt_add_to_cart_height"
+        android:text="@string/add_to_cart"
+        android:textColor="@color/white"
+        android:textAllCaps="false"
+        android:textSize="@dimen/btn_sign_in_up_text_size"
+        android:background="@color/red_buttons"
+        android:fontFamily="@font/titilliu_web_semi_bold"
+        android:layout_gravity="bottom"
+        android:gravity="center"
+        />
 
 </FrameLayout>
 

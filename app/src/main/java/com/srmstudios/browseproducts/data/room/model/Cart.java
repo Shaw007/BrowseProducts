@@ -13,22 +13,10 @@ public class Cart {
     private int cart_id;
     @ColumnInfo(name = "user_email")
     private String userEmail;
-    @ColumnInfo(name = "order_id")
-    private String orderId;
     @ColumnInfo(name = "product_id")
     private int productId;
     @ColumnInfo(name = "product_quantity")
     private int productQuantity;
-    @ColumnInfo(name = "delivery_date")
-    private String deliveryDate;
-    @ColumnInfo(name = "latitude")
-    private double latitude;
-    @ColumnInfo(name = "longitude")
-    private double longitude;
-    @ColumnInfo(name = "is_booked")
-    private boolean isBooked = false;
-    @ColumnInfo(name = "is_dispatched")
-    private boolean isDispatched = false;
 
     public int getCart_id() {
         return cart_id;
@@ -38,21 +26,12 @@ public class Cart {
         this.cart_id = cart_id;
     }
 
-    @NonNull
     public String getUserEmail() {
         return userEmail;
     }
 
-    public void setUserEmail(@NonNull String userEmail) {
+    public void setUserEmail(String userEmail) {
         this.userEmail = userEmail;
-    }
-
-    public String getOrderId() {
-        return orderId;
-    }
-
-    public void setOrderId(String orderId) {
-        this.orderId = orderId;
     }
 
     public int getProductId() {
@@ -69,45 +48,5 @@ public class Cart {
 
     public void setProductQuantity(int productQuantity) {
         this.productQuantity = productQuantity;
-    }
-
-    public String getDeliveryDate() {
-        return deliveryDate;
-    }
-
-    public void setDeliveryDate(String deliveryDate) {
-        this.deliveryDate = deliveryDate;
-    }
-
-    public double getLatitude() {
-        return latitude;
-    }
-
-    public void setLatitude(double latitude) {
-        this.latitude = latitude;
-    }
-
-    public double getLongitude() {
-        return longitude;
-    }
-
-    public void setLongitude(double longitude) {
-        this.longitude = longitude;
-    }
-
-    public boolean isBooked() {
-        return isBooked;
-    }
-
-    public void setIsBooked(boolean booked) {
-        isBooked = booked;
-    }
-
-    public boolean isDispatched() {
-        return isDispatched;
-    }
-
-    public void setIsDispatched(boolean dispatched) {
-        isDispatched = dispatched;
     }
 }

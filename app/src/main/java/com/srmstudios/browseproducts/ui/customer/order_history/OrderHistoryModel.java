@@ -1,7 +1,6 @@
 package com.srmstudios.browseproducts.ui.customer.order_history;
 
 import com.srmstudios.browseproducts.data.room.AppDatabase;
-import com.srmstudios.browseproducts.data.room.model.CartJoinProduct;
 import com.srmstudios.browseproducts.data.room.model.CustomerOrderHistory;
 import com.srmstudios.browseproducts.util.interfaces.IDatabaseListOps;
 
@@ -27,7 +26,7 @@ public class OrderHistoryModel implements OrderHistoryMVP.Model {
                 .map(new Function<AppDatabase, List<CustomerOrderHistory>>() {
                     @Override
                     public List<CustomerOrderHistory> apply(AppDatabase appDatabase) throws Exception {
-                        return appDatabase.getCartDao().getCustomerOrderHistory(email);
+                        return appDatabase.getOrderItemDao().getCustomerOrderHistory(email);
                     }
                 })
                 .subscribeOn(Schedulers.io())

@@ -5,26 +5,42 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:gravity="center"
+    android:background="@drawable/bg_gradient_orange"
     tools:context=".ui.account_selection.AccountSelectionFragment">
-
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/select_account_type"
+        android:textColor="@color/white"
+        android:textSize="@dimen/txt_splash_app_name"
+        android:fontFamily="@font/titilliu_web_bold"
+        android:layout_marginBottom="@dimen/sign_in_up_fields_top_bottom_margin"
+        />
     <Button
         android:id="@+id/btnVendor"
-        android:layout_width="@dimen/btn_account_selection_width"
+        android:layout_width="@dimen/btn_sign_in_up_width"
         android:layout_height="wrap_content"
         android:text="@string/vendor"
-        android:textSize="@dimen/btn_account_selection_text_size"
+        android:textColor="@color/white"
         android:textAllCaps="false"
-        android:fontFamily="@font/futura_semi_bold_1"
+        android:textSize="@dimen/btn_sign_in_up_text_size"
+        android:background="@drawable/bg_sign_in_up_btn"
+        android:fontFamily="@font/titilliu_web_semi_bold"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="10dp"
         />
     <Button
         android:id="@+id/btnCustomer"
-        android:layout_width="@dimen/btn_account_selection_width"
+        android:layout_width="@dimen/btn_sign_in_up_width"
         android:layout_height="wrap_content"
         android:text="@string/customer"
-        android:textSize="@dimen/btn_account_selection_text_size"
+        android:textColor="@color/white"
         android:textAllCaps="false"
-        android:fontFamily="@font/futura_semi_bold_1"
-        android:layout_marginTop="10dp"
+        android:textSize="@dimen/btn_sign_in_up_text_size"
+        android:background="@drawable/bg_sign_in_up_btn"
+        android:fontFamily="@font/titilliu_web_semi_bold"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="10dp"
         />
 
 </LinearLayout>

@@ -1,9 +1,9 @@
 package com.srmstudios.browseproducts.ui.customer.cart;
 
+import android.graphics.Paint;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -45,15 +45,20 @@ public class CartAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                     cartViewHolder.imgProductImage,
                     cartJoinProduct.getProductImageUrl());
             cartViewHolder.txtProductName.setText(cartJoinProduct.getProductName());
-            cartViewHolder.txtProductQuantity.setText("Quantity " + cartJoinProduct.getProductQuantity());
+            cartViewHolder.txtProductQuantity.setText("Quantity: " + cartJoinProduct.getProductQuantity());
             if(cartJoinProduct.getProductDiscount() == 0){
-                cartViewHolder.txtProductPrice.setText("PKR " + cartJoinProduct.getProductPrice());
-                cartViewHolder.txtProductDiscountedPrice.setVisibility(View.GONE);
+                cartViewHolder.txtProductPriceNew.setText("Rs. " +
+                        (cartJoinProduct.getProductPrice()*cartJoinProduct.getProductQuantity()));
+                cartViewHolder.txtProductPriceOld.setVisibility(View.GONE);
+                cartViewHolder.txtDiscountPercent.setVisibility(View.GONE);
             }else {
                 double discountedPrice = cartJoinProduct.getProductPrice() - (cartJoinProduct.getProductPrice()*(cartJoinProduct.getProductDiscount()/100f));
-                cartViewHolder.txtProductPrice.setText("Actual Price: PKR " + cartJoinProduct.getProductPrice());
-                cartViewHolder.txtProductDiscountedPrice.setText("Discounted Price: PKR " + Math.round(discountedPrice));
-                cartViewHolder.txtProductDiscountedPrice.setVisibility(View.VISIBLE);
+                cartViewHolder.txtProductPriceNew.setText("Rs. " + (Math.round(discountedPrice)*cartJoinProduct.getProductQuantity()));
+                cartViewHolder.txtProductPriceOld.setText("Rs. " + (cartJoinProduct.getProductPrice()*cartJoinProduct.getProductQuantity()));
+                cartViewHolder.txtProductPriceOld.setPaintFlags(cartViewHolder.txtProductPriceOld.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
+                cartViewHolder.txtProductPriceOld.setVisibility(View.VISIBLE);
+                cartViewHolder.txtDiscountPercent.setText("-"+cartJoinProduct.getProductDiscount()+"%");
+                cartViewHolder.txtDiscountPercent.setVisibility(View.VISIBLE);
             }
         }
     }
@@ -87,19 +92,21 @@ public class CartAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         protected ImageView imgProductImage;
         @BindView(R.id.txtProductName)
         protected TextView txtProductName;
+        @BindView(R.id.txtProductPriceNew)
+        protected TextView txtProductPriceNew;
+        @BindView(R.id.txtProductPriceOld)
+        protected TextView txtProductPriceOld;
+        @BindView(R.id.txtDiscountPercent)
+        protected TextView txtDiscountPercent;
         @BindView(R.id.txtProductQuantity)
         protected TextView txtProductQuantity;
-        @BindView(R.id.txtProductPrice)
-        protected TextView txtProductPrice;
-        @BindView(R.id.txtProductDiscountedPrice)
-        protected TextView txtProductDiscountedPrice;
-        @BindView(R.id.btnDeleteItem)
-        protected Button btnDeleteItem;
+        @BindView(R.id.imgDelete)
+        protected ImageView imgDelete;
 
         public CartViewHolder(@NonNull View itemView) {
             super(itemView);
             ButterKnife.bind(this,itemView);
-            btnDeleteItem.setOnClickListener(new View.OnClickListener() {
+            imgDelete.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     iCartAdapter.onBtnDeleteItem(cartJoinProducts.get(getLayoutPosition()).getCartId());

@@ -65,4 +65,16 @@
     <string name="location_setting_is_required">App needs to turn on your location settings for better delivery of the products. Kindly Tap \'OK\' to continue.</string>
     <string name="location_permission_required">App needs to access your current location for better delivery of the products. Kindly Tap \'Allow\' to grant permission.</string>
     <string name="show_location">Show Location</string>
+    <string name="sales">Sales</string>
+    <string name="select_date">Select Date</string>
+    <string name="register">Register</string>
+    <string name="welcome">Welcome</string>
+    <string name="select_account_type">Select Account Type</string>
+    <string name="quantity">Quantity</string>
+    <string name="total">Total:</string>
+    <string name="order_number">Order Number:</string>
+    <string name="amount">Amount:</string>
+    <string name="delivery_date">Delivery Date:</string>
+    <string name="dispatched">Dispatched:</string>
+    <string name="vendor_with_colon">Vendor:</string>
 </resources>

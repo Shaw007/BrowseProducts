@@ -59,11 +59,11 @@ public class Product {
     }
 
     public double getProductPrice() {
-        return productPrice;
+        return Math.round(productPrice);
     }
 
     public void setProductPrice(double productPrice) {
-        this.productPrice = productPrice;
+        this.productPrice = Math.round(productPrice);
     }
 
     public String getProductVendor() {

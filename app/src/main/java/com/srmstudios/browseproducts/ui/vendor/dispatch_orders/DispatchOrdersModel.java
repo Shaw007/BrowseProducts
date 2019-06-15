@@ -27,7 +27,7 @@ public class DispatchOrdersModel implements DispatchOrdersMVP.Model{
                 .map(new Function<AppDatabase, List<VendorOrder>>() {
                     @Override
                     public List<VendorOrder> apply(AppDatabase appDatabase) throws Exception {
-                        return appDatabase.getCartDao().getVendorOrders(vendorUserEmail);
+                        return appDatabase.getOrderItemDao().getVendorOrders(vendorUserEmail);
                     }
                 })
                 .subscribeOn(Schedulers.io())
@@ -57,13 +57,13 @@ public class DispatchOrdersModel implements DispatchOrdersMVP.Model{
     }
 
     @Override
-    public void dispatchOrder(String orderId, IDatabaseOps iDatabaseOps) {
+    public void dispatchOrder(String orderNumber, IDatabaseOps iDatabaseOps) {
         Observable.just(appDatabase)
                 .map(new Function<AppDatabase, Object>() {
                     @Override
                     public Object apply(AppDatabase appDatabase) throws Exception {
-                        appDatabase.getCartDao().dispatchOrder(orderId);
-                        return "Order#" + orderId + " dispatched successfully.";
+                        appDatabase.getOrderItemDao().dispatchOrder(orderNumber);
+                        return "Order#" + orderNumber + " dispatched successfully.";
                     }
                 })
                 .subscribeOn(Schedulers.io())

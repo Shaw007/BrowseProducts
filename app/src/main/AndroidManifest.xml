@@ -14,13 +14,22 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ui.vendor.dispatch_orders.DispatchOrdersActivity"></activity>
-        <activity android:name=".ui.customer.order_history.OrderHistoryActivity" />
-        <activity android:name=".ui.customer.cart.CartActivity" />
-        <activity android:name=".ui.product_detail.ProductDetailActivity" />
-        <activity android:name=".ui.customer.view_products.ViewProductsActivity" />
-        <activity android:name=".ui.vendor.vendor_products.VendorProductsActivity" />
-        <activity android:name=".ui.vendor.add_product.AddProductActivity" />
+        <activity android:name=".ui.vendor.sales.SalesActivity"
+            android:screenOrientation="portrait"></activity>
+        <activity android:name=".ui.vendor.dispatch_orders.DispatchOrdersActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".ui.customer.order_history.OrderHistoryActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".ui.customer.cart.CartActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".ui.product_detail.ProductDetailActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".ui.customer.view_products.ViewProductsActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".ui.vendor.vendor_products.VendorProductsActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".ui.vendor.add_product.AddProductActivity"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".ui.vendor.home.VendorHomeActivity"
             android:screenOrientation="portrait" />
@@ -55,6 +64,7 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/provider_paths" />
         </provider>
+
     </application>
 
 </manifest>

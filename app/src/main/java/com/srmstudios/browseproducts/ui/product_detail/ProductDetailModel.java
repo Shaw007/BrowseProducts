@@ -6,6 +6,7 @@ import com.srmstudios.browseproducts.data.room.model.CartJoinProduct;
 import com.srmstudios.browseproducts.data.room.model.Product;
 import com.srmstudios.browseproducts.util.interfaces.IDatabaseOps;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import io.reactivex.Observable;
@@ -23,7 +24,7 @@ public class ProductDetailModel implements ProductDetailMVP.Model {
     }
 
     @Override
-    public void getProductDetails(int productId, IDatabaseOps iDatabaseOps) {
+    public void getProductDetails(int productId,IDatabaseOps iDatabaseOps) {
         Observable.just(appDatabase)
                 .map(new Function<AppDatabase, Product>() {
                     @Override
@@ -42,6 +43,50 @@ public class ProductDetailModel implements ProductDetailMVP.Model {
                     @Override
                     public void onNext(Product product) {
                         iDatabaseOps.onSuccess(product);
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        e.printStackTrace();
+                        if(e instanceof NullPointerException){
+                            iDatabaseOps.onError("Product not found", e);
+                        }else {
+                            iDatabaseOps.onError("Something went wrong", e);
+                        }
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
+    }
+
+    @Override
+    public void getVendorAndProductStats(int productId, String vendorEmail, IDatabaseOps iDatabaseOps) {
+        Observable.just(appDatabase)
+                .map(new Function<AppDatabase, List<Integer>>() {
+                    @Override
+                    public List<Integer> apply(AppDatabase appDatabase) throws Exception {
+                        int vendorOrdersBookedCount = appDatabase.getOrderItemDao().getVendorOrdersBookedCount(vendorEmail);
+                        int productBookedCount = appDatabase.getOrderItemDao().getProductBookedCount(productId);
+                        List<Integer> vendorAndProductStats = new ArrayList<>();
+                        vendorAndProductStats.add(vendorOrdersBookedCount);
+                        vendorAndProductStats.add(productBookedCount);
+                        return vendorAndProductStats;
+                    }
+                })
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<List<Integer>>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onNext(List<Integer> vendorAndProductStats) {
+                        iDatabaseOps.onSuccess(vendorAndProductStats);
                     }
 
                     @Override

@@ -2,6 +2,7 @@ package com.srmstudios.browseproducts.ui.customer.cart;
 
 import com.srmstudios.browseproducts.data.room.AppDatabase;
 import com.srmstudios.browseproducts.data.room.model.CartJoinProduct;
+import com.srmstudios.browseproducts.data.room.model.OrderItem;
 import com.srmstudios.browseproducts.util.interfaces.IDatabaseListOps;
 import com.srmstudios.browseproducts.util.interfaces.IDatabaseOps;
 
@@ -57,17 +58,13 @@ public class CartModel implements CartMVP.Model {
     }
 
     @Override
-    public void bookUserCartItems(List<Integer> cartIdList, String orderId, String userEmail, String deliveryDate,double latitude,double longitude,IDatabaseOps iDatabaseOps) {
+    public void placeOrder(List<OrderItem> orderItems,String userEmail,IDatabaseOps iDatabaseOps) {
         Observable.just(appDatabase)
                 .map(new Function<AppDatabase, String>() {
                     @Override
                     public String apply(AppDatabase appDatabase) throws Exception {
-                        appDatabase.getCartDao().bookUserCart(cartIdList,
-                                orderId,
-                                userEmail,
-                                deliveryDate,
-                                latitude,
-                                longitude);
+                        appDatabase.getOrderItemDao().insertOrderItems(orderItems);
+                        appDatabase.getCartDao().deleteUserCart(userEmail);
                         return "Order booked successfully. Waiting for vendor's approval to dispatch.";
                     }
                 })

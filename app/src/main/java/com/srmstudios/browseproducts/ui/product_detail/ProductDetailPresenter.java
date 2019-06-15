@@ -5,6 +5,8 @@ import com.srmstudios.browseproducts.data.room.model.Cart;
 import com.srmstudios.browseproducts.data.room.model.Product;
 import com.srmstudios.browseproducts.util.interfaces.IDatabaseOps;
 
+import java.util.List;
+
 public class ProductDetailPresenter implements ProductDetailMVP.Presenter {
     private ProductDetailMVP.View view;
     private ProductDetailMVP.Model model;
@@ -19,10 +21,26 @@ public class ProductDetailPresenter implements ProductDetailMVP.Presenter {
         model.getProductDetails(productId, new IDatabaseOps() {
             @Override
             public void onSuccess(Object response) {
-                if(response instanceof Product){
+                if(response instanceof Product) {
                     Product product = (Product) response;
                     view.setupProductDetails(product);
                 }
+            }
+
+            @Override
+            public void onError(String message, Throwable throwable) {
+                view.showDialogMessage(message );
+            }
+        });
+    }
+
+    @Override
+    public void getVendorAndProductStats(int productId, String vendorEmail) {
+        model.getVendorAndProductStats(productId, vendorEmail, new IDatabaseOps() {
+            @Override
+            public void onSuccess(Object response) {
+                List<Integer> vendorAndProductStats = (List<Integer>) response;
+                view.setupVendorAndProductStats(vendorAndProductStats);
             }
 
             @Override

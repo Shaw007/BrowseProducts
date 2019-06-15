@@ -1,5 +1,6 @@
 package com.srmstudios.browseproducts.ui.customer.view_products;
 
+import android.graphics.Paint;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -45,13 +46,17 @@ public class ViewProductsAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                     product.getProductImageUrl());
             viewProductsViewHolder.txtProductName.setText(product.getProductName());
             if(product.getProductDiscount() == 0){
-                viewProductsViewHolder.txtProductPrice.setText("PKR " + product.getProductPrice());
-                viewProductsViewHolder.txtProductDiscountedPrice.setVisibility(View.GONE);
+                viewProductsViewHolder.txtProductPriceNew.setText("Rs. " + product.getProductPrice());
+                viewProductsViewHolder.txtProductPriceOld.setVisibility(View.GONE);
+                viewProductsViewHolder.txtDiscountPercent.setVisibility(View.GONE);
             }else {
                 double discountedPrice = product.getProductPrice() - (product.getProductPrice()*(product.getProductDiscount()/100f));
-                viewProductsViewHolder.txtProductPrice.setText("Actual Price: PKR " + product.getProductPrice());
-                viewProductsViewHolder.txtProductDiscountedPrice.setText("Discounted Price: PKR " + Math.round(discountedPrice));
-                viewProductsViewHolder.txtProductDiscountedPrice.setVisibility(View.VISIBLE);
+                viewProductsViewHolder.txtProductPriceNew.setText("Rs. " + Math.round(discountedPrice));
+                viewProductsViewHolder.txtProductPriceOld.setText("Rs. " + product.getProductPrice());
+                viewProductsViewHolder.txtProductPriceOld.setPaintFlags(viewProductsViewHolder.txtProductPriceOld.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
+                viewProductsViewHolder.txtProductPriceOld.setVisibility(View.VISIBLE);
+                viewProductsViewHolder.txtDiscountPercent.setText("-"+product.getProductDiscount()+"%");
+                viewProductsViewHolder.txtDiscountPercent.setVisibility(View.VISIBLE);
             }
         }
     }
@@ -66,10 +71,12 @@ public class ViewProductsAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         protected ImageView imgProductImage;
         @BindView(R.id.txtProductName)
         protected TextView txtProductName;
-        @BindView(R.id.txtProductPrice)
-        protected TextView txtProductPrice;
-        @BindView(R.id.txtProductDiscountedPrice)
-        protected TextView txtProductDiscountedPrice;
+        @BindView(R.id.txtProductPriceNew)
+        protected TextView txtProductPriceNew;
+        @BindView(R.id.txtProductPriceOld)
+        protected TextView txtProductPriceOld;
+        @BindView(R.id.txtDiscountPercent)
+        protected TextView txtDiscountPercent;
 
         public ViewProductsViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -77,14 +84,15 @@ public class ViewProductsAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    iViewProductsAdapter.onItemClick(products.get(getLayoutPosition()).getProductId());
+                    iViewProductsAdapter.onItemClick(products.get(getLayoutPosition()).getProductId(),
+                            products.get(getLayoutPosition()).getProductVendorEmail());
                 }
             });
         }
     }
 
     public interface IViewProductsAdapter{
-        void onItemClick(int productId);
+        void onItemClick(int productId,String vendorEmail);
     }
 }
 

@@ -7,10 +7,6 @@ public class CartJoinProduct {
     private int cartId;
     @ColumnInfo(name = "user_email")
     private String userEmail;
-    @ColumnInfo(name = "product_quantity")
-    private int productQuantity;
-    @ColumnInfo(name = "order_id")
-    private String orderId;
     @ColumnInfo(name = "product_id")
     private int productId;
     @ColumnInfo(name = "product_name")
@@ -23,12 +19,12 @@ public class CartJoinProduct {
     private double productPrice;
     @ColumnInfo(name = "product_vendor")
     private String productVendor;
+    @ColumnInfo(name = "product_vendor_email")
+    private String productVendorEmail;
     @ColumnInfo(name = "product_discount")
     private int productDiscount;
-    @ColumnInfo(name = "is_booked")
-    private boolean isBooked;
-    @ColumnInfo(name = "is_dispatched")
-    private boolean isDispatched = false;
+    @ColumnInfo(name = "product_quantity")
+    private int productQuantity;
 
     public int getCartId() {
         return cartId;
@@ -44,22 +40,6 @@ public class CartJoinProduct {
 
     public void setUserEmail(String userEmail) {
         this.userEmail = userEmail;
-    }
-
-    public int getProductQuantity() {
-        return productQuantity;
-    }
-
-    public void setProductQuantity(int productQuantity) {
-        this.productQuantity = productQuantity;
-    }
-
-    public String getOrderId() {
-        return orderId;
-    }
-
-    public void setOrderId(String orderId) {
-        this.orderId = orderId;
     }
 
     public int getProductId() {
@@ -95,11 +75,11 @@ public class CartJoinProduct {
     }
 
     public double getProductPrice() {
-        return productPrice;
+        return Math.round(productPrice);
     }
 
     public void setProductPrice(double productPrice) {
-        this.productPrice = productPrice;
+        this.productPrice = Math.round(productPrice);
     }
 
     public String getProductVendor() {
@@ -110,6 +90,14 @@ public class CartJoinProduct {
         this.productVendor = productVendor;
     }
 
+    public String getProductVendorEmail() {
+        return productVendorEmail;
+    }
+
+    public void setProductVendorEmail(String productVendorEmail) {
+        this.productVendorEmail = productVendorEmail;
+    }
+
     public int getProductDiscount() {
         return productDiscount;
     }
@@ -118,19 +106,11 @@ public class CartJoinProduct {
         this.productDiscount = productDiscount;
     }
 
-    public boolean isBooked() {
-        return isBooked;
+    public int getProductQuantity() {
+        return productQuantity;
     }
 
-    public void setBooked(boolean booked) {
-        isBooked = booked;
-    }
-
-    public boolean isDispatched() {
-        return isDispatched;
-    }
-
-    public void setDispatched(boolean dispatched) {
-        isDispatched = dispatched;
+    public void setProductQuantity(int productQuantity) {
+        this.productQuantity = productQuantity;
     }
 }

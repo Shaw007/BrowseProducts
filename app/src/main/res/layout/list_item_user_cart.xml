@@ -5,6 +5,7 @@
     android:layout_marginTop="8dp"
     android:layout_marginLeft="8dp"
     android:layout_marginRight="8dp"
+    android:background="@color/white"
     >
     <ImageView
         android:id="@+id/imgProductImage"
@@ -32,43 +33,57 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="@dimen/txt_list_item_vendor_product_name_size"
-                android:layout_marginBottom="10dp"
+                android:textColor="@color/grey_dark_sign_in_up_edt"
                 />
+            <TextView
+                android:id="@+id/txtProductPriceNew"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/txt_list_item_vendor_product_new_price_size"
+                android:textColor="@color/orange_dark"
+                android:fontFamily="@font/titilliu_web_semi_bold"
+                />
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                >
+                <TextView
+                    android:id="@+id/txtProductPriceOld"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/txt_list_item_vendor_product_old_price_size"
+                    android:textColor="@color/grey_dark_sign_in_up_edt_hint"
+                    android:layout_marginRight="3dp"
+                    />
+                <TextView
+                    android:id="@+id/txtDiscountPercent"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/txt_list_item_vendor_product_old_price_size"
+                    android:textColor="@color/grey_dark_sign_in_up_edt_hint"
+                    />
+            </LinearLayout>
             <TextView
                 android:id="@+id/txtProductQuantity"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="@dimen/txt_list_item_vendor_product_price_size"
-                android:layout_marginBottom="10dp"
-                />
-            <TextView
-                android:id="@+id/txtProductPrice"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="@dimen/txt_list_item_vendor_product_price_size"
-                android:layout_marginBottom="10dp"
-                />
-            <TextView
-                android:id="@+id/txtProductDiscountedPrice"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="@dimen/txt_list_item_vendor_product_price_size"
+                android:textSize="@dimen/txt_list_item_vendor_product_name_size"
+                android:textColor="@color/grey_dark_sign_in_up_edt"
                 />
         </LinearLayout>
         <RelativeLayout
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_weight="1"
             >
-            <Button
-                android:id="@+id/btnDeleteItem"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/futura_semi_bold_1"
-                android:text="@string/delete_item"
-                android:textAllCaps="false"
-                android:textSize="@dimen/btn_sign_in_up_text_size"
+            <ImageView
+                android:id="@+id/imgDelete"
+                android:layout_width="@dimen/img_plus_minus_width_height"
+                android:layout_height="@dimen/img_plus_minus_width_height"
+                android:src="@drawable/delete"
                 android:layout_centerInParent="true"
+                android:padding="4dp"
                 />
         </RelativeLayout>
     </LinearLayout>

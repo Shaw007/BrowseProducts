@@ -1,11 +1,11 @@
 package com.srmstudios.browseproducts.ui.product_detail;
 
 
+import android.graphics.Paint;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -19,6 +19,8 @@ import com.srmstudios.browseproducts.util.GlideUtils;
 import com.srmstudios.browseproducts.util.Utils;
 import com.srmstudios.browseproducts.util.singleton.BrowseProductsDatabase;
 import com.srmstudios.browseproducts.util.singleton.SessionManager;
+
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -34,20 +36,31 @@ public class ProductDetailFragment extends Fragment implements ProductDetailMVP.
     protected TextView txtProductName;
     @BindView(R.id.txtProductDesc)
     protected TextView txtProductDesc;
-    @BindView(R.id.txtProductPrice)
-    protected TextView txtProductPrice;
-    @BindView(R.id.btnMinus)
-    protected Button btnMinus;
+    @BindView(R.id.txtProductPriceNew)
+    protected TextView txtProductPriceNew;
+    @BindView(R.id.txtProductPriceOld)
+    protected TextView txtProductPriceOld;
+    @BindView(R.id.txtDiscountPercent)
+    protected TextView txtDiscountPercent;
+    @BindView(R.id.txtVendorName)
+    protected TextView txtVendorName;
+    @BindView(R.id.txtVendorOrdersBookedCount)
+    protected TextView txtVendorOrdersBookedCount;
+    @BindView(R.id.txtProductBookedCount)
+    protected TextView txtProductBookedCount;
+    @BindView(R.id.imgMinus)
+    protected ImageView imgMinus;
     @BindView(R.id.txtQuantity)
     protected TextView txtQuantity;
-    @BindView(R.id.btnPlus)
-    protected Button btnPlus;
-    @BindView(R.id.btnAddToCart)
-    protected Button btnAddToCart;
+    @BindView(R.id.imgPlus)
+    protected ImageView imgPlus;
+    @BindView(R.id.txtAddToCart)
+    protected TextView txtAddToCart;
 
     private Unbinder unbinder;
     private ProductDetailPresenter presenter;
     private int productId;
+    private String vendorEmail;
 
     public ProductDetailFragment() {
         // Required empty public constructor
@@ -59,6 +72,7 @@ public class ProductDetailFragment extends Fragment implements ProductDetailMVP.
         presenter = new ProductDetailPresenter(this,
                 new ProductDetailModel(BrowseProductsDatabase.getInstance(getContext()).getAppDatabase()));
         productId = getActivity().getIntent().getIntExtra(ProductDetailActivity.KEY_PRODUCT_ID,0);
+        vendorEmail = getActivity().getIntent().getStringExtra(ProductDetailActivity.KEY_VENDOR_EMAIL);
     }
 
     @Override
@@ -77,9 +91,9 @@ public class ProductDetailFragment extends Fragment implements ProductDetailMVP.
 
         presenter.getProductDetails(productId);
 
-        btnMinus.setOnClickListener(this);
-        btnPlus.setOnClickListener(this);
-        btnAddToCart.setOnClickListener(this);
+        imgMinus.setOnClickListener(this);
+        imgPlus.setOnClickListener(this);
+        txtAddToCart.setOnClickListener(this);
     }
 
     @Override
@@ -89,21 +103,42 @@ public class ProductDetailFragment extends Fragment implements ProductDetailMVP.
                 product.getProductImageUrl());
         txtProductName.setText(product.getProductName());
         txtProductDesc.setText(product.getProductDetails());
-        txtProductPrice.setText("PKR " + product.getProductPrice());
+        txtVendorName.setText("(By "+product.getProductVendor()+")");
+
+        if(product.getProductDiscount() == 0){
+            txtProductPriceNew.setText("Rs. " + product.getProductPrice());
+            txtProductPriceOld.setVisibility(View.GONE);
+            txtDiscountPercent.setVisibility(View.GONE);
+        }else {
+            double discountedPrice = product.getProductPrice() - (product.getProductPrice()*(product.getProductDiscount()/100f));
+            txtProductPriceNew.setText("Rs. " + Math.round(discountedPrice));
+            txtProductPriceOld.setText("Rs. " + product.getProductPrice());
+            txtProductPriceOld.setPaintFlags(txtProductPriceOld.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
+            txtProductPriceOld.setVisibility(View.VISIBLE);
+            txtDiscountPercent.setText("-"+product.getProductDiscount()+"%");
+            txtDiscountPercent.setVisibility(View.VISIBLE);
+        }
+        presenter.getVendorAndProductStats(productId,vendorEmail);
+    }
+
+    @Override
+    public void setupVendorAndProductStats(List<Integer> vendorAndProductStats) {
+        txtVendorOrdersBookedCount.setText("Vendor Orders Booked: " + vendorAndProductStats.get(0));
+        txtProductBookedCount.setText("Product Booked Times: " + vendorAndProductStats.get(1));
     }
 
     @Override
     public void onClick(View view) {
         switch (view.getId()){
-            case R.id.btnMinus:{
+            case R.id.imgMinus:{
                 updateQuantity(true);
                 break;
             }
-            case R.id.btnPlus:{
+            case R.id.imgPlus:{
                 updateQuantity(false);
                 break;
             }
-            case R.id.btnAddToCart:{
+            case R.id.txtAddToCart:{
                 presenter.addToCart(SessionManager.getInstance(getContext()).getUser().getEmail(),
                         productId,
                         Integer.parseInt(txtQuantity.getText().toString()));

@@ -261,13 +261,39 @@ public class Utils {
     }
 
     public static String generateUniqueOrderId(){
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyyMMddHHmm");
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(AppConstants.DATE_TIME_FORMAT_ONE);
         return simpleDateFormat.format(new Date());
+    }
+
+    public static String getFormattedDateString(String dateFormat,Date date){
+        try {
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat(dateFormat);
+            return simpleDateFormat.format(date);
+        }catch (Exception ex){
+            ex.printStackTrace();
+            return "";
+        }
+    }
+
+    public static Date getFormattedDate(String dateFormat,String date){
+        try {
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat(dateFormat);
+            return simpleDateFormat.parse(date);
+        }catch (Exception ex){
+            ex.printStackTrace();
+            return new Date();
+        }
     }
 
     public static long getMillisecondsByAddingMonthsToCurrentTimestamp(int months){
         Calendar calendar = Calendar.getInstance();
         calendar.add(Calendar.MONTH, months);
+        return calendar.getTime().getTime();
+    }
+
+    public static long getMillisecondsBySubtractingYearsToCurrentTimestamp(int years){
+        Calendar calendar = Calendar.getInstance();
+        calendar.add(Calendar.YEAR, years);
         return calendar.getTime().getTime();
     }
 

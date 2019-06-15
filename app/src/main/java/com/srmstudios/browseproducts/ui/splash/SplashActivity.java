@@ -1,7 +1,6 @@
 package com.srmstudios.browseproducts.ui.splash;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 
 import androidx.annotation.Nullable;
@@ -9,7 +8,6 @@ import androidx.fragment.app.Fragment;
 
 import com.srmstudios.browseproducts.R;
 import com.srmstudios.browseproducts.ui.BaseActivity;
-import com.srmstudios.browseproducts.util.Crypto;
 
 public class SplashActivity extends BaseActivity {
 

@@ -14,7 +14,6 @@ import com.srmstudios.browseproducts.R;
 import com.srmstudios.browseproducts.data.room.model.User;
 import com.srmstudios.browseproducts.ui.customer.home.CustomerHomeActivity;
 import com.srmstudios.browseproducts.ui.sign_in.SignInActivity;
-import com.srmstudios.browseproducts.ui.vendor.add_product.AddProductActivity;
 import com.srmstudios.browseproducts.ui.vendor.home.VendorHomeActivity;
 import com.srmstudios.browseproducts.util.singleton.SessionManager;
 

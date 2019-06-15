@@ -3,8 +3,10 @@ package com.srmstudios.browseproducts.data.room.model;
 import androidx.room.ColumnInfo;
 
 public class CustomerOrderHistory {
-    @ColumnInfo(name = "order_id")
-    private String orderId;
+    @ColumnInfo(name = "order_number")
+    private String orderNumber;
+    @ColumnInfo(name = "vendor_name")
+    private String vendorName;
     @ColumnInfo(name = "total_amount")
     private double totalAmount;
     @ColumnInfo(name = "is_dispatched")
@@ -12,20 +14,28 @@ public class CustomerOrderHistory {
     @ColumnInfo(name = "delivery_date")
     private String deliveryDate;
 
-    public String getOrderId() {
-        return orderId;
+    public String getOrderNumber() {
+        return orderNumber;
     }
 
-    public void setOrderId(String orderId) {
-        this.orderId = orderId;
+    public void setOrderNumber(String orderNumber) {
+        this.orderNumber = orderNumber;
+    }
+
+    public String getVendorName() {
+        return vendorName;
+    }
+
+    public void setVendorName(String vendorName) {
+        this.vendorName = vendorName;
     }
 
     public double getTotalAmount() {
-        return totalAmount;
+        return Math.round(totalAmount);
     }
 
     public void setTotalAmount(double totalAmount) {
-        this.totalAmount = totalAmount;
+        this.totalAmount = Math.round(totalAmount);
     }
 
     public boolean isDispatched() {

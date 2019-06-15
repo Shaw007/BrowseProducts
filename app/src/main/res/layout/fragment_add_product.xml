@@ -54,7 +54,7 @@
                 android:imeOptions="actionDone"
                 android:textSize="@dimen/edt_add_product_text_size"
                 android:hint="@string/product_price"
-                android:maxLength="35"
+                android:maxLength="8"
                 style="@style/EditTextAddProduct"
                 android:layout_marginBottom="@dimen/edt_sign_in_up_bottom_margin"
                 />
@@ -77,7 +77,7 @@
                 android:text="@string/add_product"
                 android:textAllCaps="false"
                 android:textSize="@dimen/btn_sign_in_up_text_size"
-                android:fontFamily="@font/futura_semi_bold_1"
+                android:fontFamily="@font/titilliu_web_semi_bold"
                 />
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>

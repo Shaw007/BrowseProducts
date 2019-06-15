@@ -20,7 +20,7 @@ public interface DispatchOrdersMVP {
 
     interface Model{
         void getVendorOrders(String vendorUserEmail, IDatabaseListOps iDatabaseListOps);
-        void dispatchOrder(String orderId, IDatabaseOps iDatabaseOps);
+        void dispatchOrder(String orderNumber, IDatabaseOps iDatabaseOps);
     }
 
 }

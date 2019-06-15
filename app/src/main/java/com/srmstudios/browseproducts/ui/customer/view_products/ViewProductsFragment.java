@@ -59,6 +59,7 @@ public class ViewProductsFragment extends Fragment implements ViewProductsMVP.Vi
         unbinder = ButterKnife.bind(this,v);
 
         recyclerViewProducts.setLayoutManager(new GridLayoutManager(getContext(),2));
+        //recyclerViewProducts.setLayoutManager(new StaggeredGridLayoutManager(2,StaggeredGridLayoutManager.VERTICAL));
         recyclerViewProducts.addItemDecoration(new GridSpacingItemDecoration(2, 16, true));
 
         presenter.getAllProducts();
@@ -90,9 +91,10 @@ public class ViewProductsFragment extends Fragment implements ViewProductsMVP.Vi
     }
 
     @Override
-    public void openProductDetail(int productId) {
+    public void openProductDetail(int productId,String vendorEmail) {
         Intent intent = new Intent(getContext(), ProductDetailActivity.class);
         intent.putExtra(ProductDetailActivity.KEY_PRODUCT_ID,productId);
+        intent.putExtra(ProductDetailActivity.KEY_VENDOR_EMAIL,vendorEmail);
         startActivity(intent);
     }
 }

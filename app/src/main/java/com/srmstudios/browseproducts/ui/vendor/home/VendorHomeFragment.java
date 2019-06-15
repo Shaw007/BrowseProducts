@@ -3,17 +3,17 @@ package com.srmstudios.browseproducts.ui.vendor.home;
 
 import android.content.Intent;
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
+import androidx.fragment.app.Fragment;
+
 import com.srmstudios.browseproducts.R;
 import com.srmstudios.browseproducts.ui.vendor.add_product.AddProductActivity;
 import com.srmstudios.browseproducts.ui.vendor.dispatch_orders.DispatchOrdersActivity;
+import com.srmstudios.browseproducts.ui.vendor.sales.SalesActivity;
 import com.srmstudios.browseproducts.ui.vendor.vendor_products.VendorProductsActivity;
 
 import butterknife.BindView;
@@ -30,6 +30,8 @@ public class VendorHomeFragment extends Fragment implements View.OnClickListener
     protected Button btnViewProducts;
     @BindView(R.id.btnDispatchOrders)
     protected Button btnDispatchOrders;
+    @BindView(R.id.btnSales)
+    protected Button btnSales;
 
     private Unbinder unbinder;
 
@@ -55,6 +57,7 @@ public class VendorHomeFragment extends Fragment implements View.OnClickListener
         btnAddProduct.setOnClickListener(this);
         btnViewProducts.setOnClickListener(this);
         btnDispatchOrders.setOnClickListener(this);
+        btnSales.setOnClickListener(this);
     }
 
     @Override
@@ -72,6 +75,11 @@ public class VendorHomeFragment extends Fragment implements View.OnClickListener
             }
             case R.id.btnDispatchOrders:{
                 Intent intent = new Intent(getContext(), DispatchOrdersActivity.class);
+                startActivity(intent);
+                break;
+            }
+            case R.id.btnSales:{
+                Intent intent = new Intent(getContext(), SalesActivity.class);
                 startActivity(intent);
                 break;
             }

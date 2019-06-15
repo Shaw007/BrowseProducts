@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:gravity="center_horizontal"
+    android:background="@color/white"
     >
     <ImageView
         android:id="@+id/imgProductImage"
@@ -16,29 +16,44 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:layout_centerVertical="true"
-        android:layout_marginTop="18dp"
+        android:layout_margin="8dp"
         >
         <TextView
             android:id="@+id/txtProductName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="@dimen/txt_list_item_vendor_product_name_size"
-            android:layout_marginBottom="10dp"
+            android:textColor="@color/grey_dark_sign_in_up_edt"
             />
         <TextView
-            android:id="@+id/txtProductPrice"
+            android:id="@+id/txtProductPriceNew"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="@dimen/txt_list_item_vendor_product_price_size"
-            android:layout_marginBottom="10dp"
+            android:textSize="@dimen/txt_list_item_vendor_product_new_price_size"
+            android:textColor="@color/orange_dark"
+            android:fontFamily="@font/titilliu_web_semi_bold"
             />
-        <TextView
-            android:id="@+id/txtProductDiscountedPrice"
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="@dimen/txt_list_item_vendor_product_price_size"
-            />
+            android:orientation="horizontal"
+            >
+            <TextView
+                android:id="@+id/txtProductPriceOld"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/txt_list_item_vendor_product_old_price_size"
+                android:textColor="@color/grey_dark_sign_in_up_edt_hint"
+                android:layout_marginRight="3dp"
+                />
+            <TextView
+                android:id="@+id/txtDiscountPercent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/txt_list_item_vendor_product_old_price_size"
+                android:textColor="@color/grey_dark_sign_in_up_edt_hint"
+                />
+        </LinearLayout>
     </LinearLayout>
 </LinearLayout>
 

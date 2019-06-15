@@ -8,7 +8,7 @@ public interface ViewProductsMVP {
         void showDialogMessage(int resourceId);
         void showDialogMessage(String message);
         void setRecyclerViewViewProductsAdapter(ViewProductsAdapter adapter);
-        void openProductDetail(int productId);
+        void openProductDetail(int productId,String vendorEmail);
     }
 
     interface Presenter{
