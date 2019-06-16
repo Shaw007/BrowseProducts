@@ -3,7 +3,6 @@ package com.srmstudios.browseproducts.ui.vendor.dispatch_orders;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -11,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.srmstudios.browseproducts.R;
 import com.srmstudios.browseproducts.data.room.model.VendorOrder;
+import com.srmstudios.browseproducts.util.Utils;
 
 import java.util.List;
 
@@ -41,12 +41,12 @@ public class DispatchOrdersAdapter extends RecyclerView.Adapter<RecyclerView.Vie
             DispatchOrdersViewHolder dispatchOrdersViewHolder = (DispatchOrdersViewHolder) holder;
             dispatchOrdersViewHolder.txtOrderId.setText(vendorOrder.getOrderNumber());
             dispatchOrdersViewHolder.txtCustomerName.setText(vendorOrder.getCustomerName());
-            dispatchOrdersViewHolder.txtTotalAmount.setText("PKR " + vendorOrder.getTotalAmount());
-            dispatchOrdersViewHolder.txtDeliveryDate.setText("DeliveryDate: " + vendorOrder.getDeliveryDate());
+            dispatchOrdersViewHolder.txtTotalAmount.setText("Rs. " + Utils.getFormattedPrice(vendorOrder.getTotalAmount()));
+            dispatchOrdersViewHolder.txtDeliveryDate.setText(vendorOrder.getDeliveryDate());
             if(vendorOrder.isDispatched()){
-                dispatchOrdersViewHolder.btnDispatchOrder.setVisibility(View.GONE);
+                dispatchOrdersViewHolder.txtDispatchOrder.setVisibility(View.GONE);
             }else {
-                dispatchOrdersViewHolder.btnDispatchOrder.setVisibility(View.VISIBLE);
+                dispatchOrdersViewHolder.txtDispatchOrder.setVisibility(View.VISIBLE);
             }
         }
     }
@@ -75,21 +75,21 @@ public class DispatchOrdersAdapter extends RecyclerView.Adapter<RecyclerView.Vie
         protected TextView txtTotalAmount;
         @BindView(R.id.txtDeliveryDate)
         protected TextView txtDeliveryDate;
-        @BindView(R.id.btnDispatchOrder)
-        protected Button btnDispatchOrder;
-        @BindView(R.id.btnShowLocation)
-        protected Button btnShowLocation;
+        @BindView(R.id.txtDispatchOrder)
+        protected TextView txtDispatchOrder;
+        @BindView(R.id.txtShowLocation)
+        protected TextView txtShowLocation;
 
         public DispatchOrdersViewHolder(@NonNull View itemView) {
             super(itemView);
             ButterKnife.bind(this,itemView);
-            btnDispatchOrder.setOnClickListener(new View.OnClickListener() {
+            txtDispatchOrder.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     iDispatchOrdersAdapter.onClickBtnDispatchOrder(vendorOrders.get(getLayoutPosition()).getOrderNumber());
                 }
             });
-            btnShowLocation.setOnClickListener(new View.OnClickListener() {
+            txtShowLocation.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     iDispatchOrdersAdapter.onClickBtnShowLocation(vendorOrders.get(getLayoutPosition()).getLatitude(),

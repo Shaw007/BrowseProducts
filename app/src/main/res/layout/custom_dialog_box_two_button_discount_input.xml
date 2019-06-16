@@ -27,7 +27,6 @@
         android:textSize="@dimen/edt_add_product_text_size"
         android:hint="@string/product_discount"
         android:maxLength="2"
-        style="@style/EditTextAddProduct"
         android:layout_gravity="center_horizontal"
         android:layout_marginLeft="30dp"
         android:layout_marginRight="30dp"

@@ -98,7 +98,7 @@ public class ProductDetailFragment extends Fragment implements ProductDetailMVP.
 
     @Override
     public void setupProductDetails(Product product) {
-        GlideUtils.loadImage(getContext(),
+        GlideUtils.loadImageProductDetail(getContext(),
                 imgProductImage,
                 product.getProductImageUrl());
         txtProductName.setText(product.getProductName());
@@ -106,13 +106,13 @@ public class ProductDetailFragment extends Fragment implements ProductDetailMVP.
         txtVendorName.setText("(By "+product.getProductVendor()+")");
 
         if(product.getProductDiscount() == 0){
-            txtProductPriceNew.setText("Rs. " + product.getProductPrice());
+            txtProductPriceNew.setText("Rs. " + Utils.getFormattedPrice(product.getProductPrice()));
             txtProductPriceOld.setVisibility(View.GONE);
             txtDiscountPercent.setVisibility(View.GONE);
         }else {
             double discountedPrice = product.getProductPrice() - (product.getProductPrice()*(product.getProductDiscount()/100f));
-            txtProductPriceNew.setText("Rs. " + Math.round(discountedPrice));
-            txtProductPriceOld.setText("Rs. " + product.getProductPrice());
+            txtProductPriceNew.setText("Rs. " + Utils.getFormattedPrice(Math.round(discountedPrice)));
+            txtProductPriceOld.setText("Rs. " + Utils.getFormattedPrice(product.getProductPrice()));
             txtProductPriceOld.setPaintFlags(txtProductPriceOld.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
             txtProductPriceOld.setVisibility(View.VISIBLE);
             txtDiscountPercent.setText("-"+product.getProductDiscount()+"%");

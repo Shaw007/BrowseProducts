@@ -31,10 +31,11 @@ public interface OrderItemDao {
             "group by order_number")
     List<VendorOrder> getVendorOrders(String vendorUserEmail);
 
-    @Query("select order_number,sum(total_price) as total_order_amount,sum(product_quantity) as total_products_quantity,is_dispatched,delivery_date " +
-            "FROM order_items " +
-            "where booking_date=:bookingDate and vendor_email=:vendorEmail " +
-            "group by order_number")
+    @Query("select oi.order_number,u.name as customer_name,sum(oi.total_price) as total_order_amount,sum(oi.product_quantity) as total_products_quantity,oi.is_dispatched,oi.delivery_date FROM " +
+            "order_items oi,user u " +
+            "where oi.user_email = u.email " +
+            "and oi.booking_date=:bookingDate and oi.vendor_email=:vendorEmail " +
+            "group by oi.order_number")
     List<VendorSales> getVendorSalesByBookingDate(String bookingDate,String vendorEmail);
 
     @Query("update order_items set is_dispatched=1 " +

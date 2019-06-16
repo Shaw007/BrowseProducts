@@ -13,6 +13,7 @@ public class CartMVP {
         void showDialogMessage(String message);
         void setRecyclerViewCartAdapter(CartAdapter adapter);
         void setTxtTotalCartAmount(String totalAmount);
+        void showTxtNoDataFound();
         void showDeleteItemConfirmationDialog(int cartId);
     }
 

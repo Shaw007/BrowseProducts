@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -7,68 +7,75 @@
     android:background="@color/grey_light_bg"
     tools:context=".ui.customer.cart.CartFragment"
     >
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerViewCart"
-        android:layout_width="match_parent"
-        android:background="@color/grey_light_bg"
-        android:layout_height="0dp"
-        android:layout_weight="8"
-        />
     <LinearLayout
+        android:id="@+id/linearParent"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:orientation="horizontal"
-        android:padding="12dp"
-        android:background="@color/white"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
         >
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerViewCart"
+            android:layout_width="match_parent"
+            android:background="@color/grey_light_bg"
+            android:layout_height="0dp"
+            android:layout_weight="8"
+            />
         <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="2"
-            android:orientation="horizontal"
-            android:gravity="center_vertical"
-            >
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="@color/grey_dark_sign_in_up_edt"
-                android:textSize="@dimen/txt_cart_total_size"
-                android:fontFamily="@font/titilliu_web_semi_bold"
-                android:text="@string/total"
-                android:layout_marginRight="6dp"
-                />
-            <TextView
-                android:id="@+id/txtCartTotalAmount"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="@color/grey_dark_sign_in_up_edt"
-                android:textSize="@dimen/txt_cart_total_size"
-                android:fontFamily="@font/titilliu_web_bold"
-                />
-        </LinearLayout>
-        <RelativeLayout
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
             android:layout_weight="1"
+            android:orientation="horizontal"
+            android:padding="12dp"
+            android:background="@color/white"
             >
-            <Button
-                android:id="@+id/btnCheckout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/checkout"
-                android:textColor="@color/white"
-                android:textAllCaps="false"
-                android:textSize="@dimen/btn_cart_checkout_txt_siz"
-                android:background="@drawable/bg_sign_in_up_btn"
-                android:fontFamily="@font/titilliu_web_semi_bold"
-                android:layout_centerInParent="true"
-                />
-        </RelativeLayout>
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="2"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                >
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/grey_dark_sign_in_up_edt"
+                    android:textSize="@dimen/txt_cart_total_size"
+                    android:fontFamily="@font/titilliu_web_semi_bold"
+                    android:text="@string/total"
+                    android:layout_marginRight="6dp"
+                    />
+                <TextView
+                    android:id="@+id/txtCartTotalAmount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/grey_dark_sign_in_up_edt"
+                    android:textSize="@dimen/txt_cart_total_size"
+                    android:fontFamily="@font/titilliu_web_bold"
+                    />
+            </LinearLayout>
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                >
+                <Button
+                    android:id="@+id/btnCheckout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/checkout"
+                    android:textColor="@color/white"
+                    android:textAllCaps="false"
+                    android:textSize="@dimen/btn_cart_checkout_txt_siz"
+                    android:background="@drawable/bg_sign_in_up_btn"
+                    android:fontFamily="@font/titilliu_web_semi_bold"
+                    android:layout_centerInParent="true"
+                    />
+            </RelativeLayout>
+        </LinearLayout>
     </LinearLayout>
+    <include layout="@layout/layout_no_data_found"/>
 
-</LinearLayout>
+</FrameLayout>
 
 
 

@@ -17,6 +17,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
@@ -52,6 +53,8 @@ public class AddProductFragment extends Fragment implements AddProductMVP.View,V
     protected EditText edtProductDiscount;
     @BindView(R.id.btnAddProduct)
     protected Button btnAddProduct;
+    @BindView(R.id.txtAddDummyText)
+    protected TextView txtAddDummyText;
 
     private Unbinder unbinder;
     private AddProductPresenter presenter;
@@ -85,6 +88,7 @@ public class AddProductFragment extends Fragment implements AddProductMVP.View,V
 
         imgAddProductImage.setOnClickListener(this);
         btnAddProduct.setOnClickListener(this);
+        txtAddDummyText.setOnClickListener(this);
         customProgressDialogPleaseWait = new CustomProgressDialog(getContext(),R.string.please_wait);
     }
 
@@ -125,6 +129,10 @@ public class AddProductFragment extends Fragment implements AddProductMVP.View,V
                             SessionManager.getInstance(getContext()).getUser().getEmail(),
                             discount);
                 }
+                break;
+            }
+            case R.id.txtAddDummyText:{
+                edtProductDesc.append(Utils.getStringFromResourceId(getContext(),R.string.lorem_ipsum));
                 break;
             }
         }
@@ -168,7 +176,7 @@ public class AddProductFragment extends Fragment implements AddProductMVP.View,V
     @Override
     public void clearInputFields() {
         imageUrlMain = "";
-        imgAddProductImage.setImageResource(android.R.drawable.btn_plus);
+        imgAddProductImage.setImageResource(R.drawable.image_placeholder_product_detail);
         edtProductName.setText("");
         edtProductDesc.setText("");
         edtProductPrice.setText("");
@@ -201,7 +209,7 @@ public class AddProductFragment extends Fragment implements AddProductMVP.View,V
             Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
             Uri fileUri;
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                fileUri = FileProvider.getUriForFile(getActivity(), getActivity().getApplicationContext().getPackageName() + ".provider", file);
+                fileUri = FileProvider.getUriForFile(getContext(), getContext().getApplicationContext().getPackageName() + ".provider", file);
             } else {
                 fileUri = Uri.fromFile(file);
             }

@@ -6,6 +6,8 @@ import androidx.room.ColumnInfo;
 public class VendorSales {
     @ColumnInfo(name = "order_number")
     private String orderNumber;
+    @ColumnInfo(name = "customer_name")
+    private String customerName;
     @ColumnInfo(name = "total_order_amount")
     private double totalOrderAmount;
     @ColumnInfo(name = "total_products_quantity")
@@ -21,6 +23,14 @@ public class VendorSales {
 
     public void setOrderNumber(String orderNumber) {
         this.orderNumber = orderNumber;
+    }
+
+    public String getCustomerName() {
+        return customerName;
+    }
+
+    public void setCustomerName(String customerName) {
+        this.customerName = customerName;
     }
 
     public double getTotalOrderAmount() {

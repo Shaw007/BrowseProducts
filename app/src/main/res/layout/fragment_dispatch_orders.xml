@@ -3,12 +3,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/grey_light_bg"
     tools:context=".ui.vendor.dispatch_orders.DispatchOrdersFragment">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewVendorOrders"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@color/grey_light_bg"
         />
+    <include layout="@layout/layout_no_data_found"/>
 
 </FrameLayout>

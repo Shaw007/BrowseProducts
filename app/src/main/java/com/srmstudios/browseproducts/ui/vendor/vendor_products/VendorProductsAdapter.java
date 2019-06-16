@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.srmstudios.browseproducts.R;
 import com.srmstudios.browseproducts.data.room.model.Product;
 import com.srmstudios.browseproducts.util.GlideUtils;
+import com.srmstudios.browseproducts.util.Utils;
 
 import java.util.List;
 
@@ -41,18 +42,18 @@ public class VendorProductsAdapter extends RecyclerView.Adapter<RecyclerView.Vie
         Product product = products.get(position);
         if(holder instanceof VendorProductsViewHolder){
             VendorProductsViewHolder vendorProductsViewHolder = (VendorProductsViewHolder) holder;
-            GlideUtils.loadImage(vendorProductsViewHolder.imgProductImage.getContext(),
+            GlideUtils.loadImageListItems(vendorProductsViewHolder.imgProductImage.getContext(),
                     vendorProductsViewHolder.imgProductImage,
                     product.getProductImageUrl());
             vendorProductsViewHolder.txtProductName.setText(product.getProductName());
             if(product.getProductDiscount() == 0){
-                vendorProductsViewHolder.txtProductPriceNew.setText("Rs. " + product.getProductPrice());
+                vendorProductsViewHolder.txtProductPriceNew.setText("Rs. " + Utils.getFormattedPrice(product.getProductPrice()));
                 vendorProductsViewHolder.txtProductPriceOld.setVisibility(View.GONE);
                 vendorProductsViewHolder.txtDiscountPercent.setVisibility(View.GONE);
             }else {
                 double discountedPrice = product.getProductPrice() - (product.getProductPrice()*(product.getProductDiscount()/100f));
-                vendorProductsViewHolder.txtProductPriceNew.setText("Rs. " + Math.round(discountedPrice));
-                vendorProductsViewHolder.txtProductPriceOld.setText("Rs. " + product.getProductPrice());
+                vendorProductsViewHolder.txtProductPriceNew.setText("Rs. " + Utils.getFormattedPrice(Math.round(discountedPrice)));
+                vendorProductsViewHolder.txtProductPriceOld.setText("Rs. " + Utils.getFormattedPrice(product.getProductPrice()));
                 vendorProductsViewHolder.txtProductPriceOld.setPaintFlags(vendorProductsViewHolder.txtProductPriceOld.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
                 vendorProductsViewHolder.txtProductPriceOld.setVisibility(View.VISIBLE);
                 vendorProductsViewHolder.txtDiscountPercent.setText("-"+product.getProductDiscount()+"%");

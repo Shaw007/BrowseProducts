@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.srmstudios.browseproducts.R;
 import com.srmstudios.browseproducts.data.room.model.VendorSales;
+import com.srmstudios.browseproducts.util.Utils;
 
 import java.util.List;
 
@@ -37,12 +38,13 @@ public class SalesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
         if(holder instanceof SalesViewHolder){
             SalesViewHolder salesViewHolder = (SalesViewHolder) holder;
             salesViewHolder.txtOrderNumber.setText(vendorSale.getOrderNumber());
-            salesViewHolder.txtTotalOrderAmount.setText("PKR " + vendorSale.getTotalOrderAmount());
-            salesViewHolder.txtProductsQuantity.setText("Products Quantity: " + vendorSale.getProductsQuantity());
+            salesViewHolder.txtCustomerName.setText(vendorSale.getCustomerName());
+            salesViewHolder.txtTotalOrderAmount.setText("Rs. " + Utils.getFormattedPrice(vendorSale.getTotalOrderAmount()));
+            salesViewHolder.txtProductsQuantity.setText(String.valueOf(vendorSale.getProductsQuantity()));
             if(vendorSale.isDispatched()) {
-                salesViewHolder.txtIsDispatched.setText("Dispatched: Yes");
+                salesViewHolder.txtIsDispatched.setText("Yes");
             }else {
-                salesViewHolder.txtIsDispatched.setText("Dispatched: No");
+                salesViewHolder.txtIsDispatched.setText("No");
             }
             salesViewHolder.txtDeliveryDate.setText(vendorSale.getDeliveryDate());
         }
@@ -56,6 +58,8 @@ public class SalesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
     class SalesViewHolder extends RecyclerView.ViewHolder{
         @BindView(R.id.txtOrderNumber)
         protected TextView txtOrderNumber;
+        @BindView(R.id.txtCustomerName)
+        protected TextView txtCustomerName;
         @BindView(R.id.txtTotalOrderAmount)
         protected TextView txtTotalOrderAmount;
         @BindView(R.id.txtProductsQuantity)

@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.srmstudios.browseproducts.R;
 import com.srmstudios.browseproducts.data.room.model.CartJoinProduct;
 import com.srmstudios.browseproducts.util.GlideUtils;
+import com.srmstudios.browseproducts.util.Utils;
 
 import java.util.List;
 
@@ -41,20 +42,20 @@ public class CartAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         CartJoinProduct cartJoinProduct = cartJoinProducts.get(position);
         if(holder instanceof CartViewHolder){
             CartViewHolder cartViewHolder = (CartViewHolder) holder;
-            GlideUtils.loadImage(cartViewHolder.imgProductImage.getContext(),
+            GlideUtils.loadImageListItems(cartViewHolder.imgProductImage.getContext(),
                     cartViewHolder.imgProductImage,
                     cartJoinProduct.getProductImageUrl());
             cartViewHolder.txtProductName.setText(cartJoinProduct.getProductName());
             cartViewHolder.txtProductQuantity.setText("Quantity: " + cartJoinProduct.getProductQuantity());
             if(cartJoinProduct.getProductDiscount() == 0){
                 cartViewHolder.txtProductPriceNew.setText("Rs. " +
-                        (cartJoinProduct.getProductPrice()*cartJoinProduct.getProductQuantity()));
+                        Utils.getFormattedPrice(cartJoinProduct.getProductPrice()*cartJoinProduct.getProductQuantity()));
                 cartViewHolder.txtProductPriceOld.setVisibility(View.GONE);
                 cartViewHolder.txtDiscountPercent.setVisibility(View.GONE);
             }else {
                 double discountedPrice = cartJoinProduct.getProductPrice() - (cartJoinProduct.getProductPrice()*(cartJoinProduct.getProductDiscount()/100f));
-                cartViewHolder.txtProductPriceNew.setText("Rs. " + (Math.round(discountedPrice)*cartJoinProduct.getProductQuantity()));
-                cartViewHolder.txtProductPriceOld.setText("Rs. " + (cartJoinProduct.getProductPrice()*cartJoinProduct.getProductQuantity()));
+                cartViewHolder.txtProductPriceNew.setText("Rs. " + Utils.getFormattedPrice((Math.round(discountedPrice)*cartJoinProduct.getProductQuantity())));
+                cartViewHolder.txtProductPriceOld.setText("Rs. " + Utils.getFormattedPrice((cartJoinProduct.getProductPrice()*cartJoinProduct.getProductQuantity())));
                 cartViewHolder.txtProductPriceOld.setPaintFlags(cartViewHolder.txtProductPriceOld.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
                 cartViewHolder.txtProductPriceOld.setVisibility(View.VISIBLE);
                 cartViewHolder.txtDiscountPercent.setText("-"+cartJoinProduct.getProductDiscount()+"%");

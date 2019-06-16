@@ -12,5 +12,6 @@
         android:layout_height="wrap_content"
         android:background="@color/grey_light_bg"
         />
+    <include layout="@layout/layout_no_data_found"/>
 
 </FrameLayout>

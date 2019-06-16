@@ -133,12 +133,12 @@
                         </LinearLayout>
                     </LinearLayout>
                 </LinearLayout>
-                <LinearLayout
+                <!--<LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
                     android:layout_marginTop="10dp"
-                    >
+                    >-->
                     <TextView
                         android:id="@+id/txtProductName"
                         android:layout_width="wrap_content"
@@ -146,16 +146,16 @@
                         android:textSize="@dimen/txt_list_item_vendor_product_detail_name_size"
                         android:textColor="@color/grey_dark_sign_in_up_edt"
                         android:fontFamily="@font/titilliu_web_semi_bold"
-                        android:layout_marginRight="5dp"
+                        android:layout_marginTop="8dp"
                         />
                     <TextView
                         android:id="@+id/txtVendorName"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textSize="@dimen/txt_list_item_vendor_product_detail_vendor_name_size"
-                        android:textColor="@color/grey_dark_sign_in_up_edt"
+                        android:textColor="@color/orange_dark"
                         />
-                </LinearLayout>
+                <!--</LinearLayout>-->
                 <TextView
                     android:id="@+id/txtProductDesc"
                     android:layout_width="wrap_content"

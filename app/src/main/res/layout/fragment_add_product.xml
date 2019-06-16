@@ -8,77 +8,104 @@
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@color/grey_light_bg"
         >
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:orientation="vertical"
-            android:gravity="center_horizontal"
             >
             <ImageView
                 android:id="@+id/imgAddProductImage"
-                android:layout_width="@dimen/img_add_product_width"
-                android:layout_height="@dimen/img_add_product_height"
-                android:src="@android:drawable/btn_plus"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/img_prodduct_detail_banner_height"
+                android:src="@drawable/image_placeholder_product_detail"
                 android:scaleType="centerCrop"
                 android:adjustViewBounds="true"
+                android:layout_marginBottom="@dimen/edt_add_product_fields_bottom_margin"
+                android:layout_marginTop="-2dp"
                 />
-            <EditText
-                android:id="@+id/edtProductName"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="text"
-                android:imeOptions="actionNext"
-                android:textSize="@dimen/edt_add_product_text_size"
-                android:hint="@string/product_name"
-                android:maxLength="50"
-                style="@style/EditTextAddProduct"
-                android:layout_marginBottom="@dimen/edt_sign_in_up_bottom_margin"
-                />
-            <EditText
-                android:id="@+id/edtProductDesc"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="text"
-                android:imeOptions="actionNext"
-                android:textSize="@dimen/edt_add_product_text_size"
-                android:hint="@string/product_desc"
-                style="@style/EditTextAddProduct"
-                android:layout_marginBottom="@dimen/edt_sign_in_up_bottom_margin"
-                />
-            <EditText
-                android:id="@+id/edtProductPrice"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="numberDecimal"
-                android:imeOptions="actionDone"
-                android:textSize="@dimen/edt_add_product_text_size"
-                android:hint="@string/product_price"
-                android:maxLength="8"
-                style="@style/EditTextAddProduct"
-                android:layout_marginBottom="@dimen/edt_sign_in_up_bottom_margin"
-                />
-            <EditText
-                android:id="@+id/edtProductDiscount"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="number"
-                android:imeOptions="actionDone"
-                android:textSize="@dimen/edt_add_product_text_size"
-                android:hint="@string/product_discount_optional"
-                android:maxLength="2"
-                style="@style/EditTextAddProduct"
-                android:layout_marginBottom="@dimen/edt_sign_in_up_bottom_margin"
-                />
-            <Button
-                android:id="@+id/btnAddProduct"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/add_product"
-                android:textAllCaps="false"
-                android:textSize="@dimen/btn_sign_in_up_text_size"
-                android:fontFamily="@font/titilliu_web_semi_bold"
-                />
+                android:orientation="vertical"
+                android:gravity="center_horizontal"
+                android:layout_marginLeft="@dimen/sign_in_up_parent_margin_left_right"
+                android:layout_marginRight="@dimen/sign_in_up_parent_margin_left_right"
+                >
+                <EditText
+                    android:id="@+id/edtProductName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textPersonName|textCapWords"
+                    android:imeOptions="actionNext"
+                    android:textSize="@dimen/edt_add_product_text_size"
+                    android:hint="@string/product_name"
+                    android:maxLength="50"
+                    style="@style/EditTextAddProduct"
+                    android:layout_marginBottom="@dimen/edt_add_product_fields_bottom_margin"
+                    />
+                <com.srmstudios.browseproducts.util.ActionEditText
+                    android:id="@+id/edtProductDesc"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/edt_add_product_text_size"
+                    android:gravity="top|left"
+                    android:hint="@string/product_desc"
+                    android:inputType="textMultiLine|textCapSentences"
+                    android:imeOptions="actionNext"
+                    style="@style/EditTextAddProduct"
+                    />
+                    <TextView
+                        android:id="@+id/txtAddDummyText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/add_dummy_description"
+                        android:textColor="@color/blue_gradient_color_1"
+                        android:textSize="@dimen/txt_edit_discount_size"
+                        android:layout_gravity="left"
+                        android:fontFamily="@font/titilliu_web_semi_bold"
+                        android:padding="2dp"
+                        android:layout_marginBottom="@dimen/edt_add_product_fields_bottom_margin"
+                        />
+                <EditText
+                    android:id="@+id/edtProductPrice"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="numberDecimal"
+                    android:imeOptions="actionDone"
+                    android:textSize="@dimen/edt_add_product_text_size"
+                    android:hint="@string/product_price"
+                    android:maxLength="7"
+                    style="@style/EditTextAddProduct"
+                    android:layout_marginBottom="@dimen/edt_add_product_fields_bottom_margin"
+                    />
+                <EditText
+                    android:id="@+id/edtProductDiscount"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="number"
+                    android:imeOptions="actionDone"
+                    android:textSize="@dimen/edt_add_product_text_size"
+                    android:hint="@string/product_discount_optional"
+                    android:maxLength="2"
+                    style="@style/EditTextAddProduct"
+                    android:layout_marginBottom="@dimen/edt_add_product_fields_bottom_margin"
+                    />
+                <Button
+                    android:id="@+id/btnAddProduct"
+                    android:layout_width="@dimen/btn_sign_in_up_width"
+                    android:layout_height="wrap_content"
+                    android:text="@string/add_product"
+                    android:textColor="@color/white"
+                    android:textAllCaps="false"
+                    android:textSize="@dimen/btn_sign_in_up_text_size"
+                    android:background="@drawable/bg_sign_in_up_btn"
+                    android:fontFamily="@font/titilliu_web_semi_bold"
+                    android:layout_marginTop="@dimen/edt_add_product_fields_bottom_margin"
+                    android:layout_marginBottom="@dimen/edt_add_product_fields_bottom_margin"
+                    />
+            </LinearLayout>
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
 

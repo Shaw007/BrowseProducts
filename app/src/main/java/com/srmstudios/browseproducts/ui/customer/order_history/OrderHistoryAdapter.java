@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.srmstudios.browseproducts.R;
 import com.srmstudios.browseproducts.data.room.model.CustomerOrderHistory;
+import com.srmstudios.browseproducts.util.Utils;
 
 import java.util.List;
 
@@ -38,7 +39,7 @@ public class OrderHistoryAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             OrderHistoryViewHolder orderHistoryViewHolder = (OrderHistoryViewHolder) holder;
             orderHistoryViewHolder.txtOrderId.setText(order.getOrderNumber());
             orderHistoryViewHolder.txtVendorName.setText(order.getVendorName());
-            orderHistoryViewHolder.txtTotalAmount.setText("Rs. " + order.getTotalAmount());
+            orderHistoryViewHolder.txtTotalAmount.setText("Rs. " + Utils.getFormattedPrice(order.getTotalAmount()));
             orderHistoryViewHolder.txtDeliveryDate.setText(order.getDeliveryDate());
             if(order.isDispatched()) {
                 orderHistoryViewHolder.txtIsDispatched.setText("Yes");

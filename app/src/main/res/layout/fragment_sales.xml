@@ -3,49 +3,100 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/grey_light_bg"
     tools:context=".ui.vendor.sales.SalesFragment">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
+        android:padding="8dp"
+        android:focusableInTouchMode="true"
         >
-        <TextView
-            android:id="@+id/txtSelectedDate"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="@dimen/txt_list_item_vendor_product_name_size"
-            android:layout_marginBottom="10dp"
-            />
-        <Button
-            android:id="@+id/btnSelectDate"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/select_date"
-            android:textAllCaps="false"
-            android:textSize="@dimen/btn_sign_in_up_text_size"
-            android:fontFamily="@font/titilliu_web_semi_bold"
-            android:layout_marginBottom="10dp"
-            />
-        <TextView
-            android:id="@+id/txtTotalDayEndSales"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="@dimen/txt_list_item_vendor_product_name_size"
-            android:layout_marginBottom="10dp"
-            />
-        <TextView
-            android:id="@+id/txtTotalOrdersReceived"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="@dimen/txt_list_item_vendor_product_name_size"
-            android:layout_marginBottom="10dp"
-            />
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerViewSales"
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            />
+            android:layout_marginBottom="10dp"
+            >
+            <TextView
+                android:id="@+id/txtSelectedDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/txt_vendor_sales_selected_date_size"
+                android:textColor="@color/orange_dark"
+                android:fontFamily="@font/titilliu_web_semi_bold"
+                android:layout_centerVertical="true"
+                />
+            <Button
+                android:id="@+id/btnSelectDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/select_date"
+                android:textColor="@color/white"
+                android:textAllCaps="false"
+                android:textSize="@dimen/btn_cart_checkout_txt_siz"
+                android:background="@drawable/bg_sign_in_up_btn"
+                android:fontFamily="@font/titilliu_web_semi_bold"
+                android:layout_centerInParent="true"
+                android:layout_alignParentRight="true"
+                />
+        </RelativeLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginBottom="6dp"
+            >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/txt_vendor_sales_lbl_size"
+                android:textColor="@color/grey_dark_sign_in_up_edt_hint"
+                android:text="@string/day_end_sale"
+                android:fontFamily="@font/titilliu_web_semi_bold"
+                />
+            <TextView
+                android:id="@+id/txtTotalDayEndSales"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/txt_vendor_sales_value_size"
+                android:textColor="@color/orange_dark"
+                />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginBottom="8dp"
+            >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/txt_vendor_sales_lbl_size"
+                android:textColor="@color/grey_dark_sign_in_up_edt_hint"
+                android:text="@string/total_orders_received"
+                android:fontFamily="@font/titilliu_web_semi_bold"
+                />
+            <TextView
+                android:id="@+id/txtTotalOrdersReceived"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/txt_vendor_sales_value_size"
+                android:textColor="@color/orange_dark"
+                />
+        </LinearLayout>
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            >
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerViewSales"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/grey_light_bg"
+                />
+            <include layout="@layout/layout_no_data_found" />
+        </FrameLayout>
     </LinearLayout>
 </androidx.core.widget.NestedScrollView>
 

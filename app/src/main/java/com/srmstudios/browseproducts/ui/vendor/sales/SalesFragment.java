@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.DatePicker;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
@@ -44,6 +45,8 @@ public class SalesFragment extends Fragment implements SalesMVP.View,View.OnClic
     protected TextView txtTotalOrdersReceived;
     @BindView(R.id.recyclerViewSales)
     protected RecyclerView recyclerViewSales;
+    @BindView(R.id.txtNoDateFound)
+    protected TextView txtNoDateFound;
 
     private Unbinder unbinder;
     private SalesPresenter presenter;
@@ -126,17 +129,31 @@ public class SalesFragment extends Fragment implements SalesMVP.View,View.OnClic
 
     @Override
     public void setRecyclerViewSalesAdapter(SalesAdapter adapter) {
-        recyclerViewSales.setAdapter(adapter);
+        if(adapter == null){
+            return;
+        }
+        if(adapter.getItemCount() == 0){
+            txtNoDateFound.setVisibility(View.VISIBLE);
+            txtNoDateFound.setText(Utils.getStringFromResourceId(getContext(),R.string.no_sales_found));
+            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+            params.setMargins(0,200,0,0);
+            txtNoDateFound.setLayoutParams(params);
+            recyclerViewSales.setVisibility(View.GONE);
+        }else {
+            recyclerViewSales.setAdapter(adapter);
+            recyclerViewSales.setVisibility(View.VISIBLE);
+            txtNoDateFound.setVisibility(View.GONE);
+        }
     }
 
     @Override
     public void setTxtTotalDayEndSales(double totalDayEndSales) {
-        txtTotalDayEndSales.setText("Day End Sale: PKR " + totalDayEndSales);
+        txtTotalDayEndSales.setText("Rs. " + Utils.getFormattedPrice(totalDayEndSales));
     }
 
     @Override
     public void setTxtTotalOrdersReceived(int ordersReceived) {
-        txtTotalOrdersReceived.setText("Total Orders Received: " + ordersReceived);
+        txtTotalOrdersReceived.setText(String.valueOf(ordersReceived));
     }
 
     @Override

@@ -1,9 +1,8 @@
 package com.srmstudios.browseproducts.ui.vendor.add_product;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
-
 import android.os.Bundle;
+
+import androidx.fragment.app.Fragment;
 
 import com.srmstudios.browseproducts.ui.BaseActivity;
 

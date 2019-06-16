@@ -73,6 +73,7 @@ public class CartPresenter implements CartMVP.Presenter, CartAdapter.ICartAdapte
                 if(response.toString().contains("successfully")){
                     adapter.clear();
                     view.setTxtTotalCartAmount("0");
+                    view.showTxtNoDataFound();
                 }
             }
 
@@ -92,6 +93,9 @@ public class CartPresenter implements CartMVP.Presenter, CartAdapter.ICartAdapte
                 if(response.toString().contains("successfully")){
                     adapter.deleteItem(cartId);
                     calculateTotalCartAmount(adapter.getCartJoinProducts());
+                    if(adapter.getCartJoinProducts().size() == 0){
+                        view.showTxtNoDataFound();
+                    }
                 }
             }
 
@@ -119,7 +123,7 @@ public class CartPresenter implements CartMVP.Presenter, CartAdapter.ICartAdapte
                 totalCartAmount += Math.round(discountedPrice) * cartJoinProduct.getProductQuantity();
             }
         }
-        view.setTxtTotalCartAmount(String.valueOf(totalCartAmount));
+        view.setTxtTotalCartAmount(Utils.getFormattedPrice(totalCartAmount));
     }
 
     @Override

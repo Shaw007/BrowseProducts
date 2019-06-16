@@ -60,7 +60,7 @@ public class SplashFragment extends Fragment {
                     }
                 }
             }
-        },500);
+        },1600);
     }
 }
 

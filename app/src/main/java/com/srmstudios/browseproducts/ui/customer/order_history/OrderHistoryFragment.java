@@ -2,20 +2,19 @@ package com.srmstudios.browseproducts.ui.customer.order_history;
 
 
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-
 import com.srmstudios.browseproducts.R;
 import com.srmstudios.browseproducts.util.DialogUtils;
 import com.srmstudios.browseproducts.util.Utils;
-import com.srmstudios.browseproducts.util.interfaces.DialogBoxTwoButtonCallback;
 import com.srmstudios.browseproducts.util.singleton.BrowseProductsDatabase;
 import com.srmstudios.browseproducts.util.singleton.SessionManager;
 
@@ -29,6 +28,8 @@ import butterknife.Unbinder;
 public class OrderHistoryFragment extends Fragment implements OrderHistoryMVP.View {
     @BindView(R.id.recyclerViewOrderHistory)
     protected RecyclerView recyclerViewOrderHistory;
+    @BindView(R.id.txtNoDateFound)
+    protected TextView txtNoDateFound;
 
     private Unbinder unbinder;
     private OrderHistoryPresenter presenter;
@@ -85,7 +86,15 @@ public class OrderHistoryFragment extends Fragment implements OrderHistoryMVP.Vi
 
     @Override
     public void setRecyclerViewOrderHistoryAdapter(OrderHistoryAdapter adapter) {
-        recyclerViewOrderHistory.setAdapter(adapter);
+        if(adapter == null){
+            return;
+        }
+        if(adapter.getItemCount() == 0){
+            txtNoDateFound.setVisibility(View.VISIBLE);
+            txtNoDateFound.setText(Utils.getStringFromResourceId(getContext(),R.string.no_orders_found));
+        }else {
+            recyclerViewOrderHistory.setAdapter(adapter);
+        }
     }
 
 }

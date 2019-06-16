@@ -79,4 +79,16 @@
     <string name="vendor_with_colon">Vendor:</string>
     <string name="add_product">Add Product</string>
     <string name="my_products">My Products</string>
+    <string name="customer_name">Customer Name:</string>
+    <string name="total_amount">Total Amount:</string>
+    <string name="products_quantity">Products Quantity:</string>
+    <string name="day_end_sale">Day End Sale</string>
+    <string name="total_orders_received">Total Orders Received</string>
+    <string name="no_products_found">No Products Found</string>
+    <string name="no_orders_found">No Orders Found</string>
+    <string name="no_sales_found">No Sales Found</string>
+    <string name="add_dummy_text">Add Dummy Text</string>
+
+    <string name="lorem_ipsum">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</string>
+    <string name="add_dummy_description">Add Dummy Description</string>
 </resources>

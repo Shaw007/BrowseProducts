@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -28,6 +29,8 @@ import butterknife.Unbinder;
 public class VendorProductsFragment extends Fragment implements VendorProductsMVP.View {
     @BindView(R.id.recyclerVendorProducts)
     protected RecyclerView recyclerVendorProducts;
+    @BindView(R.id.txtNoDateFound)
+    protected TextView txtNoDateFound;
 
     private Unbinder unbinder;
     private VendorProductsPresenter presenter;
@@ -78,7 +81,15 @@ public class VendorProductsFragment extends Fragment implements VendorProductsMV
 
     @Override
     public void setRecyclerViewVendorProductsAdapter(VendorProductsAdapter adapter) {
-        recyclerVendorProducts.setAdapter(adapter);
+        if(adapter == null){
+            return;
+        }
+        if(adapter.getItemCount() == 0){
+            txtNoDateFound.setVisibility(View.VISIBLE);
+            txtNoDateFound.setText(Utils.getStringFromResourceId(getContext(),R.string.no_products_found));
+        }else {
+            recyclerVendorProducts.setAdapter(adapter);
+        }
     }
 
     @Override

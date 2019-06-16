@@ -16,6 +16,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.DatePicker;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
@@ -64,6 +65,10 @@ public class CartFragment extends Fragment implements CartMVP.View,View.OnClickL
     protected TextView txtCartTotalAmount;
     @BindView(R.id.btnCheckout)
     protected Button btnCheckout;
+    @BindView(R.id.linearParent)
+    protected LinearLayout linearParent;
+    @BindView(R.id.txtNoDateFound)
+    protected TextView txtNoDateFound;
 
     private Unbinder unbinder;
     private CartPresenter presenter;
@@ -161,12 +166,28 @@ public class CartFragment extends Fragment implements CartMVP.View,View.OnClickL
 
     @Override
     public void setRecyclerViewCartAdapter(CartAdapter adapter) {
-        recyclerViewCart.setAdapter(adapter);
+        if(adapter == null){
+            return;
+        }
+        txtNoDateFound.setText(Utils.getStringFromResourceId(getContext(),R.string.no_products_found));
+        if(adapter.getItemCount() == 0){
+            txtNoDateFound.setVisibility(View.VISIBLE);
+            linearParent.setVisibility(View.GONE);
+        }else {
+            showTurnOnOffLocationDialog();
+            recyclerViewCart.setAdapter(adapter);
+        }
     }
 
     @Override
     public void setTxtTotalCartAmount(String totalAmount) {
-        txtCartTotalAmount.setText(totalAmount+"rs");
+        txtCartTotalAmount.setText("Rs. "+totalAmount);
+    }
+
+    @Override
+    public void showTxtNoDataFound() {
+        linearParent.setVisibility(View.GONE);
+        txtNoDateFound.setVisibility(View.VISIBLE);
     }
 
     @Override
@@ -408,7 +429,7 @@ public class CartFragment extends Fragment implements CartMVP.View,View.OnClickL
             showMissingPermissionError();
             mPermissionDenied = false;
         }else {
-            showTurnOnOffLocationDialog();
+            //showTurnOnOffLocationDialog();
         }
     }
 }

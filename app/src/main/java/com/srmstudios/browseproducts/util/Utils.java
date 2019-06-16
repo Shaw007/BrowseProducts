@@ -23,6 +23,7 @@ import androidx.core.content.FileProvider;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -308,6 +309,17 @@ public class Utils {
         }*/
         Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("geo:<"+latitude+">,<"+longitude+">?q=<"+latitude+">,<"+longitude+">(Delivery_Location)"));
         context.startActivity(intent);
+    }
+
+    public static String getFormattedPrice(double price){
+        try {
+            NumberFormat cf1 = NumberFormat.getCurrencyInstance(new Locale("en", "US"));
+            String priceString = cf1.format(price);
+            return priceString.substring(1,priceString.length()-1);
+        }catch (Exception ex){
+            ex.printStackTrace();
+            return String.valueOf(price);
+        }
     }
 }
 
