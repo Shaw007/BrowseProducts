@@ -18,10 +18,10 @@ public class BrowseProductsDatabase {
         final Migration MIGRATION_1_2 = new Migration(1, 2) {
             @Override
             public void migrate(@NonNull SupportSQLiteDatabase database) {
-                database.execSQL("CREATE TABLE IF NOT EXISTS repo(repo_id INTEGER PRIMARY KEY AUTOINCREMENT," +
-                        "type CHAR(500)," +
-                        "name CHAR(500)," +
-                        "url CHAR(500));");
+                database.execSQL("CREATE TABLE IF NOT EXISTS repo(repo_id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL," +
+                        "type TEXT," +
+                        "name TEXT," +
+                        "url TEXT);");
             }
         };
         appDatabase = Room.databaseBuilder(context, AppDatabase.class, AppConstants.DATABASE_NAME)

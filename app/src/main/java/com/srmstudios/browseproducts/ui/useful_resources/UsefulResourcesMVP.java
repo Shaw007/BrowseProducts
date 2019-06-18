@@ -11,6 +11,7 @@ public interface UsefulResourcesMVP {
         void showDialogMessage(String message);
         void setRecyclerViewUsefulResourcesAdapter(UsefulResourcesAdapter adapter);
         void showRecyclerViewUsefulResources();
+        void showTxtNoDataFound();
         void openLink(String url);
         void openPDF(String uri);
     }

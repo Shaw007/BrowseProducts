@@ -43,14 +43,9 @@ public class UsefulResourcesPresenter implements UsefulResourcesMVP.Presenter, U
                 }else if(response instanceof Repo){
                     Repo repo = (Repo) response;
                     view.showDialogMessage(R.string.resource_added_successfully);
-                    if(adapter == null){
-                        List<Repo> repoList = new ArrayList<>();
-                        repoList.add(repo);
-                        setupRecyclerViewUsefulResourcesAdapter(repoList);
-                    }else {
-                        adapter.addResource(repo);
-                        view.showRecyclerViewUsefulResources();
-                    }
+                    List<Repo> repoList = new ArrayList<>();
+                    repoList.add(repo);
+                    setupRecyclerViewUsefulResourcesAdapter(repoList);
                 }
             }
 
@@ -78,8 +73,19 @@ public class UsefulResourcesPresenter implements UsefulResourcesMVP.Presenter, U
     }
 
     private void setupRecyclerViewUsefulResourcesAdapter(List<Repo> repoList){
-        adapter = new UsefulResourcesAdapter(repoList, this);
-        view.setRecyclerViewUsefulResourcesAdapter(adapter);
+        if(repoList == null){
+            view.showTxtNoDataFound();
+        }else if(repoList.size() == 0){
+            view.showTxtNoDataFound();
+        }else {
+            view.showRecyclerViewUsefulResources();
+            if(adapter == null){
+                adapter = new UsefulResourcesAdapter(repoList, this);
+                view.setRecyclerViewUsefulResourcesAdapter(adapter);
+            }else {
+                adapter.addResource(repoList.get(0));
+            }
+        }
     }
 }
 

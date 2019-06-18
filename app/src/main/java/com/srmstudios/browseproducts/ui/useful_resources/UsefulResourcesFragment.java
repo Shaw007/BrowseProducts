@@ -185,27 +185,23 @@ public class UsefulResourcesFragment extends Fragment implements UsefulResources
 
     @Override
     public void setRecyclerViewUsefulResourcesAdapter(UsefulResourcesAdapter adapter) {
-        if(adapter == null){
-            return;
-        }
-        if(adapter.getItemCount() == 0){
-            txtNoDateFound.setVisibility(View.VISIBLE);
-            txtNoDateFound.setText(Utils.getStringFromResourceId(getContext(),R.string.no_resources_found));
-            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-            params.setMargins(0,200,0,0);
-            txtNoDateFound.setLayoutParams(params);
-            recyclerViewUsefulResources.setVisibility(View.GONE);
-        }else {
-            recyclerViewUsefulResources.setAdapter(adapter);
-            recyclerViewUsefulResources.setVisibility(View.VISIBLE);
-            txtNoDateFound.setVisibility(View.GONE);
-        }
+        recyclerViewUsefulResources.setAdapter(adapter);
     }
 
     @Override
     public void showRecyclerViewUsefulResources() {
         recyclerViewUsefulResources.setVisibility(View.VISIBLE);
         txtNoDateFound.setVisibility(View.GONE);
+    }
+
+    @Override
+    public void showTxtNoDataFound() {
+        txtNoDateFound.setText(Utils.getStringFromResourceId(getContext(),R.string.no_resources_found));
+        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+        params.setMargins(0,200,0,0);
+        txtNoDateFound.setLayoutParams(params);
+        recyclerViewUsefulResources.setVisibility(View.GONE);
+        txtNoDateFound.setVisibility(View.VISIBLE);
     }
 
     @Override
