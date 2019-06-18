@@ -12,4 +12,7 @@ public class AppConstants {
     public static final String DATE_FORMAT_TWO = "yyyyMMdd";
     public static final String DATE_TIME_FORMAT_ONE = "yyyyMMddHHmm";
 
+    public static final String REPO_TYPE_LINK = "repo_link";
+    public static final String REPO_TYPE_PDF = "repo_pdf";
+
 }
