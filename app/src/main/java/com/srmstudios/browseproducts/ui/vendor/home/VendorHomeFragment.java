@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.srmstudios.browseproducts.R;
 import com.srmstudios.browseproducts.ui.customer.home.HomeAdapter;
+import com.srmstudios.browseproducts.ui.useful_resources.UsefulResourcesActivity;
 import com.srmstudios.browseproducts.ui.vendor.add_product.AddProductActivity;
 import com.srmstudios.browseproducts.ui.vendor.dispatch_orders.DispatchOrdersActivity;
 import com.srmstudios.browseproducts.ui.vendor.sales.SalesActivity;
@@ -64,6 +65,7 @@ public class VendorHomeFragment extends Fragment {
         homeItems.add(new HomeItem(R.drawable.products, Utils.getStringFromResourceId(getContext(),R.string.my_products)));
         homeItems.add(new HomeItem(R.drawable.dispatch_orders, Utils.getStringFromResourceId(getContext(),R.string.dispatch_orders)));
         homeItems.add(new HomeItem(R.drawable.sales, Utils.getStringFromResourceId(getContext(),R.string.sales)));
+        homeItems.add(new HomeItem(R.drawable.resources, Utils.getStringFromResourceId(getContext(),R.string.useful_resource)));
         recyclerViewHome.setAdapter(new HomeAdapter(homeItems, new HomeAdapter.IHomeAdapter() {
             @Override
             public void onItemClick(HomeItem homeItem) {
@@ -76,6 +78,8 @@ public class VendorHomeFragment extends Fragment {
                     intent = new Intent(getContext(), DispatchOrdersActivity.class);
                 }else if(homeItem.getName().equals(Utils.getStringFromResourceId(getContext(),R.string.sales))){
                     intent = new Intent(getContext(), SalesActivity.class);
+                }else if(homeItem.getName().equals(Utils.getStringFromResourceId(getContext(),R.string.useful_resource))){
+                    intent = new Intent(getContext(), UsefulResourcesActivity.class);
                 }
                 if(intent != null) {
                     startActivity(intent);

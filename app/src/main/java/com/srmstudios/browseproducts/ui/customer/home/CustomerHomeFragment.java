@@ -15,6 +15,7 @@ import com.srmstudios.browseproducts.R;
 import com.srmstudios.browseproducts.ui.customer.cart.CartActivity;
 import com.srmstudios.browseproducts.ui.customer.order_history.OrderHistoryActivity;
 import com.srmstudios.browseproducts.ui.customer.view_products.ViewProductsActivity;
+import com.srmstudios.browseproducts.ui.useful_resources.UsefulResourcesActivity;
 import com.srmstudios.browseproducts.util.GridSpacingItemDecoration;
 import com.srmstudios.browseproducts.util.HomeItem;
 import com.srmstudios.browseproducts.util.Utils;
@@ -61,6 +62,7 @@ public class CustomerHomeFragment extends Fragment {
         homeItems.add(new HomeItem(R.drawable.products, Utils.getStringFromResourceId(getContext(),R.string.browse_products)));
         homeItems.add(new HomeItem(R.drawable.cart, Utils.getStringFromResourceId(getContext(),R.string.my_cart)));
         homeItems.add(new HomeItem(R.drawable.customer_orders, Utils.getStringFromResourceId(getContext(),R.string.order_history)));
+        homeItems.add(new HomeItem(R.drawable.resources, Utils.getStringFromResourceId(getContext(),R.string.useful_resource)));
         recyclerViewHome.setAdapter(new HomeAdapter(homeItems, new HomeAdapter.IHomeAdapter() {
             @Override
             public void onItemClick(HomeItem homeItem) {
@@ -71,6 +73,8 @@ public class CustomerHomeFragment extends Fragment {
                     intent = new Intent(getContext(), CartActivity.class);
                 }else if(homeItem.getName().equals(Utils.getStringFromResourceId(getContext(),R.string.order_history))){
                     intent = new Intent(getContext(), OrderHistoryActivity.class);
+                }else if(homeItem.getName().equals(Utils.getStringFromResourceId(getContext(),R.string.useful_resource))){
+                    intent = new Intent(getContext(), UsefulResourcesActivity.class);
                 }
                 if(intent != null) {
                     startActivity(intent);
