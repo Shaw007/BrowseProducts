@@ -55,7 +55,7 @@ public class UsefulResourcesFragment extends Fragment implements UsefulResources
 
     private Unbinder unbinder;
     private UsefulResourcesPresenter presenter;
-    private String selectedPdfUri;
+    private String selectedPDFlocalStoragePath;
 
     private static final int RESULT_CODE_GET_PDF = 456;
 
@@ -150,9 +150,11 @@ public class UsefulResourcesFragment extends Fragment implements UsefulResources
                         } else if (uriString.startsWith("file://")) {
                             displayName = myFile.getName();
                         }
+                        //converting uri string to local storage path
+                        String localStoragePath = PathUtil.getRealPath(getContext(),uri);
                         presenter.addItemInList(AppConstants.REPO_TYPE_PDF,
                                 displayName,
-                                uriString);
+                                localStoragePath);
                     }
                     break;
             }
@@ -210,15 +212,19 @@ public class UsefulResourcesFragment extends Fragment implements UsefulResources
     }
 
     @Override
-    public void openPDF(String uri) {
-        selectedPdfUri = uri;
+    public void openPDF(String localStoragePath) {
+        selectedPDFlocalStoragePath = localStoragePath;
         requestStoragePermissionFromUser();
     }
 
     private void permissionsGranted(){
         try {
-            String path = PathUtil.getRealPath(getContext(),Uri.parse(selectedPdfUri));
-            Utils.openPDFIntent(getContext(),path);
+            File file = new File(selectedPDFlocalStoragePath);
+            if(!file.exists()){
+                showDialogMessage(R.string.file_not_found_in_local_storage);
+                return;
+            }
+            Utils.openPDFIntent(getContext(),selectedPDFlocalStoragePath);
         }catch (Exception ex){
             ex.printStackTrace();
             showDialogMessage(ex.getMessage());

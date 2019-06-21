@@ -13,7 +13,7 @@ public interface UsefulResourcesMVP {
         void showRecyclerViewUsefulResources();
         void showTxtNoDataFound();
         void openLink(String url);
-        void openPDF(String uri);
+        void openPDF(String localStoragePath);
     }
 
     interface Presenter{
